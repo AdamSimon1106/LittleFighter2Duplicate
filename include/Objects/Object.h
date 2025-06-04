@@ -4,7 +4,9 @@
 class Object {
 public:
 	virtual void handleCollision() = 0;
-private:
+	virtual void draw(sf::RenderWindow& window) = 0;
+
+protected:
 	sf::Sprite m_sprite;
 	sf::Texture m_texture;
 
