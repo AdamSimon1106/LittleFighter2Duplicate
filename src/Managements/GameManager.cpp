@@ -4,6 +4,13 @@
 #include <string>
 #include "Management/GameManager.h"
 #include "GamePlay/Level.h" 
+#include "States/InGameState.h"
+
+void GameManager::run()
+{
+    readLevels("levels.txt");
+    m_controller.run(); // Eventually needs to be preformed through InGameState
+}
 
 void GameManager::switchState(IState& state)
 {
