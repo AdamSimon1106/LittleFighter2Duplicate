@@ -1,4 +1,5 @@
 #include "Squad.h"
+#include "Squad.h"
 
 void Squad::draw(sf::RenderWindow& window)
 {
@@ -14,4 +15,9 @@ void Squad::update(float dt)
 	{
 		enemy.update(window);
 	}
+}
+
+void Squad::addEnemy(std::unique_ptr<Enemy> enemy)
+{
+	m_squad.push_back(std::move(enemy));
 }
