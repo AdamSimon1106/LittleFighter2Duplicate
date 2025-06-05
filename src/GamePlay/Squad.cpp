@@ -1,6 +1,7 @@
 #include "Squad.h"
 
-void Squad::draw(sf::RenderWindow& window)
+
+void Squad::render(sf::RenderWindow& window)
 {
 	for (const auto& enemy : m_squad)
 	{
@@ -14,4 +15,9 @@ void Squad::update(float dt)
 	{
 		enemy.update(window);
 	}
+}
+
+void Squad::addEnemy(std::unique_ptr<Enemy> enemy)
+{
+	m_squad.push_back(std::move(enemy));
 }
