@@ -28,5 +28,5 @@ private:
 	sf::Sprite m_backgroundSprite;
 	sf::Texture m_backgroundTexture;
 
-	std::string m_levelName
+	std::string m_levelName;
 };
