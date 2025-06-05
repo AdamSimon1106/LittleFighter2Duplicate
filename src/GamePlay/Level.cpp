@@ -1,10 +1,12 @@
 #include "Gameplay/Level.h"
 #include <sstream>
+#include "Management/ResourceManager.h"
+#include "Factory/Factory.h"
 
 Level::Level(std::string background)
 {
 	//background
-	sf::Texture& bgTex = ResourceManager::instance().getTexture(background);
+	const sf::Texture& bgTex = ResourceManager::instance().getTexture(background);
 	m_backgroundSprite.setTexture(bgTex);
 
 }
@@ -27,10 +29,10 @@ void Level::addSquad(std::string& squadLine)
 
             switch (type) {
             case 'p':
-                enemy = Factory::instance().create<Enemy>("P");
+                enemy = Factory::create<Enemy>("P");
                 break;
             case 'a':
-                enemy = Factory::instance().create<Enemy>("A");
+                enemy = Factory::create<Enemy>("A");
                 break;
             default:
                 
@@ -59,10 +61,10 @@ void Level::loadObject(std::string& objectLine)
 
         switch (type) {
         case 'a':
-            obj = Factory::instance().create<PickableObject>("Apple");
+            obj = Factory::create<PickableObject>("Apple");
             break;
         case 'k':
-            obj = Factory::instance().create<PickableObject>("Knife");
+            obj = Factory::create<PickableObject>("Knife");
             break;
             
         default:

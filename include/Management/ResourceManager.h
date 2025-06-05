@@ -18,8 +18,7 @@ public:
     ResourceManager& operator=(ResourceManager&&) = delete;
 
     // Returns an immutable reference to the requested texture.
-    const sf::Texture& getTexture(const std::string& id,
-        const std::string& filePath);
+    const sf::Texture& getTexture(const std::string& id);
 
     // Optional explicit unloading (rarely needed in most games).
     void unloadTexture(const std::string& id);
