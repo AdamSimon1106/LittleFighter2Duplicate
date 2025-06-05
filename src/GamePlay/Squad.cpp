@@ -5,7 +5,7 @@ void Squad::render(sf::RenderWindow& window)
 {
 	for (const auto& enemy : m_squad)
 	{
-		enemy.draw(window);
+		enemy->draw(window);
 	}
 }
 

@@ -4,7 +4,7 @@
 class Object {
 public:
 	virtual void handleCollision() = 0;
-	virtual void draw(sf::RenderWindow& window) = 0;
+	void draw(sf::RenderWindow& window) const;
 
 protected:
 	sf::Sprite m_sprite;

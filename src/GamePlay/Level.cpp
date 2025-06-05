@@ -36,7 +36,7 @@ void Level::addSquad(std::string& squadLine)
     m_enemies.push_back(std::move(newSquad));
 }
 
-void Level::loadPickableObject(std::string& objectLine)
+void Level::addPickableObjects(std::string& objectLine)
 {
     std::istringstream iss(objectLine);
     std::string token;

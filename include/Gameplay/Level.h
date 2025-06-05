@@ -12,7 +12,7 @@ class Level {
 public:
 	Level(std::string background);
 	void addSquad(std::string& squad);
-	void loadPickableObject(std::string& objectLine);
+	void addPickableObjects(std::string& objectLine);
 	void render(sf::RenderWindow& window);
 	
 	
