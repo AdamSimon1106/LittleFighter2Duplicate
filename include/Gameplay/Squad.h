@@ -5,7 +5,7 @@
 //groop of enemies for every level faze
 class Squad {
 public:
-	void draw(sf::RenderWindow& window);
+	void render(sf::RenderWindow& window);
 	void update(float dt);
 	void addEnemy(std::unique_ptr<Enemy> enemy);
 	

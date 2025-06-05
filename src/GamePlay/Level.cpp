@@ -44,3 +44,51 @@ void Level::addSquad(std::string& squadLine)
 
     m_enemies.push_back(std::move(newSquad));
 }
+
+void Level::loadObject(std::string& objectLine)
+{
+    std::istringstream iss(objectLine);
+    std::string token;
+
+    while (iss >> token) {
+        if (token.empty()) continue;
+
+        char type = std::tolower(token[0]); 
+
+        std::unique_ptr<PickableObject> obj = nullptr;
+
+        switch (type) {
+        case 'a':
+            obj = Factory::instance().create<PickableObject>("Apple");
+            break;
+        case 'k':
+            obj = Factory::instance().create<PickableObject>("Knife");
+            break;
+            
+        default:
+            
+            continue;
+        }
+
+        if (obj) {
+            
+            m_pickables.push_back(std::move(obj));
+
+           
+        }
+    }
+}
+
+void Level::render(sf::RenderWindow& window)
+{
+    window.draw(m_backgroundSprite);
+
+    int index = static_cast<int>(m_faze);
+
+    if (index < m_enemies.size()) {
+        m_enemies[index].render(window); 
+    }
+
+    //render picObj
+
+}

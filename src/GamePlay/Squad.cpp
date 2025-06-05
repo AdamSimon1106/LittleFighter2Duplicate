@@ -1,7 +1,7 @@
 #include "Squad.h"
-#include "Squad.h"
 
-void Squad::draw(sf::RenderWindow& window)
+
+void Squad::render(sf::RenderWindow& window)
 {
 	for (const auto& enemy : m_squad)
 	{
