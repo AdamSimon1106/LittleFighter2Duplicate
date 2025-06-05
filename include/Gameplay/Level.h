@@ -12,13 +12,9 @@ class Level {
 public:
 	Level(std::string background);
 	void addSquad(std::string& squad);
-	void addPickableObjects(std::string& objectLine);
+	void addPickableObjects(const std::string& objectLine);
 	void render(sf::RenderWindow& window);
 	
-	
-
-
-
 private:
 	std::vector<Squad> m_enemies;
 	std::vector<std::unique_ptr<PickableObject>> m_pickables;

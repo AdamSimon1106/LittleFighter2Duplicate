@@ -47,10 +47,10 @@ void Player::update(float dt)
 // -----------------------------------------------------------------------------
 // Draws the sprite
 // -----------------------------------------------------------------------------
-void Player::draw(sf::RenderWindow& window)
-{
-    window.draw(m_sprite);
-}
+//void Player::draw(sf::RenderWindow& window)
+//{
+//    window.draw(m_sprite);
+//}
 
 // -----------------------------------------------------------------------------
 // Collision stub (will be expanded later)

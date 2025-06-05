@@ -15,7 +15,7 @@ private:
 
 	typedef std::map<std::string, std::unique_ptr<T>(*)()> myMap;
 
-	static mymap& getMap()
+	static myMap& getMap()
 	{
 		static myMap m_map;
 		return m_map;

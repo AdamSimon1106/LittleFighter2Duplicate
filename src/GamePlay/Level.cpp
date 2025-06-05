@@ -36,7 +36,7 @@ void Level::addSquad(std::string& squadLine)
     m_enemies.push_back(std::move(newSquad));
 }
 
-void Level::addPickableObjects(std::string& objectLine)
+void Level::addPickableObjects(const std::string& objectLine)
 {
     std::istringstream iss(objectLine);
     std::string token;
@@ -65,5 +65,7 @@ void Level::render(sf::RenderWindow& window)
     }
 
     //render picObj
+    for (auto& obj : m_pickables)
+        obj->draw(window);
 
 }

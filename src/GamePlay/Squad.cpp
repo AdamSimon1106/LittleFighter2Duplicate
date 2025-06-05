@@ -13,7 +13,7 @@ void Squad::update(float dt)
 {
 	for (const auto& enemy : m_squad)
 	{
-		enemy.update(dt);
+		//enemy.update(dt);
 	}
 }
 

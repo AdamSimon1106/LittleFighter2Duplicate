@@ -9,5 +9,5 @@ public:
 	virtual void render(sf::RenderWindow& window) = 0;
 
 private:
-	GameManager* m_manager;
+//	GameManager* m_manager;
 };
