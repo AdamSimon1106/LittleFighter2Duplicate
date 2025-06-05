@@ -25,19 +25,8 @@ void Level::addSquad(std::string& squadLine)
         int count = std::stoi(token.substr(1)); // amount
 
         for (int i = 0; i < count; ++i) {
-            std::unique_ptr<Enemy> enemy = nullptr;
-
-            switch (type) {
-            case 'p':
-                enemy = Factory::create<Enemy>("P");
-                break;
-            case 'a':
-                enemy = Factory::create<Enemy>("A");
-                break;
-            default:
-                
-                continue;
-            }
+           
+            auto enemy = Factory<Enemy>::create(std::string(1, type));
 
             if (enemy)
                 newSquad.addEnemy(std::move(enemy));
@@ -47,7 +36,7 @@ void Level::addSquad(std::string& squadLine)
     m_enemies.push_back(std::move(newSquad));
 }
 
-void Level::loadObject(std::string& objectLine)
+void Level::loadPickableObject(std::string& objectLine)
 {
     std::istringstream iss(objectLine);
     std::string token;
@@ -55,28 +44,12 @@ void Level::loadObject(std::string& objectLine)
     while (iss >> token) {
         if (token.empty()) continue;
 
-        char type = std::tolower(token[0]); 
+        char type = std::tolower(token[0]);
 
-        std::unique_ptr<PickableObject> obj = nullptr;
-
-        switch (type) {
-        case 'a':
-            obj = Factory::create<PickableObject>("Apple");
-            break;
-        case 'k':
-            obj = Factory::create<PickableObject>("Knife");
-            break;
-            
-        default:
-            
-            continue;
-        }
-
-        if (obj) {
-            
+        auto obj = Factory<PickableObject>::create(std::string(1, type));
+        if (obj)
+        {
             m_pickables.push_back(std::move(obj));
-
-           
         }
     }
 }

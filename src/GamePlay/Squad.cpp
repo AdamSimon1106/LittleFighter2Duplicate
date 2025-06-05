@@ -1,4 +1,4 @@
-#include "Squad.h"
+#include "GamePlay/Squad.h"
 
 
 void Squad::render(sf::RenderWindow& window)
@@ -13,7 +13,7 @@ void Squad::update(float dt)
 {
 	for (const auto& enemy : m_squad)
 	{
-		enemy.update(window);
+		enemy.update(dt);
 	}
 }
 
