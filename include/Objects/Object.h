@@ -3,7 +3,7 @@
 
 class Object {
 public:
-	Object(sf::Texture tex);
+	Object(const sf::Texture& tex);
 	virtual ~Object() = default;
 	virtual void handleCollision() = 0;
 	void draw(sf::RenderWindow& window) const;

@@ -1,6 +1,6 @@
 #include "Objects/Object.h"
 
-Object::Object(sf::Texture tex)
+Object::Object(const sf::Texture& tex)
 {
 	m_sprite.setTexture(tex);
 }
