@@ -31,7 +31,7 @@ void GameManager::readLevels(std::string path)
         while (std::getline(file, line)) {
             // objects
             if (line.rfind("Objects: ", 0) == 0) {
-                level.addObjects(line.substr(9)); // הורדת "Objects: "
+                level.addPickableObjects(line.substr(9)); // הורדת "Objects: "
                 break; // זה סוף השלב
             }
             // squads

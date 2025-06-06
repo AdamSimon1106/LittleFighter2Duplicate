@@ -4,15 +4,36 @@
 #include <string>
 #include <map>
 
-typedef std::map<std::string, std::unique_ptr<Object>(*)()> mymap;
+ 
+
+template<typename T>
 class Factory {
 public:
-	static std::unique_ptr<Object> create(const std::string& name);
-	static bool registerit(const std::string& name, std::unique_ptr<Object>(*)());
+	static std::unique_ptr<T> create(const std::string& name);
+	static bool registerit(const std::string& name, std::unique_ptr<T>(*f)());
 private:
-	static mymap& getMap()
+
+	typedef std::map<std::string, std::unique_ptr<T>(*)()> myMap;
+
+	static myMap& getMap()
 	{
-		static mymap m_map;
+		static myMap m_map;
 		return m_map;
 	}
 };
+
+template<typename T>
+inline std::unique_ptr<T> Factory<T>::create(const std::string& name)
+{
+	auto it = getMap().find(name);
+	if (it == getMap().end())
+		return nullptr;
+	return it->second();
+}
+
+template<typename T>
+inline bool Factory<T>::registerit(const std::string& name, std::unique_ptr<T>(*f)())
+{
+	getMap().emplace(name, f);
+	return true;
+}

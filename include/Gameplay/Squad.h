@@ -10,6 +10,7 @@ public:
 	void addEnemy(std::unique_ptr<Enemy> enemy);
 	
 private:
-	std::vector<Enemy> m_squad;
+	std::vector<std::unique_ptr<Enemy>> m_squad;
+
 
 };

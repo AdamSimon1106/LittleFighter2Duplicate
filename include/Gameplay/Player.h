@@ -10,7 +10,7 @@ public:
 
     void handleInput();                 // Reads arrow-key state (?) m_direction
     void update(float dt);              // Moves position by m_direction*speed*dt
-    void draw(sf::RenderWindow& window) override;/* Draws the sprite at current position */
+    //void draw(sf::RenderWindow& window) override;/* Draws the sprite at current position */
     void handleCollision() override;    // Stub for future collision handling
 
     void setPosition(const sf::Vector2f& pos);
