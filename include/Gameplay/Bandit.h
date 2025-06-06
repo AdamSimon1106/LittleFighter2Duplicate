@@ -6,5 +6,5 @@ public:
 	Bandit();
 	virtual void handleCollision() override;
 private:
-	static bool m_registered
+	static bool m_registered;
 };
