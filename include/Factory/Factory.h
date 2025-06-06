@@ -3,6 +3,7 @@
 #include "Objects/Object.h"
 #include <string>
 #include <map>
+#include <functional>
 
  
 
@@ -10,10 +11,11 @@ template<typename T>
 class Factory {
 public:
 	static std::unique_ptr<T> create(const std::string& name);
-	static bool registerit(const std::string& name, std::unique_ptr<T>(*f)());
+	using CreatorFunc = std::function<std::unique_ptr<T>()>;
+	static bool registerit(const std::string& name, CreatorFunc f);
 private:
 
-	typedef std::map<std::string, std::unique_ptr<T>(*)()> myMap;
+	typedef std::map<std::string, CreatorFunc > myMap;
 
 	static myMap& getMap()
 	{
@@ -32,8 +34,15 @@ inline std::unique_ptr<T> Factory<T>::create(const std::string& name)
 }
 
 template<typename T>
-inline bool Factory<T>::registerit(const std::string& name, std::unique_ptr<T>(*f)())
+inline bool Factory<T>::registerit(const std::string& name, CreatorFunc f)
 {
 	getMap().emplace(name, f);
 	return true;
 }
+
+//template<typename T>
+//inline bool Factory<T>::registerit(const std::string& name, std::unique_ptr<T>(*f)())
+//{
+//	getMap().emplace(name, f);
+//	return true;
+//}
