@@ -4,9 +4,8 @@
 
 
 Player::Player(const sf::Texture& texture, float speed)
-    : m_speed(speed)
+    : PlayableObject(texture), m_speed(speed)
 {
-    m_texture = texture;
     m_sprite.setTexture(m_texture);
 
     // Centre-origin so clamping works intuitively.
