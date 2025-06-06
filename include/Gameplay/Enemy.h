@@ -3,6 +3,6 @@
 
 class Enemy : public ComputerPlayer{
 public:
-	Enemy(sf::Texture tex):ComputerPlayer(tex){ }
+	Enemy(const sf::Texture& tex):ComputerPlayer(tex){ }
 	
 };

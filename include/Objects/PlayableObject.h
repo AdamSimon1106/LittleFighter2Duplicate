@@ -3,7 +3,7 @@
 
 class PlayableObject : public Object{
 public:
-	PlayableObject(sf::Texture tex) : Object(tex){}
+	PlayableObject(const sf::Texture& tex) : Object(tex){}
 private:
 	int m_hp;
 	int m_energy;
