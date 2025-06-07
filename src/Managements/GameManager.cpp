@@ -3,10 +3,19 @@
 #include <vector>
 #include <string>
 #include "Management/GameManager.h"
+#include "States/IState.h"
+#include "States/InGameState.h"
+#include "States/WelcomeState.h"
 #include "GamePlay/Level.h" 
 
-void GameManager::switchState(IState& state)
+GameManager::GameManager() : m_window(sf::VideoMode(500, 500), "Little Fighter 2"),
+                             m_currState(std::make_unique<InGameState>(m_window, *this)
+{}
+
+
+void GameManager::switchState(std::unique_ptr<IState> nextState)
 {
+    m_nextState = std::move(nextState);
 }
 
 void GameManager::readLevels(std::string path)
