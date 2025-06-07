@@ -6,9 +6,9 @@
 
 class InGameState : public IState {
 public:
-	virtual void update(sf::RenderWindow& window) override;
-	virtual void handleEvents(sf::RenderWindow& window) override;
-	virtual void render(sf::RenderWindow& window) override;
+	void update(sf::Time deltaTime) override;
+    void handleEvents(sf::Event& ev) override;
+	void render() override;
 private:
-	Controller& m_controller;
+
 };
