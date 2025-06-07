@@ -9,14 +9,15 @@
 
 class GameManager {
 public:
+	GameManager();
 	void switchState(std::unique_ptr<IState> nextState);
 	void readLevels(std::string path);
 	void run();
 
 private:
 	sf::RenderWindow m_window;
-	ResourceManager m_resourceManager;
-	Controller m_controller;
+//	ResourceManager m_resourceManager;
+//	Controller m_controller;
 	std::vector<Level> m_levels;
 	std::unique_ptr<IState> m_currState;
 	std::unique_ptr<IState> m_nextState = nullptr;

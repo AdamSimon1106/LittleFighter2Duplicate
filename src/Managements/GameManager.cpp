@@ -9,9 +9,8 @@
 #include "GamePlay/Level.h" 
 
 GameManager::GameManager() : m_window(sf::VideoMode(500, 500), "Little Fighter 2"),
-                             m_currState(std::make_unique<InGameState>(m_window, *this)
-{}
-
+                             m_currState(std::make_unique<InGameState>(m_window, *this))
+{};
 
 void GameManager::switchState(std::unique_ptr<IState> nextState)
 {
