@@ -11,7 +11,7 @@ public:
 	virtual void handleEvents(sf::Event& ev) = 0;
 	virtual void render() = 0;
 
-private:
+protected:
 	sf::RenderWindow& m_window;
 	GameManager& m_manager;
 	bool m_switchState = false;

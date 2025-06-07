@@ -3,9 +3,9 @@
 #include <vector>
 #include <string>
 #include "Management/GameManager.h"
+#include "Management/Controller.h"
 #include "States/IState.h"
 #include "States/InGameState.h"
-#include "States/WelcomeState.h"
 #include "GamePlay/Level.h" 
 
 GameManager::GameManager() : m_window(sf::VideoMode(500, 500), "Little Fighter 2"),
@@ -29,7 +29,7 @@ void GameManager::run()
                 m_window.close();
             }
 
-            sf::Time delateTime = clock.restart();
+            sf::Time deltaTime = clock.restart();
 
             m_currState->update(deltaTime);
             m_window.clear();
