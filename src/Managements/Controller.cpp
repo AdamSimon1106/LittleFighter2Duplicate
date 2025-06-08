@@ -106,4 +106,14 @@ void Controller::render()
     m_window.display();
 }
 
+void Controller::updateAndRender(float deltaTime)
+{
+    if (m_levelFinished)
+        return;
+
+    handleInput();
+    updateWorld(deltaTime);
+    checkLevelEndConditions();
+    render();
+}
 
