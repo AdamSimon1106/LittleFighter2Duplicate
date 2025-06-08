@@ -13,6 +13,11 @@ void Bandit::handleCollision()
 {
 }
 
+void Bandit::update(const sf::Vector2f playarPos)
+{
+    move(playarPos);
+}
+
 void Bandit::move(const sf::Vector2f playerPos)
 {   
     auto pos = m_sprite.getPosition();

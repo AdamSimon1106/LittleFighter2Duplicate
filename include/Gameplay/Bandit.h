@@ -5,6 +5,7 @@ class Bandit : public Enemy {
 public:
 	Bandit();
 	virtual void handleCollision() override;
+	virtual void update(/*float dt*/ const sf::Vector2f playarPos) override;
 	void move(const sf::Vector2f playerPos);
 private:
 	static bool m_registered;
