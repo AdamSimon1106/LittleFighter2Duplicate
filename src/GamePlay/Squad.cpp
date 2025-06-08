@@ -1,10 +1,11 @@
-#include "Squad.h"
+#include "GamePlay/Squad.h"
 
-void Squad::draw(sf::RenderWindow& window)
+
+void Squad::render(sf::RenderWindow& window)
 {
 	for (const auto& enemy : m_squad)
 	{
-		enemy.draw(window);
+		enemy->draw(window);
 	}
 }
 
@@ -12,6 +13,11 @@ void Squad::update(float dt)
 {
 	for (const auto& enemy : m_squad)
 	{
-		enemy.update(window);
+		//enemy.update(dt);
 	}
+}
+
+void Squad::addEnemy(std::unique_ptr<Enemy> enemy)
+{
+	m_squad.push_back(std::move(enemy));
 }
