@@ -65,8 +65,8 @@ void GameManager::readLevels(std::string path)
         while (std::getline(file, line)) {
             // objects
             if (line.rfind("Objects: ", 0) == 0) {
-                level.addObjects(line.substr(9)); // הורדת "Objects: "
-                break; // זה סוף השלב
+                level.addObject(line.substr(9));
+                break;
             }
             // squads
             if (!line.empty())
