@@ -81,3 +81,29 @@ void Controller::checkLevelEndConditions()
     }
 }
 
+void Controller::render()
+{
+    m_window.clear();
+
+    // Draw background, enemies, pickable objects, etc.
+    m_level->render(m_window);
+
+    // Draw all human players
+    for (const auto& player : m_players)
+    {
+        //m_window.draw(*player);   TODO: draw() in Player
+    }
+
+    // Draw AI allies
+    for (const auto& ally : m_allies)
+    {
+        //m_window.draw(*ally);     TODO: draw() in Ally
+    }
+
+    // Draw HUD
+    //m_window.draw(m_stats); TODO: draw() in HUD
+
+    m_window.display();
+}
+
+
