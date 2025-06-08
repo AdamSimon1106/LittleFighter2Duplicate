@@ -11,7 +11,7 @@ Controller::Controller(sf::RenderWindow& window,
     m_players(std::move(players)),
     m_allies(std::move(allies))
 {
-    // TODO: initialize HUD (m_stats)
+    //      TODO: initialize HUD (m_stats)
 }
 
 void Controller::handleInput()
@@ -33,16 +33,16 @@ void Controller::updateWorld(float deltaTime)
     // Update all AI-controlled allies
     for (auto& ally : m_allies)
     {
-       // ally->update(deltaTime);
+       // ally->update(deltaTime);      TODO: update() in Ally
     }
 
     // Update the level itself (enemies, objects, etc.)
     // m_level->update(deltaTime);
-    // TODO: create uptade func in class Level - needs to update m_enemies!
+    //      TODO: create uptade() in Level - needs to update m_enemies!
 
     // Update HUD/stats with current data
     //m_stats.update(m_players, m_allies, *m_level);
-    // TODO: create uptade func in  class HUD
+    //      TODO: create uptade() in HUD
 
 }
 
@@ -91,17 +91,17 @@ void Controller::render()
     // Draw all human players
     for (const auto& player : m_players)
     {
-        //m_window.draw(*player);   TODO: draw() in Player
+        //m_window.draw(*player);     TODO: draw() in Player
     }
 
     // Draw AI allies
     for (const auto& ally : m_allies)
     {
-        //m_window.draw(*ally);     TODO: draw() in Ally
+        //m_window.draw(*ally);        TODO: draw() in Ally
     }
 
     // Draw HUD
-    //m_window.draw(m_stats); TODO: draw() in HUD
+    //m_window.draw(m_stats);        TODO: draw() in HUD
 
     m_window.display();
 }
