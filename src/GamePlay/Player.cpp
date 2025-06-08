@@ -19,10 +19,13 @@ void Player::handleInput()
 {
     m_direction = { 0.f, 0.f };
 
+    // TODO: Change the logic so that each player has movement with different keys.
+    //  For example: W-A-S-D (generically)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))  m_direction.x = -1.f;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) m_direction.x = 1.f;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))    m_direction.y = -1.f;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))  m_direction.y = 1.f;
+
 
     // Normalise diagonal speed to remain constant.
     if (m_direction.x != 0.f && m_direction.y != 0.f)
