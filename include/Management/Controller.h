@@ -6,8 +6,6 @@
 #include <vector>
 
 
-
-
 class Controller {
 public:
 	void run();

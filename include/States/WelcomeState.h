@@ -2,5 +2,5 @@
 
 #include "IState.h"
 
-class Welcome : public IState {
+class WelcomeState : public IState {
 };
