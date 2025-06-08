@@ -12,7 +12,7 @@ void Bandit::handleCollision()
 {
 }
 
-bool Bandit::m_registered = Factory<Enemy>::registerit("b", []() {
+bool Bandit::m_registered = Factory<Enemy>::registerIt("b", []() {
     return std::make_unique<Bandit>();
     });
 
