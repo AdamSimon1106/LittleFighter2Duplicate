@@ -103,3 +103,7 @@ void Player::clampToWindow(const sf::Vector2u& windowSize)
 
     m_sprite.setPosition(pos);
 }
+
+bool Player::isAlive() const {
+    return m_alive;
+}

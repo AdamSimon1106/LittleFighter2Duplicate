@@ -46,3 +46,38 @@ void Controller::updateWorld(float deltaTime)
 
 }
 
+
+void Controller::checkLevelEndConditions()
+{
+    if (m_level->areAllEnemiesDefeated())
+    {
+        m_levelFinished = true;
+        m_playerWon = true;
+        return;
+    }
+
+    bool allPlayersDefeated = true;
+    for (const auto& player : m_players)
+    {
+        if (player->isAlive())  
+        {
+            allPlayersDefeated = false;
+            break;
+        }
+    }
+    for (const auto& ally : m_allies)
+    {
+        if (ally->isAlive())
+        {
+            allPlayersDefeated = false;
+            break;
+        }
+    }
+
+    if (allPlayersDefeated)
+    {
+        m_levelFinished = true;
+        m_playerWon = false;
+    }
+}
+
