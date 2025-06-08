@@ -2,5 +2,5 @@
 
 #include "IState.h"
 
-class Loading : public IState {
+class MenuState : public IState {
 };
