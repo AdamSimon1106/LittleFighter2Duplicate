@@ -69,3 +69,13 @@ void Level::render(sf::RenderWindow& window)
         obj->draw(window);
 
 }
+
+void Level::update()
+{
+    int index = static_cast<int>(m_faze);
+
+    //just for demo need to pass player position
+    if (index < m_enemies.size()) {
+        m_enemies[index].update(sf::Vector2f(125.0f, 125.0f));
+    }
+}

@@ -9,11 +9,11 @@ void Squad::render(sf::RenderWindow& window)
 	}
 }
 
-void Squad::update(float dt)
+void Squad::update(/*float dt*/ const sf::Vector2f playarPos)
 {
 	for (const auto& enemy : m_squad)
 	{
-		//enemy.update(dt);
+		enemy->update(playarPos);
 	}
 }
 
