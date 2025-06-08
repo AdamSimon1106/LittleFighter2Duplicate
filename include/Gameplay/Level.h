@@ -21,5 +21,4 @@ private:
 	
 	Faze m_faze = Faze::Faze1;
 	sf::Sprite m_backgroundSprite;
-	std::string m_levelName;
 };
