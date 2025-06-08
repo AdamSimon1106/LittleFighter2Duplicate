@@ -122,3 +122,7 @@ bool Controller::isLevelFinished() const
     return m_levelFinished;
 }
 
+bool Controller::didWin() const
+{
+    return m_playerWon;
+}
