@@ -21,3 +21,28 @@ void Controller::handleInput()
         player->handleInput();
     }
 }
+
+void Controller::updateWorld(float deltaTime)
+{
+    // Update all human-controlled players
+    for (auto& player : m_players)
+    {
+        player->update(deltaTime);
+    }
+
+    // Update all AI-controlled allies
+    for (auto& ally : m_allies)
+    {
+       // ally->update(deltaTime);
+    }
+
+    // Update the level itself (enemies, objects, etc.)
+    // m_level->update(deltaTime);
+    // TODO: create uptade func in class Level - needs to update m_enemies!
+
+    // Update HUD/stats with current data
+    //m_stats.update(m_players, m_allies, *m_level);
+    // TODO: create uptade func in  class HUD
+
+}
+
