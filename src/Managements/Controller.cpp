@@ -117,3 +117,8 @@ void Controller::updateAndRender(float deltaTime)
     render();
 }
 
+bool Controller::isLevelFinished() const
+{
+    return m_levelFinished;
+}
+
