@@ -11,6 +11,6 @@ void Hunter::handleCollision()
 {
 }
 
-bool Hunter::m_registered = Factory<Enemy>::registerit("b", []() {
+bool Hunter::m_registered = Factory<Enemy>::registerIt("H", []() {
     return std::make_unique<Hunter>();
     });

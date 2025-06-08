@@ -12,7 +12,7 @@ class Factory {
 public:
 	static std::unique_ptr<T> create(const std::string& name);
 	using creatorFunc = std::function<std::unique_ptr<T>()>;
-	static bool registerIt(const std::string& name, CreatorFunc f);
+	static bool registerIt(const std::string& name, creatorFunc f);
 private:
 
 	typedef std::map<std::string, creatorFunc > myMap;
@@ -34,7 +34,7 @@ inline std::unique_ptr<T> Factory<T>::create(const std::string& name)
 }
 
 template<typename T>
-inline bool Factory<T>::registerIt(const std::string& name, CreatorFunc f)
+inline bool Factory<T>::registerIt(const std::string& name, creatorFunc f)
 {
 	getMap().emplace(name, f);
 	return true;
