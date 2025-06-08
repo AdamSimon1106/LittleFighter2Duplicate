@@ -11,6 +11,8 @@
 class GameManager {
 public:
 	void switchState(IState& state);
+	void readLevels(std::string path);
+	void run();
 
 private:
 	std::unique_ptr<IState> m_state;
