@@ -58,9 +58,7 @@ void GameManager::readLevels(std::string path)
     while (std::getline(file, line)) {
         if (line.empty()) continue; // remove empty lines from beggining
 
-        // background
         Level level(line);
-
 
         while (std::getline(file, line)) {
             // objects
