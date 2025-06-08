@@ -4,5 +4,5 @@
 class Enemy : public ComputerPlayer{
 public:
 	Enemy(const sf::Texture& tex):ComputerPlayer(tex){ }
-	virtual void update(/*float dt*/ const sf::Vector2f playarPos) = 0;
+	virtual void update(/*float dt*/ const sf::Vector2f playerPos) = 0;
 };
