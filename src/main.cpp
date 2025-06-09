@@ -1,4 +1,5 @@
 #include "../include/Management/GameManager.h"
+#include "../include/UI/Background.h"
 #include <cstdlib>
 #include <SFML/Graphics.hpp>
 #include <exception>
@@ -8,9 +9,7 @@
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(500, 500), "bgTest");
-	sf::Sprite bgSprite;
 	sf::Texture bgTexture;
-	sf::Image img;
 	
 	try {
 		bgTexture.loadFromFile("bg_welcome_state.png");
@@ -18,8 +17,7 @@ int main()
 	catch (std::exception& e) {
 		std::cout << e.what() << "\n";
 	}
-	bgSprite.setTexture(bgTexture);
-	bgSprite.scale(sf::Vector2f(window.getSize()));
+	Background bg(sf::Vector2f(window.getSize()), bgTexture);
 	while (window.isOpen()) {
 		sf::Event event;
 	
@@ -30,7 +28,7 @@ int main()
 		}
 		//stat of code
 		window.clear();
-		window.draw(bgSprite);
+		bg.draw(window,sf::RenderStates::Default);
 		window.display();
 	}
 
