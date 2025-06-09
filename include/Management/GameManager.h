@@ -16,7 +16,7 @@ public:
 
 private:
 	sf::RenderWindow m_window;
-	std::vector<Level> m_levels;
+	//std::vector<Level> m_levels;
 	std::unique_ptr<IState> m_currState;
 	std::unique_ptr<IState> m_nextState = nullptr;
 	
