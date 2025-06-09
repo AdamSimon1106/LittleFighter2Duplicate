@@ -64,7 +64,7 @@ void GameManager::readLevels(std::string path)
             // objects
             if (line.rfind("Objects: ", 0) == 0) {
                 level.addPickableObjects(line.substr(9));
-                break; 
+                break;
             }
             // squads
             if (!line.empty())
@@ -73,3 +73,4 @@ void GameManager::readLevels(std::string path)
 
         m_levels.push_back(std::move(level));
     }
+}

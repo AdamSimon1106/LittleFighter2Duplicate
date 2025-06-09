@@ -8,5 +8,5 @@ public:
 	bool isAlive() const;
 private:
 	sf::Text m_name;
-	m_alive = true;
+	bool m_alive = true;
 };
