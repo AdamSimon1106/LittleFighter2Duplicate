@@ -1,7 +1,6 @@
 #include "../include/States/InGameState.h"
 
-InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager),
-																		   m_controller(Controller())
+InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager)
 {}
 
 void InGameState::update(sf::Time deltaTime)

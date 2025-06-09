@@ -13,6 +13,5 @@ public:
     void handleEvents(sf::Event& ev) override;
 	void render() override;
 private:
-	GameManager& m_gameManager;
-	Controller m_controller;
+//	Controller m_controller;
 };
