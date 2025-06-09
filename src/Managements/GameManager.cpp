@@ -49,12 +49,12 @@ void GameManager::switchState(std::unique_ptr<IState> nextState)
 {
     m_nextState = std::move(nextState);
 }
-
+/*
 void GameManager::readLevels(std::string path)
 {
     std::ifstream file(path);
     std::string line;
-
+    
     while (std::getline(file, line)) {
         if (line.empty()) continue; // remove empty lines from beggining
 
@@ -73,3 +73,4 @@ void GameManager::readLevels(std::string path)
 
         m_levels.push_back(std::move(level));
     }
+**/
