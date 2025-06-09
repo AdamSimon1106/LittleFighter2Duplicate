@@ -79,3 +79,8 @@ void Level::update()
         m_enemies[index].update(sf::Vector2f(125.0f, 125.0f));
     }
 }
+
+bool Level::areAllEnemiesDefeated() const
+{
+    return false; // TODO: create logic to know if there is still living enemies
+}
