@@ -19,7 +19,7 @@ int main()
         std::string enemiesLine = "b1 h1";
         level.addSquad(enemiesLine);
 
-        Player player(ResourceManager::instance().getTexture("hunter"), 600.f);
+        Player player(ResourceManager::instance().getTexture("davis_ani"), 600.f);
         // Clock למדידת זמן בין פריימים
         sf::Clock clock;
 

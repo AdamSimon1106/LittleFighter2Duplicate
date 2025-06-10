@@ -28,7 +28,7 @@ std::unique_ptr<PlayerBaseState> StandingState::handleInput(Input input)
 void StandingState::enter(Player& player)
 {
 	std::cout << "enter:: StandingState\n";
-	const sf::Texture& tex = ResourceManager::instance().getTexture("hunter"); // או כל טקסטורה מתאימה
+	const sf::Texture& tex = ResourceManager::instance().getTexture("davis_ani"); // או כל טקסטורה מתאימה
 
 	Animation standingAnim(&tex,
 		0, 0,          // x, y
