@@ -10,7 +10,7 @@
 
 CharacterSelectState::CharacterSelectState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager)
 {
-	if (!m_bgTexture.loadFromFile("../resources/state_backgrounds/bg_cc.png")) throw std::runtime_error("From CharcterSelectState - bg image not found");
+	if (!m_bgTexture.loadFromFile("resources/state_backgrounds/bg_cc.png")) throw std::runtime_error("From CharcterSelectState - bg image not found");
 
 	sf::Vector2f screenSize(static_cast <sf::Vector2f> (m_window.getSize()));
 	m_backGround = Background(screenSize, m_bgTexture);

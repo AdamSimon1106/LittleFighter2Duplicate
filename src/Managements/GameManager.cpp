@@ -53,6 +53,10 @@ void GameManager::run()
 void GameManager::switchState(std::unique_ptr<IState> nextState)
 {
     m_nextState = std::move(nextState);
+    sf::Event ev;
+    while (m_window.pollEvent(ev)) {
+
+    }
 }
 /*
 void GameManager::readLevels(std::string path)

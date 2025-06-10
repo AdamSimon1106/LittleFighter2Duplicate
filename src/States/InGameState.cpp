@@ -9,11 +9,11 @@
 
 InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager)
 {
-	if (!m_bgTexture.loadFromFile("../resources/state_backgrounds/bg_welcome_state.png")) throw std::runtime_error("From InGameState - bg image not found");
+	if (!m_bgTexture.loadFromFile("resources/state_backgrounds/bg_loading_2.png")) throw std::runtime_error("From InGameState - bg image not found");
 
 	sf::Vector2f screenSize(static_cast <sf::Vector2f> (m_window.getSize()));
 	m_backGround = Background(screenSize, m_bgTexture);
-	m_startButton = Button("Start Game", sf::Vector2f(screenSize.x / 4, screenSize.y / 4), sf::Vector2f(screenSize.x / 2, screenSize.y / 2), sf::Color::Transparent, 30);
+	m_startButton = Button("to ingame state", sf::Vector2f(screenSize.x / 4, screenSize.y / 4), sf::Vector2f(screenSize.x / 2, screenSize.y / 2), sf::Color::Transparent, 30);
 	std::cout << "InGameState created, m_manager ptr: " << &m_manager << std::endl;
 
 }

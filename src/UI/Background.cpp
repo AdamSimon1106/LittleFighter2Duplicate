@@ -31,12 +31,8 @@ void Background::setPictureToCover()
 
 void Background::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	std::cout << "[Background] draw() called, useTexture: " << m_useTexture << std::endl;
 	if (m_useTexture) {
-		std::cout << "Sprite position: " << m_bgSprite.getPosition().x << ", " << m_bgSprite.getPosition().y << "\n";
-		std::cout << "Sprite scale: " << m_bgSprite.getScale().x << ", " << m_bgSprite.getScale().y << "\n";
-		target.draw(m_bgSprite, states);
-
+				target.draw(m_bgSprite, states);
 	}
 	else
 		target.draw(m_rectangleShape, states);
