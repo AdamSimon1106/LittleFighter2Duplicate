@@ -1,17 +1,19 @@
 // Player.cpp
 #include "Gameplay/Player.h"
 #include <algorithm>            // std::clamp
-
+#include "PlayerStates/StandingState.h"
 
 Player::Player(const sf::Texture& texture, float speed)
-    : PlayableObject(texture), m_speed(speed)
+    : PlayableObject(texture), m_speed(speed), m_state(std::make_unique<StandingState>())
 {
-    m_sprite.setTexture(m_texture);
+    //m_sprite.setTexture(m_texture);
 
     // Centre-origin so clamping works intuitively.
     auto sz = m_texture.getSize();
     m_sprite.setOrigin(static_cast<float>(sz.x) / 2.f,
         static_cast<float>(sz.y) / 2.f);
+
+    m_state->enter(*this);
 }
 
 // Updates m_direction according to arrow keys
@@ -36,6 +38,17 @@ void Player::handleInput()
     }
 }
 
+void Player::handleInput(Input input)
+{
+    auto state = m_state->handleInput(input);
+
+    if (state)
+    {
+        m_state = std::move(state);
+        m_state->enter(*this);
+    }
+}
+
 // -----------------------------------------------------------------------------
 // Per-frame update – simple linear movement
 // -----------------------------------------------------------------------------
@@ -44,6 +57,10 @@ void Player::update(float dt)
     sf::Vector2f delta(m_direction.x * m_speed * dt,
         m_direction.y * m_speed * dt);
     m_sprite.move(delta);
+
+    //benny
+    m_animation.update(dt);
+    m_animation.applyToSprite(m_sprite);
 }
 
 // -----------------------------------------------------------------------------
@@ -102,6 +119,14 @@ void Player::clampToWindow(const sf::Vector2u& windowSize)
         static_cast<float>(windowSize.y) - bounds.height / 2.f);
 
     m_sprite.setPosition(pos);
+}
+
+void Player::setAnimation(const Animation& anim)
+{
+
+    m_animation = anim;
+    m_animation.reset();
+    m_animation.applyToSprite(m_sprite); 
 }
 
 bool Player::isAlive() const {

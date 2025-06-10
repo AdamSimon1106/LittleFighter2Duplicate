@@ -25,9 +25,10 @@ void StandingState::enter(Player& player)
 	const sf::Texture& tex = ResourceManager::instance().getTexture("hunter"); // או כל טקסטורה מתאימה
 
 	Animation standingAnim(&tex,
-		sf::IntRect(0, 0, 80, 80),  // התחלה: (x, y, width, height)
-		sf::IntRect(180, 0, 80, 80), // סיום: x = 180 -> שלושה פריימים: 0, 60, 120, 180
-		0.2f); // זמן פריים
+		0, 0,          // x, y
+		80, 80,        // width, height
+		3,             // מספר פריימים
+		0.2f);         // זמן בין פריימים
 
 	player.setAnimation(standingAnim);
 	
