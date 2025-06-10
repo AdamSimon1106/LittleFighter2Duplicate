@@ -36,7 +36,8 @@ int main()
             // עדכון מצב המשחק
             level.update(dt);
             player.handleInput(RELEASE_LEFT);
-            player.handleInput(RELEASE_RIGHT);
+            /*player.handleInput(RELEASE_RIGHT);
+            player.handleInput(PRESS_LEFT);*/
             // ציור
             window.clear();
             

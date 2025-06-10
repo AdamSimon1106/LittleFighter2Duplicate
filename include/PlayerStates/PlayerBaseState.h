@@ -1,13 +1,19 @@
 #pragma once
 #include <memory>
 #include <iostream>
+#include "SFML/Graphics.hpp"
+#include"Management/ResourceManager.h"
+#include "Management/Animation.h"
+
+class Player;
 
 enum Input
 {
 	PRESS_LEFT,
 	PRESS_RIGHT,
 	RELEASE_LEFT,
-	RELEASE_RIGHT
+	RELEASE_RIGHT,
+	PRESS_JUMP
 };
 
 

@@ -27,6 +27,8 @@ public:
     /* Keep the player inside the window bounds */
     void clampToWindow(const sf::Vector2u& windowSize);
 
+    void setAnimation(const Animation& anim);
+
 private:
     float m_speed = 600.f;
     bool m_alive = true;

@@ -12,6 +12,8 @@ Player::Player(const sf::Texture& texture, float speed)
     auto sz = m_texture.getSize();
     m_sprite.setOrigin(static_cast<float>(sz.x) / 2.f,
         static_cast<float>(sz.y) / 2.f);
+
+    m_state->enter(*this);
 }
 
 // Updates m_direction according to arrow keys
@@ -42,8 +44,7 @@ void Player::handleInput(Input input)
 
     if (state)
     {
-        std::cout << "in Player::handleInput(input)\n";
-        m_state = move(state);
+        m_state = std::move(state);
         m_state->enter(*this);
     }
 }
@@ -56,6 +57,10 @@ void Player::update(float dt)
     sf::Vector2f delta(m_direction.x * m_speed * dt,
         m_direction.y * m_speed * dt);
     m_sprite.move(delta);
+
+    //benny
+    m_animation.update(dt);
+    m_animation.applyToSprite(m_sprite);
 }
 
 // -----------------------------------------------------------------------------
@@ -114,6 +119,14 @@ void Player::clampToWindow(const sf::Vector2u& windowSize)
         static_cast<float>(windowSize.y) - bounds.height / 2.f);
 
     m_sprite.setPosition(pos);
+}
+
+void Player::setAnimation(const Animation& anim)
+{
+
+    m_animation = anim;
+    m_animation.reset();
+    m_animation.applyToSprite(m_sprite); 
 }
 
 bool Player::isAlive() const {
