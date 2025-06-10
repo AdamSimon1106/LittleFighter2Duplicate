@@ -1,6 +1,8 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 
+#include "Management/Animation.h"
+
 class Object {
 public:
 	Object(const sf::Texture& tex);
@@ -11,5 +13,7 @@ public:
 protected:
 	sf::Sprite m_sprite;
 	sf::Texture m_texture;
+
+	Animation m_animation;
 	
 };

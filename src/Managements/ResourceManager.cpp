@@ -15,7 +15,7 @@ const sf::Texture& ResourceManager::getTexture(const std::string& id)
         return *it->second;
 
     // Otherwise load from disk.
-    std::string filePath = id + ".png";
+    std::string filePath ="resources/textures/" + id + ".png";
     auto tex = std::make_unique<sf::Texture>();
     if (!tex->loadFromFile(filePath))
         throw std::runtime_error("ResourceManager: failed to load '" + filePath + '\'');

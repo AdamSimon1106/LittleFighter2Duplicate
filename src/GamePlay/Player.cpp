@@ -1,12 +1,12 @@
 // Player.cpp
 #include "Gameplay/Player.h"
 #include <algorithm>            // std::clamp
-
+#include "PlayerStates/StandingState.h"
 
 Player::Player(const sf::Texture& texture, float speed)
-    : PlayableObject(texture), m_speed(speed)
+    : PlayableObject(texture), m_speed(speed), m_state(std::make_unique<StandingState>())
 {
-    m_sprite.setTexture(m_texture);
+    //m_sprite.setTexture(m_texture);
 
     // Centre-origin so clamping works intuitively.
     auto sz = m_texture.getSize();
@@ -33,6 +33,18 @@ void Player::handleInput()
         constexpr float invSqrt2 = 0.70710678118f;       // 1 / ?2
         m_direction.x *= invSqrt2;
         m_direction.y *= invSqrt2;
+    }
+}
+
+void Player::handleInput(Input input)
+{
+    auto state = m_state->handleInput(input);
+
+    if (state)
+    {
+        std::cout << "in Player::handleInput(input)\n";
+        m_state = move(state);
+        m_state->enter(*this);
     }
 }
 
