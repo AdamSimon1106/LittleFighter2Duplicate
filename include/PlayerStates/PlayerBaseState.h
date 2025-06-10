@@ -24,6 +24,9 @@ public:
 	virtual ~PlayerBaseState() = default;
 	virtual std::unique_ptr<PlayerBaseState> handleInput(Input input) = 0;
 	virtual void enter(Player& player) = 0;
+	virtual void update(Player& player, float dt) { };
+	
+
 protected:
 	Input m_input;
 };

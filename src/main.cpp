@@ -30,12 +30,45 @@ int main()
                 if (event.type == sf::Event::Closed)
                     window.close();
 
+            if (event.type == sf::Event::KeyPressed)
+            {
+                switch (event.key.code)
+                {
+                case sf::Keyboard::Left:
+                    player.handleInput(PRESS_LEFT);
+                    break;
+                case sf::Keyboard::Right:
+                    player.handleInput(PRESS_RIGHT);
+                    break;
+                case sf::Keyboard::Up: // או Space לפי העדפה
+                    player.handleInput(PRESS_JUMP);
+                    break;
+                default:
+                    break;
+                }
+            }
+
+            if (event.type == sf::Event::KeyReleased)
+            {
+                switch (event.key.code)
+                {
+                case sf::Keyboard::Left:
+                    player.handleInput(RELEASE_LEFT);
+                    break;
+                case sf::Keyboard::Right:
+                    player.handleInput(RELEASE_RIGHT);
+                    break;
+                default:
+                    break;
+                }
+            }
+
             // חישוב זמן שעבר מאז הפריים הקודם
             float dt = clock.restart().asSeconds();
 
             // עדכון מצב המשחק
             level.update(dt);
-            player.handleInput(RELEASE_LEFT);
+            
             /*player.handleInput(RELEASE_RIGHT);
             player.handleInput(PRESS_LEFT);*/
             // ציור

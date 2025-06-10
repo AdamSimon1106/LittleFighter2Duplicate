@@ -20,7 +20,6 @@ std::unique_ptr<PlayerBaseState> WalkingState::handleInput(Input input)
 
 void WalkingState::enter(Player& player)
 {
-	std::cout << "in walkingState:: enter\n";
 	std::cout << "enter:: WalkingState\n";
 
 	const sf::Texture& tex = ResourceManager::instance().getTexture("hunter");
