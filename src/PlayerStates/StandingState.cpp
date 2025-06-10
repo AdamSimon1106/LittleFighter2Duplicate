@@ -1,6 +1,7 @@
 #include "PlayerStates/StandingState.h"
 #include "PlayerStates/WalkingState.h" 
 #include "PlayerStates/JumpingState.h"
+#include "PlayerStates/AttackingState.h"
 #include"Gameplay/Player.h"
 
 std::unique_ptr<PlayerBaseState> StandingState::handleInput(Input input)
@@ -15,6 +16,8 @@ std::unique_ptr<PlayerBaseState> StandingState::handleInput(Input input)
 		 return std::make_unique<WalkingState>();
 	case Input::PRESS_JUMP:
 		return std::make_unique<JumpingState>();
+	case Input::PRESS_ATTACK:
+		return std::make_unique<AttackingState>();
 
 	default:
 		break;

@@ -14,7 +14,7 @@ int main()
         sf::RenderWindow window(sf::VideoMode(800, 600), "Little Fighter Level");
         window.setFramerateLimit(60); // אופציונלי, כדי להגביל FPS
 
-        Level level("lvl1bck");
+        Level level("lvl1bg");
 
         std::string enemiesLine = "b1 h1";
         level.addSquad(enemiesLine);
@@ -32,6 +32,8 @@ int main()
 
             if (event.type == sf::Event::KeyPressed)
             {
+                std::cout << "Key code: " << event.key.code << "\n";
+
                 switch (event.key.code)
                 {
                 case sf::Keyboard::Left:
@@ -42,6 +44,11 @@ int main()
                     break;
                 case sf::Keyboard::Up: // או Space לפי העדפה
                     player.handleInput(PRESS_JUMP);
+                    break;
+                case sf::Keyboard::Enter:
+                    std::cout << "enter(main)\n";
+                    
+                    player.handleInput(PRESS_ATTACK);
                     break;
                 default:
                     break;
