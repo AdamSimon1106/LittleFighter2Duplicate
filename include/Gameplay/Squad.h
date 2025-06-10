@@ -6,7 +6,7 @@
 class Squad {
 public:
 	void render(sf::RenderWindow& window);
-	void update(float dt);
+	void update(/*float dt*/ const sf::Vector2f playarPos);
 	void addEnemy(std::unique_ptr<Enemy> enemy);
 	
 private:

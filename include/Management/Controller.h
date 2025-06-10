@@ -1,19 +1,45 @@
 #pragma once
+
+#include <SFML/Graphics.hpp>
+#include <memory>
+#include <vector>
 #include "Gameplay/Level.h"
-#include "UI/HeadsUpDisplay.h"
 #include "Gameplay/Player.h"
 #include "Gameplay/Ally.h"
-#include <vector>
+#include "UI/HeadsUpDisplay.h"
 
-
-
-
-class Controller {
+class Controller
+{
 public:
-	void run();
+    // Constructor: receives all game data needed to run the battle
+    Controller(sf::RenderWindow& window,
+        std::unique_ptr<Level> level,
+        std::vector<std::shared_ptr<Player>> players,     // human-controlled
+        std::vector<std::shared_ptr<Ally>> allies);     // AI-controlled allies
+
+    // Called each frame from InGameState
+    void updateAndRender(float deltaTime);
+
+    // Returns whether the level has ended, and who won
+    bool isLevelFinished() const;
+    bool didWin() const;
+
 private:
-	Level m_level;
-	HeadsUpDisplay m_stats;
-	Player m_player;
-	std::vector<Ally> m_allies;
+    sf::RenderWindow& m_window;
+    std::unique_ptr<Level> m_level;
+
+    std::vector<std::shared_ptr<Player>> m_players; // human-controlled
+    std::vector<std::shared_ptr<Ally>> m_allies;  // AI-controlled
+
+
+    // ========== Internal state ==========
+    HeadsUpDisplay m_stats;
+    bool m_levelFinished = false;
+    bool m_playerWon = false;
+
+    // ========== Core logic ==========
+    void handleInput();                  // Input for human-controlled players
+    void updateWorld(float deltaTime);   // Updates players, allies, level, etc.
+    void checkLevelEndConditions();      // Determines whether the match is over
+    void render();                       // Draws the full scene
 };

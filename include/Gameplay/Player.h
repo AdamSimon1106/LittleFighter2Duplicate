@@ -19,11 +19,14 @@ public:
     void setSpeed(float speed);
     float getSpeed() const;
 
+    bool isAlive() const;
+
     /* Keep the player inside the window bounds */
     void clampToWindow(const sf::Vector2u& windowSize);
 
 private:
     float m_speed = 600.f;
+    bool m_alive = true;
     sf::Vector2f m_direction{ 0.f,0.f };
     //sf::Text m_name;
 

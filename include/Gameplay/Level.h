@@ -14,6 +14,8 @@ public:
 	void addSquad(std::string& squad);
 	void addPickableObjects(const std::string& objectLine);
 	void render(sf::RenderWindow& window);
+	void update();
+	bool areAllEnemiesDefeated() const;
 	
 private:
 	std::vector<Squad> m_enemies;
