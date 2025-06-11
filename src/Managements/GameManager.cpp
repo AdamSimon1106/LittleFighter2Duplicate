@@ -34,17 +34,19 @@ void GameManager::run()
             }
             m_currState->handleEvents(ev);
 
-            sf::Time deltaTime = clock.restart();
 
-            m_currState->update(deltaTime);
             if (m_nextState)
             {
                 m_currState = std::move(m_nextState);
             }
 
         }
-        
+        sf::Time deltaTime = clock.restart();
+
+        m_currState->update(deltaTime);
+
         m_window.clear();
+
         m_currState->render();
         m_window.display();
     }
