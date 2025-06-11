@@ -11,7 +11,7 @@ void IdleState::enter(ComputerPlayer& player) {
 void IdleState::update(ComputerPlayer& player, float deltaTime) {
     // 1. Scan for closest enemy (pseudo code)
     auto enemies = player.getKnownEnemies();
-    float closestDist = std::numeric_limits<float>::max();
+    float closestDist = std::numeric_limits<float>::max(); // init to largest float number
     std::shared_ptr<PlayableObject> closestEnemy = nullptr;
 
     for (const auto& enemy : enemies) {
