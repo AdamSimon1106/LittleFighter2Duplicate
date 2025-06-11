@@ -11,7 +11,7 @@ int main()
 {
     try {
         // הקוד הרגיל
-        sf::RenderWindow window(sf::VideoMode(800, 600), "Little Fighter Level");
+        sf::RenderWindow window(sf::VideoMode(980, 680), "Little Fighter Level");
         window.setFramerateLimit(60); // אופציונלי, כדי להגביל FPS
 
         Level level("lvl1bg");
