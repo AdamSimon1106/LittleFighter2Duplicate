@@ -22,7 +22,6 @@ InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IStat
 
 void InGameState::update(sf::Time deltaTime) {
     float dt = deltaTime.asSeconds();
-	std::cout << "in  IngameState::update\n";
     m_level.update(dt);
 	m_player.update(dt);
 

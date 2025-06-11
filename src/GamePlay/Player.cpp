@@ -34,7 +34,6 @@ void Player::handleInput(sf::Event event)
 
 void Player::update(float dt)
 {
-    std::cout << "in  Player::update\n";
     move(dt);
     m_animation.update(dt);
     m_animation.applyToSprite(m_sprite);
@@ -68,9 +67,11 @@ void Player::setDiraction(Input input)
     {
     case PRESS_LEFT:
         m_direction.x = -1.f;
+        m_sprite.setScale(-1.f, 1.f);
         break;
     case PRESS_RIGHT:
         m_direction.x = 1.f;
+        m_sprite.setScale(1.f, 1.f);
         break;
     case RELEASE_LEFT:
             m_direction.x = 0.f;
@@ -137,7 +138,7 @@ void Player::setAnimation(const Animation& anim)
 
     m_animation = anim;
     m_animation.reset();
-    m_animation.applyToSprite(m_sprite); 
+    //m_animation.applyToSprite(m_sprite); 
 }
 
 bool Player::isAlive() const {
