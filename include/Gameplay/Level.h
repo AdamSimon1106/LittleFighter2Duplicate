@@ -14,7 +14,7 @@ public:
 	void addSquad(std::string& squad);
 	void addPickableObjects(const std::string& objectLine);
 	void render(sf::RenderWindow& window);
-	void update();
+	void update(float dt);
 	bool areAllEnemiesDefeated() const;
 	
 private:

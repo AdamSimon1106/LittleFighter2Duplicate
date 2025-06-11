@@ -5,7 +5,7 @@
 class Animation {
 public:
     Animation();
-    Animation(const sf::Texture* texture, sf::IntRect startRect, sf::IntRect endRect, float frameTime, bool loop = true);
+    Animation(const sf::Texture* texture, int x, int y, int width, int height, int frameCount, float frameTime, bool loop = true);
 
     void update(float deltaTime);
     void applyToSprite(sf::Sprite& sprite) const;
@@ -13,12 +13,12 @@ public:
 
 private:
     const sf::Texture* texture;
-    std::vector<sf::IntRect> frames;
+    int x, y, width, height;
+    int frameCount;
     float frameTime;
     float elapsedTime;
-    size_t currentFrame;
+    int currentFrame;
     bool looping;
     bool finished;
     int direction = 1;
-
 };

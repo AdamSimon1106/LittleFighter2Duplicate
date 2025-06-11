@@ -2,27 +2,24 @@
 #include "Management/Animation.h"
 
 Animation::Animation()
-    : texture(nullptr), frameTime(0), elapsedTime(0), currentFrame(0), looping(true), finished(false) {}
+    : texture(nullptr), x(0), y(0), width(0), height(0), frameCount(0),
+    frameTime(0), elapsedTime(0), currentFrame(0), looping(true), finished(false) {}
 
-Animation::Animation(const sf::Texture* texture, sf::IntRect startRect, sf::IntRect endRect, float frameTime, bool loop)
-    : texture(texture), frameTime(frameTime), elapsedTime(0), currentFrame(0), looping(loop), finished(false) {
+Animation::Animation(const sf::Texture* tex, int x, int y, int w, int h, int count, float time, bool loop)
+    : texture(tex), x(x), y(y), width(w), height(h), frameCount(count),
+    frameTime(time), elapsedTime(0), currentFrame(0), looping(loop), finished(false) {}
 
-    // חישוב פריימים לפי טווח
-    for (int x = startRect.left; x <= endRect.left; x += startRect.width) {
-        frames.emplace_back(x, startRect.top, startRect.width, startRect.height);
-    }
-}
 
 void Animation::update(float deltaTime) {
-    if (finished || frames.empty()) return;
+    if (finished || frameCount <= 0) return;
 
     elapsedTime += deltaTime;
     while (elapsedTime >= frameTime) {
         elapsedTime -= frameTime;
         currentFrame += direction;
 
-        if (currentFrame >= frames.size()) {
-            currentFrame = frames.size() - 2;
+        if (currentFrame >= frameCount) {
+            currentFrame = frameCount - 2;
             direction = -1;
         }
         else if (currentFrame < 0) {
@@ -30,18 +27,21 @@ void Animation::update(float deltaTime) {
             direction = 1;
         }
 
-        if (!looping && (currentFrame == frames.size() - 1 || currentFrame == 0)) {
+        if (!looping && (currentFrame == frameCount - 1 || currentFrame == 0)) {
             finished = true;
             break;
         }
     }
 }
 
+
 void Animation::applyToSprite(sf::Sprite& sprite) const {
-    if (texture)
-        sprite.setTexture(*texture);
-    if (!frames.empty())
-        sprite.setTextureRect(frames[currentFrame]);
+    if (!texture || frameCount <= 0) return;
+
+    sprite.setTexture(*texture);
+
+    sf::IntRect rect(x + currentFrame * width, y, width, height);
+    sprite.setTextureRect(rect);
 }
 
 void Animation::reset() {

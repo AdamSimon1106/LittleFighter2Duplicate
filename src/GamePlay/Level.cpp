@@ -70,7 +70,7 @@ void Level::render(sf::RenderWindow& window)
 
 }
 
-void Level::update()
+void Level::update(float dt)
 {
     int index = static_cast<int>(m_faze);
 
