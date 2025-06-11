@@ -17,6 +17,8 @@ enum Input
     RELEASE_RIGHT,
     PRESS_UP,
     PRESS_DOWN,
+    RELEASE_UP,
+    RELEASE_DOWN,
     PRESS_JUMP,
     PRESS_ATTACK,
 };
