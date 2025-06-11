@@ -1,4 +1,5 @@
 #include "ComputerPlayerState/ApproachingEnemyState.h"
+#include "ComputerPlayerState/AttackingState.h"
 #include "GamePlay/ComputerPlayer.h"
 #include "Objects/PlayableObject.h"
 #include <cmath> // sqrt, etc.
@@ -21,7 +22,7 @@ void ApproachingEnemyState::update(ComputerPlayer& player, float deltaTime) {
     float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
     if (distance < 100.f) {
-        // TODO: Switch to attack state
+        player.changeState(std::make_unique<AttackingState>(m_target));
         return;
     }
 
