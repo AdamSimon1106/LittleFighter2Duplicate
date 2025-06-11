@@ -5,7 +5,7 @@
 #include "PlayerStates/PlayerBaseState.h"
 
 Player::Player(const sf::Texture& texture, float speed)
-    : PlayableObject(texture), m_speed(speed), m_state(std::make_unique<StandingState>())
+    : PlayableObject(texture), m_speed(speed), m_state(std::make_unique<StandingState>(RELEASE_RIGHT))
 {
     //m_sprite.setTexture(m_texture);
 
@@ -32,24 +32,32 @@ void Player::handleInput(sf::Event event)
     }
 }
 
-void Player::move()
+void Player::update(float dt)
 {
-    std::cout << "in player move\n";
+    move(dt);
+    m_animation.update(dt);
+    m_animation.applyToSprite(m_sprite);
+}
 
+void Player::move(float dt)
+{
     sf::Vector2f velocity = m_direction;
 
+    // Normalize diagonal movement (to prevent faster diagonal movement)
     if (velocity.x != 0.f && velocity.y != 0.f)
     {
-        constexpr float invSqrt2 = 0.70710678118f; // 1 / sqrt(2)
+        constexpr float invSqrt2 = 0.70710678118f;
         velocity.x *= invSqrt2;
         velocity.y *= invSqrt2;
     }
 
-    velocity.x *= m_speed;
-    velocity.y *= m_speed;
+    // Apply speed and delta time
+    sf::Vector2f delta(velocity.x * m_speed * dt,
+        velocity.y * m_speed * dt);  
+    m_sprite.move(delta);
 
-    m_sprite.move(velocity);
 }
+
 
 
 void Player::setDiraction(Input input)
@@ -59,44 +67,21 @@ void Player::setDiraction(Input input)
     {
     case PRESS_LEFT:
         m_direction.x = -1.f;
+        m_sprite.setScale(-1.f, 1.f);
         break;
     case PRESS_RIGHT:
         m_direction.x = 1.f;
+        m_sprite.setScale(1.f, 1.f);
         break;
     case RELEASE_LEFT:
-        if (m_direction.x < 0)
             m_direction.x = 0.f;
-        break;
     case RELEASE_RIGHT:
-        if (m_direction.x > 0)
             m_direction.x = 0.f;
         break;
     default:
         break;
     }
 }
-
-// -----------------------------------------------------------------------------
-// Per-frame update – simple linear movement
-// -----------------------------------------------------------------------------
-void Player::update(float dt)
-{
-    sf::Vector2f delta(m_direction.x * m_speed * dt,
-        m_direction.y * m_speed * dt);
-    m_sprite.move(delta);
-
-    //benny
-    m_animation.update(dt);
-    m_animation.applyToSprite(m_sprite);
-}
-
-// -----------------------------------------------------------------------------
-// Draws the sprite
-// -----------------------------------------------------------------------------
-//void Player::draw(sf::RenderWindow& window)
-//{
-//    window.draw(m_sprite);
-//}
 
 // -----------------------------------------------------------------------------
 // Collision stub (will be expanded later)
@@ -153,7 +138,7 @@ void Player::setAnimation(const Animation& anim)
 
     m_animation = anim;
     m_animation.reset();
-    m_animation.applyToSprite(m_sprite); 
+    //m_animation.applyToSprite(m_sprite); 
 }
 
 bool Player::isAlive() const {
