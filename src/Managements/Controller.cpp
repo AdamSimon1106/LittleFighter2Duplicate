@@ -92,12 +92,14 @@ void Controller::render()
     for (const auto& player : m_players)
     {
         //m_window.draw(*player);     TODO: draw() in Player
+        player->draw(m_window);
     }
 
     // Draw AI allies
     for (const auto& ally : m_allies)
     {
         //m_window.draw(*ally);        TODO: draw() in Ally
+        ally->draw(m_window);
     }
 
     // Draw HUD
