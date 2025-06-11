@@ -9,7 +9,7 @@ public:
 private:
 	sf::Vector2f m_screenSize;
 	sf::Sprite m_bgSprite;
-	sf::Texture m_bgTexture;
+	const sf::Texture* m_bgTexture;
 	sf::RectangleShape m_rectangleShape ;
 	bool m_useTexture; 
 	void setPictureToCover();

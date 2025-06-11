@@ -9,10 +9,11 @@
 
 int main()
 {
+
     try {
-        // дчег дшвйм
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         sf::RenderWindow window(sf::VideoMode(980, 680), "Little Fighter Level");
-        window.setFramerateLimit(60); // аефцйермй, лгй мдвбйм FPS
+        window.setFramerateLimit(60); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ FPS
 
         Level level("lvl1bg");
 
@@ -20,7 +21,7 @@ int main()
         level.addSquad(enemiesLine);
 
         Player player(ResourceManager::instance().getTexture("davis_ani"), 600.f);
-        // Clock могйгъ жоп бйп фшййойн
+        // Clock пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         sf::Clock clock;
 
         while (window.isOpen())
@@ -42,7 +43,7 @@ int main()
                 case sf::Keyboard::Right:
                     player.handleInput(PRESS_RIGHT);
                     break;
-                case sf::Keyboard::Up: // ае Space мфй дтгфд
+                case sf::Keyboard::Up: // пїЅпїЅ Space пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
                     player.handleInput(PRESS_JUMP);
                     break;
                 case sf::Keyboard::Enter:
@@ -70,15 +71,15 @@ int main()
                 }
             }
 
-            // зйщеб жоп щтбш оаж дфшййн дчегн
+            // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             float dt = clock.restart().asSeconds();
 
-            // тглеп оцб дощзч
+            // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             level.update(dt);
             
             /*player.handleInput(RELEASE_RIGHT);
             player.handleInput(PRESS_LEFT);*/
-            // цйеш
+            // пїЅпїЅпїЅпїЅ
             window.clear();
             
             level.render(window);
@@ -90,6 +91,34 @@ int main()
         std::cout << "FATAL: " << e.what() << "\n";
         return EXIT_FAILURE;
     }
+
+	GameManager gameManager;
+	gameManager.run();
+
+	//sf::RenderWindow window(sf::VideoMode(500, 500), "bgTest");
+	//sf::Texture bgTexture;
+	//
+	//try {
+	//	bgTexture.loadFromFile("bg_welcome_state.png");
+	//}
+	//catch (std::exception& e) {
+	//	std::cout << e.what() << "\n";
+	//}
+	//Background bg(sf::Vector2f(window.getSize()), bgTexture);
+	//while (window.isOpen()) {
+	//	sf::Event event;
+	//
+	//	while (window.pollEvent(event)) {
+	//		if (event.type == sf::Event::Closed) {
+	//			window.close();
+	//		}
+	//	}
+	//	//stat of code
+	//	window.clear();
+	//	bg.draw(window,sf::RenderStates::Default);
+	//	window.display();
+	//}
+
 
 	return EXIT_SUCCESS;
 }
