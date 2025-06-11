@@ -4,15 +4,15 @@
 #include "PlayerStates/StandingState.h"
 #include "PlayerStates/PlayerBaseState.h"
 
-Player::Player(const sf::Texture& texture, float speed)
-    : PlayableObject(texture), m_speed(speed), m_state(std::make_unique<StandingState>(RELEASE_RIGHT))
+Player::Player(const std::string& name, float speed)
+    : PlayableObject(name), m_speed(speed), m_state(std::make_unique<StandingState>(RELEASE_RIGHT))
 {
     //m_sprite.setTexture(m_texture);
 
     // Centre-origin so clamping works intuitively.
-    auto sz = m_texture.getSize();
+    /*auto sz = m_texture.getSize();
     m_sprite.setOrigin(static_cast<float>(sz.x) / 2.f,
-        static_cast<float>(sz.y) / 2.f);
+        static_cast<float>(sz.y) / 2.f);*/
 
     m_state->enter(*this);
 }
