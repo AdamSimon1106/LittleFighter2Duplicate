@@ -55,26 +55,45 @@ void Player::move(float dt)
 
 void Player::setDiraction(Input input)
 {
-    std::cout << "in player setDirection\n";
     switch (input)
     {
     case PRESS_LEFT:
         m_direction.x = -1.f;
         m_sprite.setScale(-1.f, 1.f);
         break;
+
     case PRESS_RIGHT:
         m_direction.x = 1.f;
         m_sprite.setScale(1.f, 1.f);
         break;
+
     case RELEASE_LEFT:
-            m_direction.x = 0.f;
-    case RELEASE_RIGHT:
+        if (m_direction.x < 0.f)
             m_direction.x = 0.f;
         break;
+
+    case RELEASE_RIGHT:
+        if (m_direction.x > 0.f)
+            m_direction.x = 0.f;
+        break;
+
     case PRESS_UP:
-        m_direction.y = -1;
+        m_direction.y = -1.f;
+        break;
+
+    case RELEASE_UP:
+        if (m_direction.y < 0.f)
+            m_direction.y = 0.f;
+        break;
+
     case PRESS_DOWN:
-        m_direction.y = 1;
+        m_direction.y = 1.f;
+        break;
+
+    case RELEASE_DOWN:
+        if (m_direction.y > 0.f)
+            m_direction.y = 0.f;
+        break;
 
     default:
         break;
