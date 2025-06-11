@@ -2,6 +2,7 @@
 #include "Gameplay/Player.h"
 #include <algorithm>            // std::clamp
 #include "PlayerStates/StandingState.h"
+#include "PlayerStates/PlayerBaseState.h"
 
 Player::Player(const sf::Texture& texture, float speed)
     : PlayableObject(texture), m_speed(speed), m_state(std::make_unique<StandingState>())
@@ -17,35 +18,61 @@ Player::Player(const sf::Texture& texture, float speed)
 }
 
 // Updates m_direction according to arrow keys
-void Player::handleInput()
+void Player::handleInput(sf::Event event)
 {
-    m_direction = { 0.f, 0.f };
 
-    // TODO: Change the logic so that each player has movement with different keys.
-    //  For example: W-A-S-D (generically)
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))  m_direction.x = -1.f;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) m_direction.x = 1.f;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))    m_direction.y = -1.f;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))  m_direction.y = 1.f;
+    Input input = getEventType(event);
 
-
-    // Normalise diagonal speed to remain constant.
-    if (m_direction.x != 0.f && m_direction.y != 0.f)
-    {
-        constexpr float invSqrt2 = 0.70710678118f;       // 1 / ?2
-        m_direction.x *= invSqrt2;
-        m_direction.y *= invSqrt2;
-    }
-}
-
-void Player::handleInput(Input input)
-{
     auto state = m_state->handleInput(input);
 
     if (state)
     {
         m_state = std::move(state);
         m_state->enter(*this);
+    }
+}
+
+void Player::move()
+{
+    std::cout << "in player move\n";
+
+    sf::Vector2f velocity = m_direction;
+
+    if (velocity.x != 0.f && velocity.y != 0.f)
+    {
+        constexpr float invSqrt2 = 0.70710678118f; // 1 / sqrt(2)
+        velocity.x *= invSqrt2;
+        velocity.y *= invSqrt2;
+    }
+
+    velocity.x *= m_speed;
+    velocity.y *= m_speed;
+
+    m_sprite.move(velocity);
+}
+
+
+void Player::setDiraction(Input input)
+{
+    std::cout << "in player setDirection\n";
+    switch (input)
+    {
+    case PRESS_LEFT:
+        m_direction.x = -1.f;
+        break;
+    case PRESS_RIGHT:
+        m_direction.x = 1.f;
+        break;
+    case RELEASE_LEFT:
+        if (m_direction.x < 0)
+            m_direction.x = 0.f;
+        break;
+    case RELEASE_RIGHT:
+        if (m_direction.x > 0)
+            m_direction.x = 0.f;
+        break;
+    default:
+        break;
     }
 }
 
