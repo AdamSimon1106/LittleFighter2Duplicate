@@ -8,6 +8,9 @@
 
 int main()
 {
+	GameManager gameManager;
+	gameManager.run();
+
 	//sf::RenderWindow window(sf::VideoMode(500, 500), "bgTest");
 	//sf::Texture bgTexture;
 	//
