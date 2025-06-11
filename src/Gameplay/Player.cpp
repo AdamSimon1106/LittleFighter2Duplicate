@@ -7,13 +7,6 @@
 Player::Player(const std::string& name, float speed)
     : PlayableObject(name), m_speed(speed), m_state(std::make_unique<StandingState>(RELEASE_RIGHT))
 {
-    //m_sprite.setTexture(m_texture);
-
-    // Centre-origin so clamping works intuitively.
-    /*auto sz = m_texture.getSize();
-    m_sprite.setOrigin(static_cast<float>(sz.x) / 2.f,
-        static_cast<float>(sz.y) / 2.f);*/
-
     m_state->enter(*this);
 }
 
@@ -78,6 +71,11 @@ void Player::setDiraction(Input input)
     case RELEASE_RIGHT:
             m_direction.x = 0.f;
         break;
+    case PRESS_UP:
+        m_direction.y = -1;
+    case PRESS_DOWN:
+        m_direction.y = 1;
+
     default:
         break;
     }
