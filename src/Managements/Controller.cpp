@@ -18,7 +18,7 @@ void Controller::handleInput()
 {
     for (auto& player : m_players)
     {
-        player->handleInput();
+        //player->handleInput();
     }
 }
 

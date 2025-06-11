@@ -10,8 +10,9 @@ class Player : public PlayableObject
 public:
     explicit Player(const sf::Texture& texture, float speed = 200.f);
 
-    void handleInput();                 // Reads arrow-key state (?) m_direction
-    void handleInput(Input input); //by benny
+    void handleInput(sf::Event event);                 // Reads arrow-key state (?) m_direction
+    void move();
+    void setDiraction(Input input);
     void update(float dt);              // Moves position by m_direction*speed*dt
     //void draw(sf::RenderWindow& window) override;/* Draws the sprite at current position */
     void handleCollision() override;    // Stub for future collision handling

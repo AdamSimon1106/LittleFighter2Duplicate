@@ -9,7 +9,9 @@ std::unique_ptr<PlayerBaseState> WalkingState::handleInput(Input input)
 	switch (input)
 	{
 	case Input::RELEASE_LEFT:
+		return std::make_unique<StandingState>();
 	case Input::RELEASE_RIGHT:
+		std::cout << "in WalkingState release right\n";
 		return std::make_unique<StandingState>();
 
 	default:
@@ -32,4 +34,6 @@ void WalkingState::enter(Player& player)
 
 
 	player.setAnimation(walkingAnim);
+	player.setDiraction(m_input);
+	player.move();
 }
