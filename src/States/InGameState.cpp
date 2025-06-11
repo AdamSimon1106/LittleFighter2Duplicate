@@ -10,7 +10,7 @@
 
 InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager), 
 																			m_level("lvl1bg"),
-																			m_player(ResourceManager::instance().getTexture("davis_ani"), 300.f)
+																			m_player("davis_ani", 300.f)
 {
 
 	std::cout << "InGameState created, m_manager ptr: " << &m_manager << std::endl;

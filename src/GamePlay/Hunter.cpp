@@ -3,7 +3,7 @@
 #include "management/ResourceManager.h"
 
 Hunter::Hunter()
-	:Enemy(ResourceManager::instance().getTexture("hunter"))
+	:Enemy("hunter")
 {
 }
 

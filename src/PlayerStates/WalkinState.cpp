@@ -27,9 +27,9 @@ void WalkingState::enter(Player& player)
 {
 	std::cout << "enter:: WalkingState\n";
 
-	const sf::Texture& tex = ResourceManager::instance().getTexture("davis_ani");
+	
 
-	Animation walkingAnim(&tex,
+	Animation walkingAnim(player.getTexture(),
 		320, 0,       // x, y
 		80, 80,      // width, height
 		4,           // frame count
