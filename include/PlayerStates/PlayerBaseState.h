@@ -50,7 +50,7 @@ inline Input getEventType(const sf::Event& event)
             
         }
     }
-    return RELEASE_LEFT;
+    return PRESS_JUMP;
 }
 
 

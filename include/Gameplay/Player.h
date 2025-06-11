@@ -11,9 +11,10 @@ public:
     explicit Player(const sf::Texture& texture, float speed = 200.f);
 
     void handleInput(sf::Event event);                 // Reads arrow-key state (?) m_direction
-    void move();
+    void update(float dt);
+    void move(float dt);                                // Moves position by m_direction * speed * dt
     void setDiraction(Input input);
-    void update(float dt);              // Moves position by m_direction*speed*dt
+               
     //void draw(sf::RenderWindow& window) override;/* Draws the sprite at current position */
     void handleCollision() override;    // Stub for future collision handling
 

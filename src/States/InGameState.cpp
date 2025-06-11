@@ -10,7 +10,7 @@
 
 InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager), 
 																			m_level("lvl1bg"),
-																			m_player(ResourceManager::instance().getTexture("davis_ani"), 10.f)
+																			m_player(ResourceManager::instance().getTexture("davis_ani"), 300.f)
 {
 
 	std::cout << "InGameState created, m_manager ptr: " << &m_manager << std::endl;
@@ -22,7 +22,9 @@ InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IStat
 
 void InGameState::update(sf::Time deltaTime) {
     float dt = deltaTime.asSeconds();
+	std::cout << "in  IngameState::update\n";
     m_level.update(dt);
+	m_player.update(dt);
 
     /*player.handleInput(RELEASE_RIGHT);
     player.handleInput(PRESS_LEFT);*/
