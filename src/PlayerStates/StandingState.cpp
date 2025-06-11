@@ -13,6 +13,8 @@ std::unique_ptr<PlayerBaseState> StandingState::handleInput(Input input)
 {
 	switch (input)
 	{
+	case Input::PRESS_UP:
+	case Input ::PRESS_DOWN:
 	case Input::PRESS_LEFT:
 	case Input::PRESS_RIGHT:
 		 return std::make_unique<WalkingState>(input);

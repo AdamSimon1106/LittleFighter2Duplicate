@@ -15,6 +15,8 @@ enum Input
     PRESS_RIGHT,
     RELEASE_LEFT,
     RELEASE_RIGHT,
+    PRESS_UP,
+    PRESS_DOWN,
     PRESS_JUMP,
     PRESS_ATTACK,
 };
@@ -29,10 +31,15 @@ inline Input getEventType(const sf::Event& event)
             return PRESS_LEFT;
         case sf::Keyboard::Right:
             return PRESS_RIGHT;
-        case sf::Keyboard::Space:
+        case sf::Keyboard::RShift:
             return PRESS_JUMP;
-        case sf::Keyboard::Z:
+        case sf::Keyboard::Enter:
             return PRESS_ATTACK;
+        case sf::Keyboard::Up:
+            return PRESS_UP;
+        case sf::Keyboard::Down:
+            return PRESS_DOWN;
+
         
             
         }
