@@ -10,5 +10,8 @@ public:
 	void enter(Player& player) override;
 	
 private:
+	sf::Clock m_clock; // ?? שעון פנימי
+	const float m_duration = 0.2f;
+
 	
 };

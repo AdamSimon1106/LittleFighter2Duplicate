@@ -4,8 +4,15 @@
 
 std::unique_ptr<PlayerBaseState> AttackingState::handleInput(Input input)
 {
-    return std::make_unique<StandingState>(input);
-    return nullptr;
+    switch (input)
+    {
+    case END_ATTACK:
+        return std::make_unique<StandingState>(input);
+        break;
+    
+    default:
+        break;
+    }
 }
 
 void AttackingState::enter(Player& player)

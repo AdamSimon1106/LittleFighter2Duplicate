@@ -32,9 +32,8 @@ std::unique_ptr<PlayerBaseState> StandingState::handleInput(Input input)
 void StandingState::enter(Player& player)
 {
 	std::cout << "enter:: StandingState\n";
-	const sf::Texture& tex = ResourceManager::instance().getTexture("davis_ani"); // או כל טקסטורה מתאימה
-
-	Animation standingAnim(&tex,
+	
+	Animation standingAnim(player.getTexture(),
 		0, 0,          // x, y
 		80, 80,        // width, height
 		3,             // מספר פריימים
