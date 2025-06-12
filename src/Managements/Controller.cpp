@@ -11,14 +11,17 @@ Controller::Controller(sf::RenderWindow& window,
     m_players(std::move(players)),
     m_allies(std::move(allies))
 {
+    m_players.push_back(std::make_shared<Player>("davis_ani", 300.f));
     //      TODO: initialize HUD (m_stats)
+    std::string enemiesLine = "b1 h1";
+    m_level->addSquad(enemiesLine);
 }
 
-void Controller::handleInput()
+void Controller::handleInput(sf::Event ev)
 {
     for (auto& player : m_players)
     {
-        //player->handleInput();
+        player->handleInput(ev);
     }
 }
 
@@ -27,7 +30,7 @@ void Controller::updateWorld(float deltaTime)
     // Update all human-controlled players
     for (auto& player : m_players)
     {
-        //player->update(deltaTime);
+        player->update(deltaTime);
     }
 
     // Update all AI-controlled allies
@@ -37,7 +40,7 @@ void Controller::updateWorld(float deltaTime)
     }
 
     // Update the level itself (enemies, objects, etc.)
-    // m_level->update(deltaTime);
+     m_level->update(deltaTime);
     //      TODO: create uptade() in Level - needs to update m_enemies!
 
     // Update HUD/stats with current data
@@ -45,6 +48,7 @@ void Controller::updateWorld(float deltaTime)
     //      TODO: create uptade() in HUD
 
 }
+
 
 
 void Controller::checkLevelEndConditions()
@@ -83,8 +87,7 @@ void Controller::checkLevelEndConditions()
 
 void Controller::render()
 {
-    m_window.clear();
-
+   
     // Draw background, enemies, pickable objects, etc.
     m_level->render(m_window);
 
@@ -99,25 +102,25 @@ void Controller::render()
     for (const auto& ally : m_allies)
     {
         //m_window.draw(*ally);        TODO: draw() in Ally
-        ally->draw(m_window);
+        //ally->draw(m_window);
     }
 
     // Draw HUD
     //m_window.draw(m_stats);        TODO: draw() in HUD
 
-    m_window.display();
+    
 }
 
-void Controller::updateAndRender(float deltaTime)
-{
-    if (m_levelFinished)
-        return;
-
-    handleInput();
-    updateWorld(deltaTime);
-    checkLevelEndConditions();
-    render();
-}
+//void Controller::updateAndRender(float deltaTime)
+//{
+//    if (m_levelFinished)
+//        return;
+//
+//    handleInput(deltaTime);
+//    updateWorld(deltaTime);
+//    checkLevelEndConditions();
+//    render();
+//}
 
 bool Controller::isLevelFinished() const
 {
