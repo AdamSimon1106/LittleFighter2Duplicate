@@ -76,13 +76,13 @@ void Player::setDiraction(Input input)
         if (m_direction.x > 0.f)
             m_direction.x = 0.f;
         break;
-
+    case PRESS_JUMP:
     case PRESS_UP:
         m_direction.y = -1.f;
         break;
 
     case RELEASE_UP:
-        if (m_direction.y < 0.f)
+       // if (m_direction.y < 0.f)
             m_direction.y = 0.f;
         break;
 
@@ -91,7 +91,7 @@ void Player::setDiraction(Input input)
         break;
 
     case RELEASE_DOWN:
-        if (m_direction.y > 0.f)
+      // if (m_direction.y > 0.f)
             m_direction.y = 0.f;
         break;
 
