@@ -28,6 +28,7 @@ void Player::handleInput(sf::Event event)
 void Player::update(float dt)
 {
     move(dt);
+    m_state->update(*this, dt);
     m_animation.update(dt);
     m_animation.applyToSprite(m_sprite);
 }
@@ -157,6 +158,14 @@ void Player::setAnimation(const Animation& anim)
     m_animation.reset();
     //m_animation.applyToSprite(m_sprite); 
 }
+
+void Player::setState(std::unique_ptr<PlayerBaseState> state)
+{
+    m_state = std::move(state);
+    m_state->enter(*this);
+}
+
+
 
 bool Player::isAlive() const {
     return m_alive;
