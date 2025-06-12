@@ -4,7 +4,7 @@
 
 class ComputerPlayer : public PlayableObject{
 public:
-	ComputerPlayer(const sf::Texture& tex) : PlayableObject(tex) { }
+	  ComputerPlayer(const std::string& name) : PlayableObject(name) { }
     virtual ~ComputerPlayer() = default;
 
     // Changes the current state
@@ -29,5 +29,8 @@ protected:
 
 private:
     float distance(const sf::Vector2f& a, const sf::Vector2f& b);
+
+
+
 
 };

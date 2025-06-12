@@ -24,7 +24,7 @@ void Controller::handleInput()
 {
     for (auto& player : m_players)
     {
-        player->handleInput();
+        //player->handleInput();
     }
 }
 
@@ -33,7 +33,7 @@ void Controller::updateWorld(float deltaTime)
     // Update all human-controlled players
     for (auto& player : m_players)
     {
-        player->update(deltaTime);
+        //player->update(deltaTime);
     }
 
     // Update all AI-controlled allies

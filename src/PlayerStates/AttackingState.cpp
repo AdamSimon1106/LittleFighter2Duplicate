@@ -4,7 +4,7 @@
 
 std::unique_ptr<PlayerBaseState> AttackingState::handleInput(Input input)
 {
-    return std::make_unique<StandingState>();
+    return std::make_unique<StandingState>(input);
     return nullptr;
 }
 

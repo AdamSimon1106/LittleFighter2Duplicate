@@ -2,44 +2,27 @@
 #include "Gameplay/Player.h"
 #include <algorithm>            // std::clamp
 #include "PlayerStates/StandingState.h"
+#include "PlayerStates/PlayerBaseState.h"
 
-Player::Player(const sf::Texture& texture, float speed)
-    : PlayableObject(texture), m_speed(speed), m_state(std::make_unique<StandingState>())
+Player::Player(const std::string& name, float speed)
+    : PlayableObject(name), m_speed(speed), m_state(std::make_unique<StandingState>(RELEASE_RIGHT))
 {
     //m_sprite.setTexture(m_texture);
 
     // Centre-origin so clamping works intuitively.
-    auto sz = m_texture.getSize();
+    /*auto sz = m_texture.getSize();
     m_sprite.setOrigin(static_cast<float>(sz.x) / 2.f,
-        static_cast<float>(sz.y) / 2.f);
+        static_cast<float>(sz.y) / 2.f);*/
 
     m_state->enter(*this);
 }
 
 // Updates m_direction according to arrow keys
-void Player::handleInput()
+void Player::handleInput(sf::Event event)
 {
-    m_direction = { 0.f, 0.f };
 
-    // TODO: Change the logic so that each player has movement with different keys.
-    //  For example: W-A-S-D (generically)
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))  m_direction.x = -1.f;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) m_direction.x = 1.f;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))    m_direction.y = -1.f;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))  m_direction.y = 1.f;
+    Input input = getEventType(event);
 
-
-    // Normalise diagonal speed to remain constant.
-    if (m_direction.x != 0.f && m_direction.y != 0.f)
-    {
-        constexpr float invSqrt2 = 0.70710678118f;       // 1 / ?2
-        m_direction.x *= invSqrt2;
-        m_direction.y *= invSqrt2;
-    }
-}
-
-void Player::handleInput(Input input)
-{
     auto state = m_state->handleInput(input);
 
     if (state)
@@ -49,27 +32,56 @@ void Player::handleInput(Input input)
     }
 }
 
-// -----------------------------------------------------------------------------
-// Per-frame update – simple linear movement
-// -----------------------------------------------------------------------------
 void Player::update(float dt)
 {
-    sf::Vector2f delta(m_direction.x * m_speed * dt,
-        m_direction.y * m_speed * dt);
-    m_sprite.move(delta);
-
-    //benny
+    move(dt);
     m_animation.update(dt);
     m_animation.applyToSprite(m_sprite);
 }
 
-// -----------------------------------------------------------------------------
-// Draws the sprite
-// -----------------------------------------------------------------------------
-//void Player::draw(sf::RenderWindow& window)
-//{
-//    window.draw(m_sprite);
-//}
+void Player::move(float dt)
+{
+    sf::Vector2f velocity = m_direction;
+
+    // Normalize diagonal movement (to prevent faster diagonal movement)
+    if (velocity.x != 0.f && velocity.y != 0.f)
+    {
+        constexpr float invSqrt2 = 0.70710678118f;
+        velocity.x *= invSqrt2;
+        velocity.y *= invSqrt2;
+    }
+
+    // Apply speed and delta time
+    sf::Vector2f delta(velocity.x * m_speed * dt,
+        velocity.y * m_speed * dt);  
+    m_sprite.move(delta);
+
+}
+
+
+
+void Player::setDiraction(Input input)
+{
+    std::cout << "in player setDirection\n";
+    switch (input)
+    {
+    case PRESS_LEFT:
+        m_direction.x = -1.f;
+        m_sprite.setScale(-1.f, 1.f);
+        break;
+    case PRESS_RIGHT:
+        m_direction.x = 1.f;
+        m_sprite.setScale(1.f, 1.f);
+        break;
+    case RELEASE_LEFT:
+            m_direction.x = 0.f;
+    case RELEASE_RIGHT:
+            m_direction.x = 0.f;
+        break;
+    default:
+        break;
+    }
+}
 
 // -----------------------------------------------------------------------------
 // Collision stub (will be expanded later)
@@ -126,7 +138,7 @@ void Player::setAnimation(const Animation& anim)
 
     m_animation = anim;
     m_animation.reset();
-    m_animation.applyToSprite(m_sprite); 
+    //m_animation.applyToSprite(m_sprite); 
 }
 
 bool Player::isAlive() const {
