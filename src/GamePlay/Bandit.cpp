@@ -3,7 +3,7 @@
 #include "management/ResourceManager.h"
 
 Bandit::Bandit()
-    :Enemy(ResourceManager::instance().getTexture("bandit")), m_speed(2.5f), m_attackRange(60.f)
+    :Enemy("bandit"), m_speed(2.5f), m_attackRange(60.f)
 {
     
 

@@ -3,6 +3,6 @@
 
 class Enemy : public ComputerPlayer{
 public:
-	Enemy(const sf::Texture& tex):ComputerPlayer(tex){ }
+	Enemy(const std::string& name):ComputerPlayer(name){ }
 	virtual void update(/*float dt*/ const sf::Vector2f playerPos) = 0;
 };

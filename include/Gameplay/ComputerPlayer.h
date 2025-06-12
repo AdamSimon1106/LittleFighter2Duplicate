@@ -3,5 +3,5 @@
 
 class ComputerPlayer : public PlayableObject{
 public:
-	ComputerPlayer(const sf::Texture& tex) : PlayableObject(tex) { }
+	ComputerPlayer(const std::string& name) : PlayableObject(name) { }
 };

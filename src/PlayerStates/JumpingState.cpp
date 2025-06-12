@@ -6,7 +6,7 @@
 std::unique_ptr<PlayerBaseState> JumpingState::handleInput(Input input)
 {
 	
-	return std::make_unique<StandingState>();
+	return std::make_unique<StandingState>(input);
     return nullptr;
 }
 
