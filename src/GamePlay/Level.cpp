@@ -80,6 +80,32 @@ void Level::update(float dt)
     }
 }
 
+std::vector<Enemy*> Level::getAllEnemies() {
+    std::vector<Enemy*> enemies;
+
+    Squad& curSquad = m_enemies[(int)m_faze];
+        for (auto& enemyPtr : curSquad.getEnemies()) {
+            if (enemyPtr) {
+                enemies.push_back(enemyPtr.get()); // Convert unique_ptr to raw pointer
+            }
+        }
+
+    return enemies;
+}
+
+std::vector<PickableObject*> Level::getAllObjects() {
+    std::vector<PickableObject*> objects;
+
+    for (auto& objPtr : m_pickables) {
+        if (objPtr) {
+            objects.push_back(objPtr.get());
+        }
+    }
+
+    return objects;
+}
+
+
 bool Level::areAllEnemiesDefeated() const
 {
     return false; // TODO: create logic to know if there is still living enemies

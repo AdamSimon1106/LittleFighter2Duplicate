@@ -16,7 +16,9 @@ public:
 	void render(sf::RenderWindow& window);
 	void update(float dt);
 	bool areAllEnemiesDefeated() const;
-	
+	std::vector<Enemy*> getAllEnemies();
+	std::vector<PickableObject*> getAllObjects();
+
 private:
 	std::vector<Squad> m_enemies;
 	std::vector<std::unique_ptr<PickableObject>> m_pickables;

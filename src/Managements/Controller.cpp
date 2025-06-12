@@ -1,4 +1,7 @@
 #include "Management/Controller.h"
+#include "Gameplay/Level.h"
+#include <cmath>
+#include <SFML/System/Vector2.hpp>
 #include <SFML/Window.hpp>
 #include <utility>
 
@@ -11,6 +14,9 @@ Controller::Controller(sf::RenderWindow& window,
     m_players(std::move(players)),
     m_allies(std::move(allies))
 {
+    m_enemies = m_level->getAllEnemies();
+    m_pickables = m_level->getAllObjects();
+
     //      TODO: initialize HUD (m_stats)
 }
 
@@ -119,6 +125,60 @@ void Controller::updateAndRender(float deltaTime)
     render();
 }
 
+void Controller::updateComputerPlayerTargets() {
+    // Update targets for allies (their enemies are the enemies from Level)
+    for (auto& ally : m_allies) {
+        if (!ally || !ally->needsEnemyTracking())
+            continue;
+
+        Enemy* closest = nullptr;
+        float closestDist = std::numeric_limits<float>::max();
+
+        for (Enemy* enemy : m_enemies) {
+            float dist = distanceBetween(ally->getPosition(), enemy->getPosition());
+            if (dist < closestDist) {
+                closestDist = dist;
+                closest = enemy;
+            }
+        }
+
+        if (closest)
+            ally->setTargetEnemy(closest);
+    }
+
+    // Update targets for enemies (their enemies are players and allies)
+    for (Enemy* enemy : m_enemies) {
+        if (!enemy || !enemy->needsEnemyTracking())
+            continue;
+
+        PlayableObject* closest = nullptr;
+        float closestDist = std::numeric_limits<float>::max();
+
+        // Check all players
+        for (auto& player : m_players) {
+            float dist = distanceBetween(enemy->getPosition(), player->getPosition());
+            if (dist < closestDist) {
+                closestDist = dist;
+                closest = player.get();
+            }
+        }
+
+        // Check all allies
+        for (auto& ally : m_allies) {
+            float dist = distanceBetween(enemy->getPosition(), ally->getPosition());
+            if (dist < closestDist) {
+                closestDist = dist;
+                closest = ally.get();
+            }
+        }
+
+        if (closest)
+            enemy->setTargetEnemy(closest);
+    }
+}
+
+
+
 bool Controller::isLevelFinished() const
 {
     return m_levelFinished;
@@ -128,3 +188,12 @@ bool Controller::didWin() const
 {
     return m_playerWon;
 }
+
+
+// Calculates the Euclidean distance between two 2D points
+float Controller::distanceBetween(sf::Vector2f a, sf::Vector2f b) {
+    float dx = a.x - b.x;
+    float dy = a.y - b.y;
+    return std::sqrt(dx * dx + dy * dy);
+}
+
