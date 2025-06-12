@@ -10,6 +10,17 @@ public:
     // Changes the current state
     void changeState(std::unique_ptr<ComputerPlayerState> newState);
 
+    void onHit();
+    void onKnockedDown();
+    bool wasHit() const;
+    bool wasKnockedDown() const;
+
+    void clearHitFlags();
+
+
 protected:
     std::unique_ptr<ComputerPlayerState> m_state;
+    bool m_wasHit = false;
+    bool m_wasKnockedDown = false;
+
 };
