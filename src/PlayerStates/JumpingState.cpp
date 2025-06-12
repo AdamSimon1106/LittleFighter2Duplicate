@@ -3,12 +3,16 @@
 
 #include "GamePlay/Player.h"
 
+JumpingState::JumpingState(Input input)
+{
+    m_input = input;
+}
+
 std::unique_ptr<PlayerBaseState> JumpingState::handleInput(Input input)
 {
-    if (m_clock.getElapsedTime().asSeconds() >= m_duration)
-    {
-        return std::make_unique<StandingState>();
-    }
+
+    std::cout << input << std::endl;
+    
 
     return nullptr;
 }
@@ -28,4 +32,19 @@ void JumpingState::enter(Player& player)
 
     m_clock.restart();
 }
+
+void JumpingState::update(Player& player, float dt)
+{
+    std::cout << m_clock.getElapsedTime().asSeconds() << " " << m_duration << '\n';
+    
+    if (m_clock.getElapsedTime().asSeconds() >= m_duration)
+    {
+        std::cout << "in jumping to standing\n";
+        player.setDiraction(m_input);
+        player.setState(std::make_unique<StandingState>(m_input));
+    }
+    
+}
+
+
 

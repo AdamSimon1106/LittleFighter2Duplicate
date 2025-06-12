@@ -19,7 +19,7 @@ std::unique_ptr<PlayerBaseState> StandingState::handleInput(Input input)
 	case Input::PRESS_RIGHT:
 		 return std::make_unique<WalkingState>(input);
 	case Input::PRESS_JUMP:
-		return std::make_unique<JumpingState>();
+		return std::make_unique<JumpingState>(input);
 	case Input::PRESS_ATTACK:
 		return std::make_unique<AttackingState>();
 
