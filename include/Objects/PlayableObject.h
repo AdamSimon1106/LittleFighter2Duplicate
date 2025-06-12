@@ -3,9 +3,8 @@
 
 class PlayableObject : public Object{
 public:
-	PlayableObject(const sf::Texture& tex) : Object(tex){}
+	PlayableObject(const std::string& name) : Object(name){}
 	virtual void takeDamage(int damageAmount);
-
 
 private:
 	int m_hp;

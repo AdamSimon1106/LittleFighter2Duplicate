@@ -4,16 +4,18 @@
 #include "PlayerStates/AttackingState.h"
 #include"Gameplay/Player.h"
 
+StandingState::StandingState(Input input)
+{
+	m_input = input;
+}
+
 std::unique_ptr<PlayerBaseState> StandingState::handleInput(Input input)
 {
 	switch (input)
 	{
 	case Input::PRESS_LEFT:
-		m_input = input;
-		return std::make_unique<WalkingState>();
 	case Input::PRESS_RIGHT:
-		m_input = input;
-		 return std::make_unique<WalkingState>();
+		 return std::make_unique<WalkingState>(input);
 	case Input::PRESS_JUMP:
 		return std::make_unique<JumpingState>();
 	case Input::PRESS_ATTACK:
@@ -37,5 +39,6 @@ void StandingState::enter(Player& player)
 		0.2f);         // זמן בין פריימים
 
 	player.setAnimation(standingAnim);
+	player.setDiraction(m_input);
 	
 }
