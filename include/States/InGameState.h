@@ -4,6 +4,7 @@
 #include "UI/Button.h"
 #include "Gameplay/Level.h"
 #include "Gameplay/Player.h"
+#include "Management/Controller.h"
 
 
 class InGameState : public IState {
@@ -19,6 +20,8 @@ private:
 	Level m_level;
 	Player m_player;
 	sf::Clock m_clock;
+
+	Controller m_controller;
 
 
 };
