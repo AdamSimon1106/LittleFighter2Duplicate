@@ -23,9 +23,9 @@ void JumpingState::enter(Player& player)
 	std::cout << "enter:: JumpingState\n";
     
     Animation jumpingAnim(player.getTexture(),
-        160, 480,       // x, y – נניח שזו שורת הקפיצה
+        0, 520,       // x, y – נניח שזו שורת הקפיצה
         80, 80,       // width, height
-        2,            // 2 פריימים בקפיצה לדוגמה
+        4,            // 2 פריימים בקפיצה לדוגמה
         0.25f);       // קצב איטי יותר
 
     player.setAnimation(jumpingAnim);
