@@ -1,5 +1,6 @@
 #include "PlayerStates/JumpingState.h"
 #include"PlayerStates/StandingState.h"
+#include "PlayerStates/JumpBasePhase/RisingPhase.h"
 
 #include "GamePlay/Player.h"
 
@@ -22,26 +23,30 @@ void JumpingState::enter(Player& player)
 	std::cout << "enter:: JumpingState\n";
     
     Animation jumpingAnim(player.getTexture(),
-        0, 160,       // x, y – נניח שזו שורת הקפיצה
+        160, 480,       // x, y – נניח שזו שורת הקפיצה
         80, 80,       // width, height
         2,            // 2 פריימים בקפיצה לדוגמה
         0.25f);       // קצב איטי יותר
 
     player.setAnimation(jumpingAnim);
-    player.setDiraction(m_input);
+    //player.setDiraction(m_input);
 
-    m_clock.restart();
+    m_groundY = player.getPosition().y;
+    m_phase = std::make_unique<RisingPhase>(0.15f, 650.f, player.getPosition().y);
 }
 
 void JumpingState::update(Player& player, float dt)
 {
-    std::cout << m_clock.getElapsedTime().asSeconds() << " " << m_duration << '\n';
-    
-    if (m_clock.getElapsedTime().asSeconds() >= m_duration)
-    {
-        std::cout << "in jumping to standing\n";
-        player.setDiraction(m_input);
-        player.setState(std::make_unique<StandingState>(m_input));
+    if (!m_phase) {
+        player.setState(std::make_unique<StandingState>(Input::NONE));
+        return;
+    }
+
+    if (auto next = m_phase->update(player, dt)) {
+        m_phase = std::move(next);
+    }
+    else if (player.getPosition().y >= m_groundY) {
+        player.setState(std::make_unique<StandingState>(Input::NONE));
     }
     
 }

@@ -22,7 +22,7 @@ enum Input
     PRESS_JUMP,
     PRESS_ATTACK,
     END_ATTACK,
-    NON_PRESSED,
+    NONE,
 };
 
 inline Input getEventType(const sf::Event& event)
@@ -45,7 +45,7 @@ inline Input getEventType(const sf::Event& event)
             return PRESS_JUMP;
         default:
             std::cout << "non pressed\n";
-            return NON_PRESSED;
+            return NONE;
         }
     }
 
@@ -66,12 +66,12 @@ inline Input getEventType(const sf::Event& event)
             return END_ATTACK;
         default:
             std::cout << "non pressed\n";
-            return NON_PRESSED;
+            return NONE;
             
         }
     }
     std::cout << "non pressed\n";
-    return NON_PRESSED;
+    return NONE;
 }
 
 
