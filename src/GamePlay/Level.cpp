@@ -26,7 +26,7 @@ void Level::addSquad(std::string& squadLine)
 
         for (int i = 0; i < count; ++i) {
            
-            auto enemy = Factory<Enemy>::create(std::string(1, type));
+            auto enemy = Factory<Enemy>::create(std::string(1, type), sf::Vector2f(25.f*i, 50.f*i));
 
             if (enemy)
                 newSquad.addEnemy(std::move(enemy));
@@ -46,9 +46,10 @@ void Level::addPickableObjects(const std::string& objectLine)
 
         char type = std::tolower(token[0]);
 
-        auto obj = Factory<PickableObject>::create(std::string(1, type));
+        auto obj = Factory<PickableObject>::create(std::string(1, type), sf::Vector2f(250.f, 500.f));
         if (obj)
         {
+            std::cout << "in Level::addPickableObjects if (obj)\n";
             m_pickables.push_back(std::move(obj));
         }
     }
@@ -78,6 +79,9 @@ void Level::update(float dt)
     if (index < m_enemies.size()) {
         m_enemies[index].update(sf::Vector2f(125.0f, 125.0f));
     }
+
+    for (auto& obj : m_pickables)
+        obj->update(dt);
 }
 
 bool Level::areAllEnemiesDefeated() const

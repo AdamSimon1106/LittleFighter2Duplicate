@@ -2,8 +2,8 @@
 #include "Factory/Factory.h"
 #include "management/ResourceManager.h"
 
-Bandit::Bandit()
-    :Enemy("bandit"), m_speed(2.5f), m_attackRange(60.f)
+Bandit::Bandit(const sf::Vector2f pos)
+    :Enemy(pos, "bandit"), m_speed(2.5f), m_attackRange(60.f)
 {
     
 
@@ -38,7 +38,7 @@ void Bandit::move(const sf::Vector2f playerPos)
     }
 }
 
-bool Bandit::m_registered = Factory<Enemy>::registerIt("b", []() {
-    return std::make_unique<Bandit>();
+bool Bandit::m_registered = Factory<Enemy>::registerIt("b", [](const sf::Vector2f& pos, const std::string& name) {
+    return std::make_unique<Bandit>(pos);
     });
 

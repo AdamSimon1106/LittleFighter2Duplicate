@@ -10,13 +10,16 @@
 
 InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager), 
 																			m_level("lvl1bg"),
-																			m_player("davis_ani", 300.f)
+																			m_player(sf::Vector2f(50, 600), "davis_ani", 300.f)
 {
 
 	std::cout << "InGameState created, m_manager ptr: " << &m_manager << std::endl;
 
 	std::string enemiesLine = "b1 h1";
 	m_level.addSquad(enemiesLine);
+
+	std::string objectLine = "r r r r r r";
+	m_level.addPickableObjects(objectLine);
 
 }
 

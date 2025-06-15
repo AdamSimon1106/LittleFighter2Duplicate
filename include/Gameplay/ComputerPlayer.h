@@ -3,5 +3,5 @@
 
 class ComputerPlayer : public PlayableObject{
 public:
-	ComputerPlayer(const std::string& name) : PlayableObject(name) { }
+	ComputerPlayer(const sf::Vector2f pos, const std::string& name) : PlayableObject(pos, name) { }
 };
