@@ -30,7 +30,8 @@ public:
     void clampToWindow(const sf::Vector2u& windowSize);
 
     void setAnimation(const Animation& anim);
-
+    void setState(std::unique_ptr<PlayerBaseState> state);
+    void enterToState();
 private:
     float m_speed = 600.f;
     bool m_alive = true;

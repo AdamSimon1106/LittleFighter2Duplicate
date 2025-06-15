@@ -15,6 +15,8 @@ std::unique_ptr<PlayerBaseState> WalkingState::handleInput(Input input)
 	{
 	case Input::RELEASE_LEFT:
 	case Input::RELEASE_RIGHT:
+	case Input::RELEASE_DOWN:
+	case Input::RELEASE_UP:
 		return std::make_unique<StandingState>(input);
 
 	default:
