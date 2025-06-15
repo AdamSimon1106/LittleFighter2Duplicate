@@ -4,8 +4,8 @@
 #include "PlayerStates/StandingState.h"
 #include "PlayerStates/PlayerBaseState.h"
 
-Player::Player(const std::string& name, float speed)
-    : PlayableObject(name), m_speed(speed), m_state(std::make_unique<StandingState>(RELEASE_RIGHT))
+Player::Player(const sf::Vector2f pos, const std::string& name, float speed)
+    : PlayableObject(pos, name), m_speed(speed), m_state(std::make_unique<StandingState>(RELEASE_RIGHT))
 {
     m_state->enter(*this);
 }
