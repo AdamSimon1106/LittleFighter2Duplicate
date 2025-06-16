@@ -6,6 +6,7 @@
 class Ally : public ComputerPlayer{
 public:
 	bool isAlive() const;
+	void update(float dt);
 private:
 	sf::Text m_name;
 	bool m_alive = true;

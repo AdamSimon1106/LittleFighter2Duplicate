@@ -5,6 +5,7 @@ class PlayableObject : public Object{
 public:
 	PlayableObject(sf::Vector2f pos, const std::string& name) : Object(pos, name){}
 	//virtual void takeDamage(int damageAmount);
+	//virtual void update(float dt) = 0;
 
 
 private:
