@@ -18,11 +18,11 @@ public:
 	void update(float dt);
 	bool collide(Object& other)const;
 	sf::FloatRect getGlobalBounds();
+	sf::Vector2f getPosition()const;
 
 protected:
 	void updateAnimation(float dt);
 	void apllySprite();
-	const sf::Vector2f getPosition()const;
 	void moveSprite(sf::Vector2f pos);
 	void setScale(int side);
 	

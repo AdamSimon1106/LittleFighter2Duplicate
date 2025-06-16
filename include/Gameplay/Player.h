@@ -19,9 +19,6 @@ public:
     //void draw(sf::RenderWindow& window) override;/* Draws the sprite at current position */
     void handleCollision() override;    // Stub for future collision handling
 
-    void setPosition(const sf::Vector2f& pos);
-    sf::Vector2f getPosition() const;
-
     void setSpeed(float speed);
     float getSpeed() const;
 
@@ -30,7 +27,7 @@ public:
     /* Keep the player inside the window bounds */
     void clampToWindow(const sf::Vector2u& windowSize);
 
-    void setAnimation(const Animation& anim);
+    /*void setAnimation(const Animation& anim);*/
     void setState(std::unique_ptr<PlayerBaseState> state);
 
     void pickUpObject(PickableObject& obj);
