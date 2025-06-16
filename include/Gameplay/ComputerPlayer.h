@@ -7,6 +7,7 @@ public:
 
     ComputerPlayer(const sf::Vector2f pos, const std::string& name) : PlayableObject(pos, name) { }
     virtual ~ComputerPlayer() = default;
+    void update(float dt);
 
     // Changes the current state
     void changeState(std::unique_ptr<ComputerPlayerState> newState);

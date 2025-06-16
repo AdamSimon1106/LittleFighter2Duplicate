@@ -2,7 +2,12 @@
 #include "ComputerPlayerState/IdleState.h"
 #include "ComputerPlayerState/ApproachingEnemyState.h"
 
-
+void ComputerPlayer::update(float dt)
+{
+    if (m_state) {
+        m_state->update(*this, dt);
+    }
+}
 void ComputerPlayer::changeState(std::unique_ptr<ComputerPlayerState> newState) {
     if (m_state)
         m_state->exit(*this);
