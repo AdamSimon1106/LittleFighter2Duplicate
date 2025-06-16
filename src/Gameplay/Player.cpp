@@ -29,12 +29,14 @@ void Player::update(float dt)
 {
     move(dt);
     m_state->update(*this, dt);
-    m_animation.update(dt);
-    m_animation.applyToSprite(m_sprite);
+    updateAnimation(dt);
+    //m_animation.update(dt);
+    apllySprite();
+    //m_animation.applyToSprite(m_sprite);
     if (m_heldObject)
     {
         sf::Vector2f offset(20.f, -20.f); 
-        m_heldObject->setPosition(m_sprite.getPosition() + offset);
+        m_heldObject->setPosition(getPosition() + offset);
     }
 }
 
@@ -53,7 +55,7 @@ void Player::move(float dt)
     // Apply speed and delta time
     sf::Vector2f delta(velocity.x * m_speed * dt,
         velocity.y * m_speed * dt);  
-    m_sprite.move(delta);
+        moveSprite(delta);
 
 }
 
@@ -65,12 +67,12 @@ void Player::setDiraction(Input input)
     {
     case PRESS_LEFT:
         m_direction.x = -1.f;
-        m_sprite.setScale(-1.f, 1.f);
+        setScale(-1);
         break;
 
     case PRESS_RIGHT:
         m_direction.x = 1.f;
-        m_sprite.setScale(1.f, 1.f);
+        setScale(1);
         break;
 
     case RELEASE_LEFT:
@@ -115,19 +117,6 @@ void Player::handleCollision()
 }
 
 // -----------------------------------------------------------------------------
-// Position helpers
-// -----------------------------------------------------------------------------
-void Player::setPosition(const sf::Vector2f& pos)
-{
-    m_sprite.setPosition(pos);
-}
-
-sf::Vector2f Player::getPosition() const
-{
-    return m_sprite.getPosition();
-}
-
-// -----------------------------------------------------------------------------
 // Speed helpers
 // -----------------------------------------------------------------------------
 void Player::setSpeed(float speed)
@@ -143,8 +132,8 @@ float Player::getSpeed() const
 // Keep the sprite fully inside the window bounds
 void Player::clampToWindow(const sf::Vector2u& windowSize)
 {
-    sf::FloatRect bounds = m_sprite.getGlobalBounds();
-    sf::Vector2f  pos = m_sprite.getPosition();
+    sf::FloatRect bounds = getGlobalBounds();
+    sf::Vector2f  pos = getPosition();
 
     pos.x = std::clamp(pos.x,
         bounds.width / 2.f,
@@ -153,16 +142,9 @@ void Player::clampToWindow(const sf::Vector2u& windowSize)
         bounds.height / 2.f,
         static_cast<float>(windowSize.y) - bounds.height / 2.f);
 
-    m_sprite.setPosition(pos);
+    setPosition(pos);
 }
 
-void Player::setAnimation(const Animation& anim)
-{
-
-    m_animation = anim;
-    m_animation.reset();
-    //m_animation.applyToSprite(m_sprite); 
-}
 
 void Player::setState(std::unique_ptr<PlayerBaseState> state)
 {
@@ -175,13 +157,9 @@ void Player::pickUpObject(PickableObject& obj)
     m_heldObject = &obj;
     
         std::cout << " in Player::pickUpObject\n";
-        m_heldObject->setPosition(m_sprite.getPosition() + sf::Vector2f(20.f, -30.f));
-      
-    
-        
+        m_heldObject->setPosition(getPosition() + sf::Vector2f(20.f, -30.f));
+              
 }
-
-
 
 bool Player::isAlive() const {
     return m_alive;
