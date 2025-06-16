@@ -11,6 +11,7 @@ Bandit::Bandit(const sf::Vector2f pos)
 
 void Bandit::handleCollision()
 {
+
 }
 
 void Bandit::update(const sf::Vector2f playarPos)

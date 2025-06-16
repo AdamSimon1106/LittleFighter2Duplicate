@@ -2,6 +2,8 @@
 #include <sstream>
 #include "Management/ResourceManager.h"
 #include "Factory/Factory.h"
+#include "Management/CollisionHandling.h"
+#include "GamePlay/Player.h"
 
 Level::Level(std::string background)
 {
@@ -82,9 +84,22 @@ void Level::update(float dt)
 
     for (auto& obj : m_pickables)
         obj->update(dt);
+
+    
 }
 
 bool Level::areAllEnemiesDefeated() const
 {
     return false; // TODO: create logic to know if there is still living enemies
+}
+
+void Level::handleCollisionsWithPlayer(Player& player)
+{
+    for (const auto& obj : m_pickables)
+    {
+        if (player.collide(*obj)) {
+            
+            processCollision(player, *obj);
+        }
+    }
 }

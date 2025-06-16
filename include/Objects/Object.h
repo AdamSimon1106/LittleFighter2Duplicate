@@ -13,6 +13,7 @@ public:
 	void draw(sf::RenderWindow& window) const;
 	const sf::Texture* getTexture();
 	void setAnimation(const Animation& anim);
+	void setPosition(const sf::Vector2f pos);
 	void update(float dt);
 	bool collide(Object& other)const;
 	sf::FloatRect getGlobalBounds();

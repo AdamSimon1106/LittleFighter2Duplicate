@@ -25,6 +25,12 @@ void Object::setAnimation(const Animation& anim)
 	m_animation.reset();
 }
 
+void Object::setPosition(const sf::Vector2f pos)
+{
+	std::cout << "Object::setPosition\n";
+	m_sprite.setPosition(pos);
+}
+
 void Object::update(float dt)
 {	
 	//m_animation.update(dt);
@@ -33,7 +39,7 @@ void Object::update(float dt)
 
 bool Object::collide(Object& other) const
 {
-	return false;
+	return m_sprite.getGlobalBounds().intersects(other.getGlobalBounds());
 }
 
 sf::FloatRect Object::getGlobalBounds()

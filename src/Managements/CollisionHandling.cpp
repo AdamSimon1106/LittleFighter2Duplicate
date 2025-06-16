@@ -16,10 +16,10 @@ namespace {
         auto& rock = static_cast<Rock&>(rockObj);
 
         //if (rock.isPickedUp())
-            return;
+            //return;
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-            //player.pickUp(rock);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+            player.pickUpObject(rock);
            // rock.markAsPickedUp();
             std::cout << "Player picked up the rock.\n";
         }

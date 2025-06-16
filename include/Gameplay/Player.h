@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include<PlayerStates/PlayerBaseState.h>
+#include "Objects/PickableObject.h"
 
 
 class Player : public PlayableObject
@@ -31,6 +32,8 @@ public:
 
     void setAnimation(const Animation& anim);
     void setState(std::unique_ptr<PlayerBaseState> state);
+
+    void pickUpObject(PickableObject& obj);
    
 private:
     float m_speed = 600.f;
@@ -39,5 +42,5 @@ private:
     //sf::Text m_name;
 
     std::unique_ptr<PlayerBaseState> m_state;
-
+    PickableObject* m_heldObject = nullptr;
 };

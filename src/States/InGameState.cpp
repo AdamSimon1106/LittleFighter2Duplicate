@@ -18,7 +18,7 @@ InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IStat
 	std::string enemiesLine = "b1 h1";
 	m_level.addSquad(enemiesLine);
 
-	std::string objectLine = "r r r r r r";
+	std::string objectLine = "r";
 	m_level.addPickableObjects(objectLine);
 
 }
@@ -27,7 +27,7 @@ void InGameState::update(sf::Time deltaTime) {
     float dt = deltaTime.asSeconds();
     m_level.update(dt);
 	m_player.update(dt);
-
+	m_level.handleCollisionsWithPlayer(m_player);
     /*player.handleInput(RELEASE_RIGHT);
     player.handleInput(PRESS_LEFT);*/
     // ????
