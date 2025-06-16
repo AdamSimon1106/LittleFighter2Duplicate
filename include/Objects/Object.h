@@ -14,10 +14,19 @@ public:
 	const sf::Texture* getTexture();
 	void setAnimation(const Animation& anim);
 	void setPosition(const sf::Vector2f pos);
+	
 	void update(float dt);
 	bool collide(Object& other)const;
 	sf::FloatRect getGlobalBounds();
+
 protected:
+	void updateAnimation(float dt);
+	void apllySprite();
+	const sf::Vector2f getPosition()const;
+	void moveSprite(sf::Vector2f pos);
+	void setScale(int side);
+	
+private:
 	sf::Sprite m_sprite;
 	const sf::Texture* m_texture = nullptr;
 
