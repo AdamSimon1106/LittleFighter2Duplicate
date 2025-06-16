@@ -31,6 +31,11 @@ void Player::update(float dt)
     m_state->update(*this, dt);
     m_animation.update(dt);
     m_animation.applyToSprite(m_sprite);
+    if (m_heldObject)
+    {
+        sf::Vector2f offset(20.f, -20.f); 
+        m_heldObject->setPosition(m_sprite.getPosition() + offset);
+    }
 }
 
 void Player::move(float dt)
@@ -163,6 +168,17 @@ void Player::setState(std::unique_ptr<PlayerBaseState> state)
 {
     m_state = std::move(state);
     m_state->enter(*this);
+}
+
+void Player::pickUpObject(PickableObject& obj)
+{
+    m_heldObject = &obj;
+    
+        std::cout << " in Player::pickUpObject\n";
+        m_heldObject->setPosition(m_sprite.getPosition() + sf::Vector2f(20.f, -30.f));
+      
+    
+        
 }
 
 
