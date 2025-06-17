@@ -27,7 +27,6 @@ void Object::setAnimation(const Animation& anim)
 
 void Object::setPosition(const sf::Vector2f pos)
 {
-	std::cout << "Object::setPosition\n";
 	m_sprite.setPosition(pos);
 }
 

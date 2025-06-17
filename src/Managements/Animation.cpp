@@ -9,6 +9,27 @@ Animation::Animation(const sf::Texture* tex, int x, int y, int w, int h, int cou
     : texture(tex), x(x), y(y), width(w), height(h), frameCount(count),
     frameTime(time), elapsedTime(0), currentFrame(0), looping(loop), finished(false) {}
 
+Animation& Animation::operator=(const Animation& other)
+{
+    if (this == &other)
+        return *this;
+
+    texture = other.texture;
+    x = other.x;
+    y = other.y;
+    width = other.width;
+    height = other.height;
+    frameCount = other.frameCount;
+    frameTime = other.frameTime;
+    elapsedTime = other.elapsedTime;
+    currentFrame = other.currentFrame;
+    looping = other.looping;
+    finished = other.finished;
+    direction = other.direction;
+
+    return *this;
+}
+
 
 void Animation::update(float deltaTime) {
     if (finished || frameCount <= 0) return;

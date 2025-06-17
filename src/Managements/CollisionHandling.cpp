@@ -2,7 +2,7 @@
 
 #include "GamePlay/Player.h"
 #include "Objects/Weapons/Rock.h"
-
+#include "PlayerStates/WeaponHoldingState.h"
 #include <map>
 #include <typeindex>
 #include <iostream>
@@ -19,6 +19,7 @@ namespace {
             //return;
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+            player.setState(std::make_unique<WeaponHolding>(Input::NONE, weaponType::Rock));
             player.pickUpObject(rock);
            // rock.markAsPickedUp();
             std::cout << "Player picked up the rock.\n";
