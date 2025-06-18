@@ -29,7 +29,7 @@ void Player::handleInput(sf::Event event)
 void Player::update(float dt)
 {
     if (m_currentAnimationName != m_aniName) {
-        setAnimation(AnimationManager::getAnimation(m_aniName, getTexture()));
+        setAnimation(AnimationManager::getAnimation(m_aniName + m_strategyName, getTexture()));
         m_currentAnimationName = m_aniName;
     }
     move(dt);
@@ -169,15 +169,21 @@ void Player::setState(std::unique_ptr<PlayerBaseState> state)
     m_state->enter(*this);
 }
 
+void Player::setAttack(std::unique_ptr<AttackBehavior> attack)
+{
+    m_attack = std::move(attack);
+}
+
 void Player::pickUpObject(PickableObject& obj)
 {
     m_heldObject = &obj;
-    
-        std::cout << " in Player::pickUpObject\n";
-        m_heldObject->setPosition(getPosition() + sf::Vector2f(20.f, -30.f));
-      
-    
-        
+    //just for expirience. must do it nice
+    m_strategyName = "rock";
+
+    std::cout << m_aniName + m_strategyName << "\n";
+    std::cout << " in Player::pickUpObject\n";
+
+    m_heldObject->setPosition(getPosition() + sf::Vector2f(20.f, -30.f));    
 }
 
 void Player::setAniName(const std::string& name)

@@ -54,5 +54,6 @@ void CollideWithObject::update(Player& player, float dt)
 	{
 		player.pickUpObject(m_obj);
 		m_pickupPending = false;
+		
 	}
 }
