@@ -27,6 +27,7 @@ void Player::handleInput(sf::Event event)
 
 void Player::update(float dt)
 {
+
     move(dt);
     m_state->update(*this, dt);
     updateAnimation(dt);

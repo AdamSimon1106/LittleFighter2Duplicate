@@ -5,6 +5,7 @@
 #include "../include/UI/Button.h"
 #include "../include/Management/GameManager.h"
 #include "Management/ResourceManager.h"
+#include "Management/AnimationManager.h"
 #include <iostream>
 #include <stdexcept>
 
@@ -12,6 +13,7 @@ InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IStat
 																			m_level("lvl1bg"),
 																			m_player(sf::Vector2f(50, 600), "davis_ani", 300.f)
 {
+	AnimationManager::loadAnimations();
 
 	std::cout << "InGameState created, m_manager ptr: " << &m_manager << std::endl;
 

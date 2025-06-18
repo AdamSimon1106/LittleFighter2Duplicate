@@ -40,4 +40,8 @@ private:
 
     std::unique_ptr<PlayerBaseState> m_state;
     PickableObject* m_heldObject = nullptr;
+
+    //maybe in base
+    std::string m_aniName ;
+    std::string m_currentAnimationName;
 };
