@@ -18,7 +18,13 @@ public:
         std::vector<std::shared_ptr<Ally>> allies);     // AI-controlled allies
 
     // Called each frame from InGameState
-    void updateAndRender(float deltaTime);
+    //void updateAndRender(float deltaTime);
+
+    // ========== Core logic ==========
+    void handleInput(sf::Event ev);                  // Input for human-controlled players
+    void updateWorld(float deltaTime);   // Updates players, allies, level, etc.
+    void checkLevelEndConditions();      // Determines whether the match is over
+    void render();
 
     // Returns whether the level has ended, and who won
     bool isLevelFinished() const;
@@ -37,9 +43,5 @@ private:
     bool m_levelFinished = false;
     bool m_playerWon = false;
 
-    // ========== Core logic ==========
-    void handleInput();                  // Input for human-controlled players
-    void updateWorld(float deltaTime);   // Updates players, allies, level, etc.
-    void checkLevelEndConditions();      // Determines whether the match is over
-    void render();                       // Draws the full scene
+                      // Draws the full scene
 };
