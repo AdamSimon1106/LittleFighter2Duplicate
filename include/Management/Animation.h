@@ -6,6 +6,7 @@ class Animation {
 public:
     Animation();
     Animation(const sf::Texture* texture, int x, int y, int width, int height, int frameCount, float frameTime, bool loop = true);
+    Animation& operator=(const Animation& other);
 
     void update(float deltaTime);
     void applyToSprite(sf::Sprite& sprite) const;

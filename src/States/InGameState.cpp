@@ -11,20 +11,26 @@
 
 InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager), 
 																			m_level("lvl1bg"),
-																			m_player("davis_ani", 300.f),
-	m_controller(window, std::make_unique<Level>("lvl1bg"), std::vector<std::shared_ptr<Player>>{},
-		std::vector<std::shared_ptr<Ally>>{})
+																			m_player(sf::Vector2f(50, 600), "davis_ani", 300.f)
+	//m_controller(window, std::make_unique<Level>("lvl1bg"), std::vector<std::shared_ptr<Player>>{},
+		//std::vector<std::shared_ptr<Ally>>{})
 {
 
 	std::cout << "InGameState created, m_manager ptr: " << &m_manager << std::endl;
 
 	
 
+	std::string objectLine = "r";
+	m_level.addPickableObjects(objectLine);
+
 }
 
 void InGameState::update(sf::Time deltaTime) {
-	float dt = deltaTime.asSeconds();
-	m_controller.updateWorld(dt);
+    float dt = deltaTime.asSeconds();
+    m_level.update(dt);
+	m_player.update(dt);
+	m_level.handleCollisionsWithPlayer(m_player);
+	//m_controller.updateWorld(dt); // for later. dont let it stay hard coded
     
    
 
