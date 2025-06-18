@@ -22,14 +22,7 @@ void JumpingState::enter(Player& player)
 {
 	std::cout << "enter:: JumpingState\n";
     
-    Animation jumpingAnim(player.getTexture(),
-        0, 520,       // x, y – נניח שזו שורת הקפיצה
-        80, 80,       // width, height
-        4,            // 2 פריימים בקפיצה לדוגמה
-        0.25f);       // קצב איטי יותר
-
-    player.setAnimation(jumpingAnim);
-    //player.setDiraction(m_input);
+    player.setAniName("jumping");
 
     m_groundY = player.getPosition().y;
     m_phase = std::make_unique<RisingPhase>(0.15f, 650.f, player.getPosition().y);

@@ -3,6 +3,7 @@
 #include <algorithm>            // std::clamp
 #include "PlayerStates/StandingState.h"
 #include "PlayerStates/PlayerBaseState.h"
+#include "Management/AnimationManager.h"
 
 Player::Player(const sf::Vector2f pos, const std::string& name, float speed)
     : PlayableObject(pos, name), m_speed(speed), m_state(std::make_unique<StandingState>(RELEASE_RIGHT))
@@ -27,13 +28,14 @@ void Player::handleInput(sf::Event event)
 
 void Player::update(float dt)
 {
-
+    if (m_currentAnimationName != m_aniName) {
+        setAnimation(AnimationManager::getAnimation(m_aniName, getTexture()));
+        m_currentAnimationName = m_aniName;
+    }
     move(dt);
     m_state->update(*this, dt);
     updateAnimation(dt);
     apllySprite();
-    /*m_animation.update(dt);
-    m_animation.applyToSprite(m_sprite);*/
     
 }
 
@@ -161,14 +163,6 @@ void Player::clampToWindow(const sf::Vector2u& windowSize)
    setPosition(pos);
 }
 
-//void Player::setAnimation(const Animation& anim)
-//{
-//
-//    m_animation = anim;
-//    m_animation.reset();
-//    //m_animation.applyToSprite(m_sprite); 
-//}
-
 void Player::setState(std::unique_ptr<PlayerBaseState> state)
 {
     m_state = std::move(state);
@@ -184,6 +178,11 @@ void Player::pickUpObject(PickableObject& obj)
       
     
         
+}
+
+void Player::setAniName(const std::string& name)
+{
+     m_aniName = name;
 }
 
 

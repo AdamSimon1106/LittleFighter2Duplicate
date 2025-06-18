@@ -5,6 +5,10 @@ std::map<std::string, AnimationInfo> AnimationManager::s_animationMap;
 void AnimationManager::loadAnimations() {
     s_animationMap["walking"] = WALKING;
     s_animationMap["walking_with_rock"] = WALKING_WITH_ROCK;
+    s_animationMap["standing"] = STANDING;
+    s_animationMap["jumping"] = JUMPING;
+
+
 }
 
 Animation AnimationManager::getAnimation(const std::string& aniName, const sf::Texture* texture) {

@@ -31,7 +31,7 @@ public:
     void setState(std::unique_ptr<PlayerBaseState> state);
 
     void pickUpObject(PickableObject& obj);
-   
+    void setAniName(const std::string& name);
 private:
     float m_speed = 600.f;
     bool m_alive = true;
