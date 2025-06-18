@@ -16,24 +16,24 @@ namespace {
         auto& rock = static_cast<Rock&>(rockObj);
 
 
-        //player.setState(std::make_unique<CollideWithObject>(Input::NONE));
+        player.setState(std::make_unique<CollideWithObject>(Input::NONE, rock));
         //if (rock.isPickedUp())
             //return;
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
-            //player.setState(std::make_unique<WeaponHolding>(Input::NONE, weaponType::Rock));
-            Animation rockHolding(player.getTexture(),
-                240, 160,       // x, y
-                80, 80,         // width, height
-                0,              // frames
-                0.2f,           // frame time
-                false           // looping
-            );
-            player.setAnimation(rockHolding);
-            player.pickUpObject(rock);
-        //   // rock.markAsPickedUp();
-        //    std::cout << "Player picked up the rock.\n";
-        }
+        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+        //    //player.setState(std::make_unique<WeaponHolding>(Input::NONE, weaponType::Rock));
+        //    Animation rockHolding(player.getTexture(),
+        //        240, 160,       // x, y
+        //        80, 80,         // width, height
+        //        0,              // frames
+        //        0.2f,           // frame time
+        //        false           // looping
+        //    );
+        //    player.setAnimation(rockHolding);
+        //    player.pickUpObject(rock);
+        ////   // rock.markAsPickedUp();
+        ////    std::cout << "Player picked up the rock.\n";
+        //}
     }
 
 

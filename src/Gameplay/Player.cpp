@@ -64,6 +64,7 @@ void Player::move(float dt)
 
 void Player::setDiraction(Input input)
 {
+    std::cout << input << "\n";
     switch (input)
     {
     case PRESS_LEFT:
@@ -80,7 +81,7 @@ void Player::setDiraction(Input input)
         if (m_direction.x < 0.f)
             m_direction.x = 0.f;
         break;
-
+    case NONE:
     case RELEASE_RIGHT:
         if (m_direction.x > 0.f)
             m_direction.x = 0.f;
