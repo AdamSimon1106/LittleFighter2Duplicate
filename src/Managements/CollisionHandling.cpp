@@ -2,12 +2,12 @@
 
 #include "GamePlay/Player.h"
 #include "Objects/Weapons/Rock.h"
-#include "PlayerStates/WeaponHoldingState.h"
+#include "PlayerStates/CollideWithObjectState.h"
 #include <map>
 #include <typeindex>
 #include <iostream>
 #include <SFML/Window/Keyboard.hpp>
-
+#include <memory>
 namespace {
 
     // ? פונקציית התנגשות: שחקן דורך על סלע ומרים אותו
@@ -15,6 +15,8 @@ namespace {
         auto& player = static_cast<Player&>(playerObj);
         auto& rock = static_cast<Rock&>(rockObj);
 
+
+        //player.setState(std::make_unique<CollideWithObject>(Input::NONE));
         //if (rock.isPickedUp())
             //return;
 
@@ -29,8 +31,8 @@ namespace {
             );
             player.setAnimation(rockHolding);
             player.pickUpObject(rock);
-           // rock.markAsPickedUp();
-            std::cout << "Player picked up the rock.\n";
+        //   // rock.markAsPickedUp();
+        //    std::cout << "Player picked up the rock.\n";
         }
     }
 

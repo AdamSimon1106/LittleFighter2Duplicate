@@ -22,6 +22,7 @@ enum Input
     PRESS_JUMP,
     PRESS_ATTACK,
     END_ATTACK,
+    ADD_OBJ,
     NONE,
 };
 
@@ -64,6 +65,8 @@ inline Input getEventType(const sf::Event& event)
         
         case sf::Keyboard::Return:
             return END_ATTACK;
+        case sf::Keyboard::LShift:
+            return ADD_OBJ;
         default:
             std::cout << "non pressed\n";
             return NONE;
