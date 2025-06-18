@@ -57,7 +57,7 @@ void Animation::update(float deltaTime) {
 
 
 void Animation::applyToSprite(sf::Sprite& sprite) const {
-    if (!texture || frameCount <= 0) return;
+    if (!texture /*|| frameCount <= 0*/) return;
 
     sprite.setTexture(*texture);
 

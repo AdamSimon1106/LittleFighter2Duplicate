@@ -100,6 +100,7 @@ void Level::handleCollisionsWithPlayer(Player& player)
         if (player.collide(*obj)) {
             
             processCollision(player, *obj);
+            
         }
     }
 }

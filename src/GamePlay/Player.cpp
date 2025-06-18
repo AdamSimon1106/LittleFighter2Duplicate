@@ -31,11 +31,7 @@ void Player::update(float dt)
     m_state->update(*this, dt);
     m_animation.update(dt);
     m_animation.applyToSprite(m_sprite);
-    if (m_heldObject)
-    {
-        sf::Vector2f offset(20.f, -20.f); 
-        m_heldObject->setPosition(m_sprite.getPosition() + offset);
-    }
+    
 }
 
 void Player::move(float dt)
@@ -54,6 +50,11 @@ void Player::move(float dt)
     sf::Vector2f delta(velocity.x * m_speed * dt,
         velocity.y * m_speed * dt);  
     m_sprite.move(delta);
+    if (m_heldObject)
+    {
+        sf::Vector2f offset(20.f, -100.f);
+        m_heldObject->move(getPosition() + offset);
+    }
 
 }
 
