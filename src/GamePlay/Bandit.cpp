@@ -21,7 +21,7 @@ void Bandit::update(const sf::Vector2f playarPos)
 
 void Bandit::move(const sf::Vector2f playerPos)
 {   
-    auto pos = m_sprite.getPosition();
+    auto pos = getPosition();
     m_direction = playerPos - pos;
 
     float distance = std::sqrt(m_direction.x * m_direction.x + m_direction.y * m_direction.y);
@@ -31,7 +31,7 @@ void Bandit::move(const sf::Vector2f playerPos)
     if (distance > m_attackRange) {
         sf::Vector2f normDir = m_direction / distance;
 
-        m_sprite.move(normDir * m_speed);
+        moveSprite(normDir * m_speed);
 
 
         /*pos += normDir * m_speed;

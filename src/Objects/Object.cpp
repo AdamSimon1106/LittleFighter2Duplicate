@@ -45,3 +45,31 @@ sf::FloatRect Object::getGlobalBounds()
 {
 	return m_sprite.getGlobalBounds();
 }
+
+sf::Vector2f Object::getPosition() const
+{
+	return m_sprite.getPosition();
+}
+
+
+
+void Object::updateAnimation(float dt)
+{
+	m_animation.update(dt);
+}
+
+void Object::apllySprite()
+{
+	m_animation.applyToSprite(m_sprite);
+}
+
+void Object::moveSprite(sf::Vector2f pos)
+{
+	m_sprite.move(pos);
+}
+
+void Object::setScale(int side)
+{
+	m_sprite.setScale(side, 1);
+}
+
