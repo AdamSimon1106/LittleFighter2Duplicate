@@ -1,9 +1,13 @@
 #include "Gameplay/Ally.h"
 
-bool Ally::isAlive() const {
-    return m_alive;
+Ally::Ally(const std::string& name, float speed)
+    : ComputerPlayer(name), m_speed(speed)
+{
+
+    // Start with IdleState
+    changeState(std::make_unique<IdleState>());
 }
 
-void Ally::update(float dt)
-{
+bool Ally::isAlive() const {
+    return m_alive;
 }

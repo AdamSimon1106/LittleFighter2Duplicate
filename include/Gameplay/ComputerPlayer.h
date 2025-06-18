@@ -7,7 +7,7 @@ public:
 
     ComputerPlayer(const sf::Vector2f pos, const std::string& name) : PlayableObject(pos, name) { }
     virtual ~ComputerPlayer() = default;
-    void update(float dt);
+    virtual void update(float dt);
 
     // Changes the current state
     //void changeState(std::unique_ptr<ComputerPlayerState> newState);
@@ -21,6 +21,7 @@ public:
     void clearHitFlags();
     void setTargetEnemy(PlayableObject* target);
     sf::Vector2f getPosition();
+    PlayableObject* getTarget();
 
 protected:
    // std::unique_ptr<ComputerPlayerState> m_state;
