@@ -8,7 +8,7 @@ ApproachingEnemyState::ApproachingEnemyState(std::shared_ptr<PlayableObject> tar
     : m_target(std::move(target)) {}
 
 void ApproachingEnemyState::enter(ComputerPlayer& player) {
-    player.setAnimation("Run");
+    // player.setAnimation("Run");
 }
 
 void ApproachingEnemyState::update(ComputerPlayer& player, float deltaTime) {
@@ -16,8 +16,8 @@ void ApproachingEnemyState::update(ComputerPlayer& player, float deltaTime) {
         return;
 
     sf::Vector2f playerPos = player.getPosition();
-    sf::Vector2f targetPos = m_target->getPosition();
-    sf::Vector2f direction = targetPos - playerPos;
+    PlayableObject* target = player.getTarget();
+    sf::Vector2f direction = target->getPosition() - playerPos;
 
     float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 

@@ -44,7 +44,6 @@ private:
     bool m_levelFinished = false;
     bool m_playerWon = false;
     float distanceBetween(sf::Vector2f a, sf::Vector2f b);
-         // Draws the full scene
     void updateComputerPlayerTargets();
 
 };

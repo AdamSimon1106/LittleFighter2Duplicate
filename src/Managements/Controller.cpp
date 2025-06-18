@@ -42,11 +42,14 @@ void Controller::updateWorld(float deltaTime)
     // Update all AI-controlled allies
     for (auto& ally : m_allies)
     {
-       // ally->update(deltaTime);      TODO: update() in Ally
+       ally->update(deltaTime);      //TODO: update() in Ally
     }
-
+    for (auto& enemy : m_enemies)
+    {
+        //enemy->update(deltaTime);
+    }
     // Update the level itself (enemies, objects, etc.)
-     m_level->update(deltaTime);
+     //m_level->update(deltaTime);
     //      TODO: create uptade() in Level - needs to update m_enemies!
 
     // Update HUD/stats with current data

@@ -70,3 +70,8 @@ sf::Vector2f ComputerPlayer::getPosition()
 {
     return m_position;
 }
+
+PlayableObject* ComputerPlayer::getTarget()
+{
+    return m_target;
+}
