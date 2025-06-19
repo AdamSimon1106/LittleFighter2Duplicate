@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include "ComputerPlayerState/ComputerPlayerState.h"
 #include <memory>
@@ -17,3 +17,4 @@ private:
     std::shared_ptr<PlayableObject> m_target; // the target for attacking
     float m_attackCooldown = 0.f; // time betweeen attacks
 };
+*/
