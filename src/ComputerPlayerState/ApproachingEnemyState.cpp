@@ -8,7 +8,16 @@ ApproachingEnemyState::ApproachingEnemyState(std::shared_ptr<PlayableObject> tar
     : m_target(std::move(target)) {}
 
 void ApproachingEnemyState::enter(ComputerPlayer& player) {
-    // player.setAnimation("Run");
+    std::cout << "enter:: ApproachingEnemyState\n";
+
+    Animation approachingEnemyAnim(player.getTexture(),
+        0, 400,          // x, y
+        80, 80,        // width, height
+        4,             // מספר פריימים
+        0.2f);         // זמן בין פריימים
+
+    player.setAnimation(approachingEnemyAnim);
+    //player.setDiraction(m_input); 
 }
 
 void ApproachingEnemyState::update(ComputerPlayer& player, float deltaTime) {

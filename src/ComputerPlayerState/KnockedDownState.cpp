@@ -5,9 +5,19 @@
 KnockedDownState::KnockedDownState() = default;
 
 void KnockedDownState::enter(ComputerPlayer& player) {
-    player.setAnimation("KnockDown");
+    std::cout << "enter:: KnockedDownState\n";
+
+    Animation knockedDownAnim(player.getTexture(),
+        240, 0,          // x, y
+        80, 80,        // width, height
+        5,             // מספר פריימים
+        0.2f,
+        false);         
+
+    player.setAnimation(knockedDownAnim);
+    //player.setDiraction(m_input);     
     m_elapsedTime = 0.0f;
-    player.setControllable(false); // TODO: write m_controllabe field in Player
+    player.setControllable(false);
 }
 
 void KnockedDownState::update(ComputerPlayer& player, float deltaTime) {

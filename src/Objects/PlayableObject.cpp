@@ -1,3 +1,5 @@
+#include "Objects/PlayableObject.h"
+
 void PlayableObject::takeDamage(int damageAmount) {
   /*  // Reduce health
     m_health -= damageAmount;
@@ -15,4 +17,12 @@ void PlayableObject::takeDamage(int damageAmount) {
     // Check for death
     if (m_health == 0)
         onDeath(); */
+}
+float PlayableObject::getSpeed() const
+{
+    return m_speed;
+}
+
+void PlayableObject::move(const sf::Vector2f& delta) {
+    m_sprite.move(delta);
 }

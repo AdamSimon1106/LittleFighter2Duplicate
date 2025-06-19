@@ -9,7 +9,17 @@ PickingUpItemState::PickingUpItemState(std::shared_ptr<PickableObject> item)
     : m_targetItem(std::move(item)) {}
 
 void PickingUpItemState::enter(ComputerPlayer& player) {
-    player.setAnimation("Walk");
+    std::cout << "enter:: PickingUpItemState\n";
+
+    Animation pickingUpItemAnim(player.getTexture(),
+        480, 0,          // x, y
+        80, 80,        // width, height
+        2,             // מספר פריימים
+        0.2f,
+        false);
+
+    player.setAnimation(pickingUpItemAnim);
+    //player.setDiraction(m_input); 
 }
 
 void PickingUpItemState::update(ComputerPlayer& player, float deltaTime) {
