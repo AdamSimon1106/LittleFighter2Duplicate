@@ -89,6 +89,13 @@ void ComputerPlayer::setControllable(bool control)
 
 void ComputerPlayer::performAttack(PlayableObject& target)
 {
-    // TODO: implement his properly
+    // TODO: implement his properly (attack only if collision it true)
     std::cout << "attacking now" << std::endl;
+}
+
+void ComputerPlayer::pickUp(PickableObject& pickable)
+{
+    // TODO: implement his properly (pick only if collision it true)
+    std::cout << "picking up the item now" << std::endl;
+
 }
