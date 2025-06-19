@@ -1,5 +1,7 @@
 #pragma once
 #include "Objects/PlayableObject.h"
+#include "Objects/PickableObject.h"
+
 #include "ComputerPlayerState/ComputerPlayerState.h"
 
 class ComputerPlayer : public PlayableObject{
@@ -25,6 +27,7 @@ public:
     void setBlocking(bool blocking);
     void setControllable(bool control);
     void performAttack(PlayableObject &target);
+    void pickUp(PickableObject& pickable);
 
 protected:
     std::unique_ptr<ComputerPlayerState> m_state;

@@ -4,7 +4,7 @@
 #include "Objects/PlayableObject.h"
 #include <cmath>
 
-AttackingState::AttackingState(std::shared_ptr<PlayableObject> target)
+AttackingState::AttackingState(PlayableObject* target)
     : m_target(std::move(target)) {}
 
 void AttackingState::enter(ComputerPlayer& player) {

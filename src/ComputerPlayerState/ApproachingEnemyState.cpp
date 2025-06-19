@@ -4,7 +4,7 @@
 #include "Objects/PlayableObject.h"
 #include <cmath> // sqrt, etc.
 
-ApproachingEnemyState::ApproachingEnemyState(std::shared_ptr<PlayableObject> target)
+ApproachingEnemyState::ApproachingEnemyState(PlayableObject* target)
     : m_target(std::move(target)) {}
 
 void ApproachingEnemyState::enter(ComputerPlayer& player) {
