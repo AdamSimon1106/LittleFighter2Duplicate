@@ -10,10 +10,11 @@
 #include <memory>
 
 InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager)
-//																			m_level("lvl1bg"),
-	//																		m_player(sf::Vector2f(50, 600), "davis_ani", 300.f)
-	//m_controller(window, std::make_unique<Level>("lvl1bg"), std::vector<std::shared_ptr<Player>>{},
-		//std::vector<std::shared_ptr<Ally>>{})
+																			//m_level("lvl1bg"),
+																			//m_player(sf::Vector2f(50, 600), "davis_ani", 300.f),
+																			//m_controller(window, std::make_unique<Level>("lvl1bg"), 
+																			//std::vector<std::shared_ptr<Player>>{},
+																			//std::vector<std::shared_ptr<Ally>>{})
 {
 
 	std::cout << "InGameState created, m_manager ptr: " << &m_manager << std::endl;

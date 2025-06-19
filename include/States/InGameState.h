@@ -14,11 +14,11 @@ public:
 	void handleEvents(sf::Event& ev) override;
 	void render() override;
 private:
-	//sf::Texture m_bgTexture;
-	//std::optional<Background> m_backGround;
-	//Button m_startButton;
-//	Level m_level;
-	///Player m_player;
+	sf::Texture m_bgTexture;
+	std::optional<Background> m_backGround;
+	Button m_startButton;
+    //level m_level;
+	//Player m_player;
 	sf::Clock m_clock;
 
 	//Controller m_controller;

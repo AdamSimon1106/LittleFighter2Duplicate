@@ -38,7 +38,6 @@ set_target_properties(sfml-main sfml-system sfml-window sfml-graphics sfml-audio
 
 file(COPY ${CMAKE_SOURCE_DIR}/resources DESTINATION ${CMAKE_BINARY_DIR})
 
-
 # Custom ZIP or SFML setup if needed
 include(cmake/Zip.cmake)
 include(cmake/SFML.cmake)
