@@ -8,7 +8,16 @@
 //    : m_target(std::move(target)) {}
 //
 //void ApproachingEnemyState::enter(ComputerPlayer& player) {
-//    player.setAnimation("Run");
+//    std::cout << "enter:: ApproachingEnemyState\n";
+//
+//    Animation approachingEnemyAnim(player.getTexture(),
+//        0, 400,          // x, y
+//        80, 80,        // width, height
+//        4,             // מספר פריימים
+//        0.2f);         // זמן בין פריימים
+//
+//    player.setAnimation(approachingEnemyAnim);
+//    //player.setDiraction(m_input); 
 //}
 //
 //void ApproachingEnemyState::update(ComputerPlayer& player, float deltaTime) {
@@ -16,8 +25,8 @@
 //        return;
 //
 //    sf::Vector2f playerPos = player.getPosition();
-//    sf::Vector2f targetPos = m_target->getPosition();
-//    sf::Vector2f direction = targetPos - playerPos;
+//    PlayableObject* target = player.getTarget();
+//    sf::Vector2f direction = target->getPosition() - playerPos;
 //
 //    float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 //

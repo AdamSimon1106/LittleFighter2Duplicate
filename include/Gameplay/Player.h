@@ -36,7 +36,6 @@ public:
 
     void setAniName(const std::string& name);
 private:
-    float m_speed = 600.f;
     bool m_alive = true;
     sf::Vector2f m_direction{ 0.f,0.f };
     //sf::Text m_name;

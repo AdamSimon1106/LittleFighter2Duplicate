@@ -8,11 +8,10 @@
 
 class Ally : public ComputerPlayer {
 public:
-	Ally(const std::string& name, float speed = 200.f);
+	Ally(const sf::Vector2f pos, const std::string& name, float speed = 200.f);
 
 	bool isAlive() const;
 private:
-	float m_speed;
 	sf::Text m_name;
 	bool m_alive = true;
 };

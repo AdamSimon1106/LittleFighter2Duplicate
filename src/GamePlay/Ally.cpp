@@ -1,10 +1,10 @@
 #include "Gameplay/Ally.h"
 
-Ally::Ally(const std::string& name, float speed)
-    : ComputerPlayer(name), m_speed(speed)
+Ally::Ally(const sf::Vector2f pos, const std::string& name, float speed)
+    : ComputerPlayer(pos, name)
 {
-
-    // Start with IdleState
+    m_speed = speed;
+    // Starts with IdleState
     changeState(std::make_unique<IdleState>());
 }
 

@@ -6,6 +6,16 @@
 //void IdleState::enter(ComputerPlayer& player) {
 //    // Optional: reset animation or internal timer
 //    // player.setAnimation("Idle");
+//    std::cout << "enter:: IdleState\n";
+//
+//    Animation idleAnim(player.getTexture(),
+//        0, 0,          // x, y
+//        80, 80,        // width, height
+//        4,             // מספר פריימים
+//        0.2f);         // זמן בין פריימים
+//
+//    player.setAnimation(idleAnim);
+//    //player.setDiraction(m_input); 
 //}
 //
 //void IdleState::update(ComputerPlayer& player, float deltaTime) {

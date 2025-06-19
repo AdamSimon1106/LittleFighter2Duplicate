@@ -8,8 +8,17 @@
 //    : m_target(std::move(target)) {}
 //
 //void AttackingState::enter(ComputerPlayer& player) {
-//    player.setAnimation("Attack");
-//    m_attackCooldown = 0.f; // Start immediately
+//    std::cout << "enter:: AttackingState\n";
+//
+//    Animation attackingAnim(player.getTexture(),
+//        80, 0,          // x, y
+//        80, 80,        // width, height
+//        6,             // מספר פריימים
+//        0.2f);         // זמן בין פריימים
+//
+//    player.setAnimation(attackingAnim);
+//    // I think we need switch-case here according to the attack
+//    //player.setDiraction(m_input);     m_attackCooldown = 0.f; // Start immediately
 //}
 //
 //void AttackingState::update(ComputerPlayer& player, float deltaTime) {

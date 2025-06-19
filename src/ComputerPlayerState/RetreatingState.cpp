@@ -6,8 +6,16 @@
 //RetreatingState::RetreatingState() = default;
 //
 //void RetreatingState::enter(ComputerPlayer& player) {
-//    player.setAnimation("Retreat");
-//    m_elapsedTime = 0.f;
+//    std::cout << "enter:: RetreatingState\n";
+//
+//    Animation retreatingAnim(player.getTexture(),
+//        0, 0,          // x, y
+//        80, 80,        // width, height
+//        4,             // מספר פריימים
+//        0.2f);         // זמן בין פריימים
+//
+//    player.setAnimation(retreatingAnim);
+//    //player.setDiraction(m_input);     m_elapsedTime = 0.f;
 //}
 //
 //void RetreatingState::update(ComputerPlayer& player, float deltaTime) {

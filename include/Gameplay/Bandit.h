@@ -13,5 +13,4 @@ private:
 	//used in move()
 	sf::Vector2f m_direction;
 	float m_attackRange = 60.f;
-	float m_speed = 2.5f;
 };

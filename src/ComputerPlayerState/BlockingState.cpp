@@ -5,7 +5,16 @@
 //BlockingState::BlockingState() = default;
 //
 //void BlockingState::enter(ComputerPlayer& player) {
-//    player.setAnimation("Block");
+//    std::cout << "enter:: BlockingState\n";
+//
+//    Animation blockingAnim(player.getTexture(),
+//        400, 480,          // x, y
+//        80, 80,        // width, height
+//        2,             // מספר פריימים
+//        0.2f);         // זמן בין פריימים
+//
+//    player.setAnimation(blockingAnim);
+//    //player.setDiraction(m_input); 
 //    m_elapsedTime = 0.0f;
 //    player.setBlocking(true); // TODO: write m_isBlocking field in Player
 //

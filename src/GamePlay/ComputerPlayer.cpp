@@ -1,6 +1,7 @@
 #include "GamePlay/ComputerPlayer.h"
 #include "ComputerPlayerState/IdleState.h"
 #include "ComputerPlayerState/ApproachingEnemyState.h"
+#include <iostream>
 
 //void ComputerPlayer::update(float dt)
 //{
@@ -74,4 +75,20 @@ sf::Vector2f ComputerPlayer::getPosition()
 PlayableObject* ComputerPlayer::getTarget()
 {
     return m_target;
+}
+
+void ComputerPlayer::setBlocking(bool blocking)
+{
+    m_blocking = blocking;
+}
+
+void ComputerPlayer::setControllable(bool control)
+{
+    m_controllable = control;
+}
+
+void ComputerPlayer::performAttack(PlayableObject& target)
+{
+    // TODO: implement his properly
+    std::cout << "attacking now" << std::endl;
 }

@@ -22,6 +22,9 @@ public:
     void setTargetEnemy(PlayableObject* target);
     sf::Vector2f getPosition();
     PlayableObject* getTarget();
+    void setBlocking(bool blocking);
+    void setControllable(bool control);
+    void performAttack(PlayableObject &target);
 
 protected:
    // std::unique_ptr<ComputerPlayerState> m_state;
@@ -29,6 +32,8 @@ protected:
     bool m_wasKnockedDown = false;
     PlayableObject* m_target = nullptr;
     sf::Vector2f m_position;
+    bool m_controllable = true;
+    bool m_blocking = false;
 
 private:
     float distance(const sf::Vector2f& a, const sf::Vector2f& b);
