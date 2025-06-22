@@ -15,5 +15,6 @@ std::unique_ptr<JumpPhaseBase> FallingPhase::update(Player& player, float dt) {
     }
 
     player.setPosition(pos);
+    player.setDiraction(PRESS_FALLING);
     return nullptr;
 }

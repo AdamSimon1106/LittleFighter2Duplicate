@@ -20,6 +20,7 @@ enum Input
     RELEASE_UP,
     RELEASE_DOWN,
     PRESS_JUMP,
+    PRESS_FALLING,
     PRESS_ATTACK,
     END_ATTACK,
     ADD_OBJ,
@@ -36,12 +37,10 @@ inline Input getEventType(const sf::Event& event)
             return PRESS_LEFT;
         case sf::Keyboard::Right:
             return PRESS_RIGHT;
-        case sf::Keyboard::Return:
-            return PRESS_ATTACK;
         case sf::Keyboard::Up:
             return PRESS_UP;
         case sf::Keyboard::Down:
-            return PRESS_DOWN; 
+            return PRESS_DOWN;
         case sf::Keyboard::RShift:
             return PRESS_JUMP;
         default:
@@ -54,6 +53,8 @@ inline Input getEventType(const sf::Event& event)
     {
         switch (event.key.code)
         {
+        case sf::Keyboard::Return:
+            return PRESS_ATTACK;
         case sf::Keyboard::Left:
             return RELEASE_LEFT;
         case sf::Keyboard::Right:
@@ -62,15 +63,12 @@ inline Input getEventType(const sf::Event& event)
             return RELEASE_DOWN;
         case sf::Keyboard::Up:
             return RELEASE_UP;
-        
-        case sf::Keyboard::Return:
-            return END_ATTACK;
         case sf::Keyboard::LShift:
             return ADD_OBJ;
         default:
             std::cout << "non pressed\n";
             return NONE;
-            
+
         }
     }
     std::cout << "non pressed\n";
@@ -83,12 +81,12 @@ class Player;
 
 class PlayerBaseState {
 public:
-	virtual ~PlayerBaseState() = default;
-	virtual std::unique_ptr<PlayerBaseState> handleInput(Input input) = 0;
-	virtual void enter(Player& player) = 0;
+    virtual ~PlayerBaseState() = default;
+    virtual std::unique_ptr<PlayerBaseState> handleInput(Input input) = 0;
+    virtual void enter(Player& player) = 0;
     virtual void update(Player& player, float dt) {};
-	
+
 
 protected:
-	Input m_input;
+    Input m_input;
 };

@@ -30,7 +30,7 @@ void Controller::handleInput(sf::Event ev)
 
 void Controller::updateWorld(float deltaTime)
 {
-	m_level->handleCollisionsWithPlayer(*m_players.back());
+	
     // Update all human-controlled players
     for (auto& player : m_players)
     {
@@ -50,7 +50,7 @@ void Controller::updateWorld(float deltaTime)
     // Update HUD/stats with current data
     //m_stats.update(m_players, m_allies, *m_level);
     //      TODO: create uptade() in HUD
-
+     m_level->handleCollisionsWithPlayer(*m_players.back());
 }
 
 

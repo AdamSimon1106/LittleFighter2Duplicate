@@ -35,6 +35,7 @@ public:
     void pickUpObject(PickableObject& obj);
 
     void setAniName(const std::string& name);
+    void attack();
 private:
     float m_speed = 600.f;
     bool m_alive = true;

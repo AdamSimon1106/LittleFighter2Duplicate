@@ -92,7 +92,7 @@ void Player::setDiraction(Input input)
     case PRESS_UP:
         m_direction.y = -1.f;
         break;
-
+    case PRESS_FALLING:
     case RELEASE_UP:
        // if (m_direction.y < 0.f)
             m_direction.y = 0.f;
@@ -176,6 +176,23 @@ void Player::pickUpObject(PickableObject& obj)
 void Player::setAniName(const std::string& name)
 {
      m_aniName = name;
+}
+
+void Player::attack()
+{
+    setAniName("attacking");
+	//std::cout << m_heldObject->getName() << "\n";
+    if (m_heldObject)
+    {
+        std::cout << "in player attack detuch object\n";
+        m_heldObject = nullptr;
+    }
+    if (m_attack)
+    {
+        std::cout << "player attack\n";
+        m_attack->attack();
+    }
+
 }
 
 bool Player::isAlive() const {

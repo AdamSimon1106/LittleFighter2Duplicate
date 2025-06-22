@@ -13,15 +13,15 @@ std::unique_ptr<PlayerBaseState> JumpingState::handleInput(Input input)
 {
 
     std::cout << input << std::endl;
-    
+
 
     return nullptr;
 }
 
 void JumpingState::enter(Player& player)
 {
-	std::cout << "enter:: JumpingState\n";
-    
+    std::cout << "enter:: JumpingState\n";
+
     player.setAniName("jumping");
 
     m_groundY = player.getPosition().y;
@@ -41,5 +41,8 @@ void JumpingState::update(Player& player, float dt)
     else if (player.getPosition().y >= m_groundY) {
         player.setState(std::make_unique<StandingState>(Input::NONE));
     }
-    
+
 }
+
+
+
