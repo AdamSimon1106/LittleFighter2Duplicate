@@ -13,14 +13,16 @@ Controller::Controller(sf::RenderWindow& window,
     m_level(std::move(level)),
     m_players(std::move(players)),
     m_allies(std::move(allies))
-{
+{   
+    //std::string sq = "b1";
+    //m_level->addSquad(sq);
     //m_enemies = m_level->getAllEnemies();
     //m_pickables = m_level->getAllObjects();
 
-    m_players.push_back(std::make_shared<Player>("davis_ani", 300.f));
+    m_players.push_back(std::make_shared<Player>(sf::Vector2f(50, 600), "davis_ani", 300.f));
     //      TODO: initialize HUD (m_stats)
-    std::string enemiesLine = "b1 h1";
-    m_level->addSquad(enemiesLine);
+    //std::string enemiesLine = "b1 h1";
+    //m_level->addSquad(enemiesLine);
 }
 
 void Controller::handleInput(sf::Event ev)
@@ -46,7 +48,7 @@ void Controller::updateWorld(float deltaTime)
     }
     for (auto& enemy : m_enemies)
     {
-        //enemy->update(deltaTime);
+        enemy->update(deltaTime);
     }
     // Update the level itself (enemies, objects, etc.)
      //m_level->update(deltaTime);

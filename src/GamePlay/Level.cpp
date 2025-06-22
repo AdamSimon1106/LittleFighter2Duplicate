@@ -10,7 +10,7 @@ Level::Level(std::string background)
 	//background
 	const sf::Texture& bgTex = ResourceManager::instance().getTexture(background);
 	m_backgroundSprite.setTexture(bgTex);
-
+    
 }
 
 void Level::addSquad(std::string& squadLine)
