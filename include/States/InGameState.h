@@ -7,6 +7,7 @@
 #include "Management/Controller.h"
 
 
+
 class InGameState : public IState {
 public:
 	InGameState(sf::RenderWindow& window, GameManager& manager);
@@ -21,7 +22,7 @@ private:
 	//Player m_player;
 	sf::Clock m_clock;
 
-	//Controller m_controller;
+	Controller m_controller;
 
 
 };
