@@ -5,6 +5,7 @@
 #include "../include/UI/Button.h"
 #include "../include/Management/GameManager.h"
 #include "Management/ResourceManager.h"
+#include "Management/AnimationManager.h"
 #include <iostream>
 #include <stdexcept>
 #include <memory>
@@ -16,6 +17,7 @@ InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IStat
 																			//std::vector<std::shared_ptr<Player>>{},
 																			//std::vector<std::shared_ptr<Ally>>{})
 {
+	AnimationManager::loadAnimations();
 
 	std::cout << "InGameState created, m_manager ptr: " << &m_manager << std::endl;
 
