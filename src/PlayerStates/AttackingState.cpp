@@ -6,6 +6,7 @@ std::unique_ptr<PlayerBaseState> AttackingState::handleInput(Input input)
 {
     switch (input)
     {
+
     case END_ATTACK:
         return std::make_unique<StandingState>(input);
         break;
@@ -28,6 +29,7 @@ void AttackingState::update(Player& player, float dt)
 {
     if (m_clock.getElapsedTime().asSeconds() >= m_attackDuration)
     {
+        player.setStrategyName("");
         player.setState(std::make_unique<StandingState>(Input::NONE));
     }
 }

@@ -32,10 +32,12 @@ public:
     /*void setAnimation(const Animation& anim);*/
     void setState(std::unique_ptr<PlayerBaseState> state);
     void setAttack(std::unique_ptr<AttackBehavior> attack);
-    void pickUpObject(PickableObject& obj);
+    void pickUpObject(PickableObject* obj);
 
     void setAniName(const std::string& name);
+    void setStrategyName(const std::string& name); 
     void attack();
+	bool isHeldWaepomSameAsWaepon(PickableObject* obj) const;
 private:
     float m_speed = 600.f;
     bool m_alive = true;

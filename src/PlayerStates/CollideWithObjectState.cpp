@@ -7,7 +7,7 @@
 #include "Gameplay/Player.h"
 
 
-CollideWithObject::CollideWithObject(Input input, PickableObject& obj)
+CollideWithObject::CollideWithObject(Input input, PickableObject* obj)
 	:m_obj(obj)
 {
 	m_input = input;

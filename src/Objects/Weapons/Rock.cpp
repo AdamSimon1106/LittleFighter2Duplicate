@@ -12,6 +12,8 @@ Rock::Rock(const sf::Vector2f pos, const std::string& name)
     );
 
     setAnimation(rockAnim);
+    sf::Vector2f offset(10.f, -60.f);
+    m_offset = offset;
 }
 
 void Rock::playAttack()

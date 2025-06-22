@@ -7,6 +7,7 @@
 Player::Player(const sf::Vector2f pos, const std::string& name, float speed)
     : PlayableObject(pos, name), m_speed(speed), m_state(std::make_unique<StandingState>(RELEASE_RIGHT))
 {
+	m_attack = Factory<AttackBehavior>::createAttackBehavior("h", nullptr);
     m_state->enter(*this);
 }
 
@@ -27,9 +28,9 @@ void Player::handleInput(sf::Event event)
 
 void Player::update(float dt)
 {
-    if (m_currentAnimationName != m_aniName) {
+    if (m_currentAnimationName != m_aniName + m_strategyName) {
         setAnimation(AnimationManager::getAnimation(m_aniName + m_strategyName, getTexture()));
-        m_currentAnimationName = m_aniName;
+        m_currentAnimationName = m_aniName + m_strategyName;
     }
     move(dt);
     m_state->update(*this, dt);
@@ -56,8 +57,7 @@ void Player::move(float dt)
     moveSprite(delta);
     if (m_heldObject)
     {
-        sf::Vector2f offset(20.f, -100.f);
-        m_heldObject->move(getPosition() + offset);
+        m_heldObject->move(getPosition());
     }
 
 }
@@ -157,12 +157,12 @@ void Player::setAttack(std::unique_ptr<AttackBehavior> attack)
     m_attack = std::move(attack);
 }
 
-void Player::pickUpObject(PickableObject& obj)
+void Player::pickUpObject(PickableObject* obj)
 {
-    m_heldObject = &obj;
+    m_heldObject = obj;
     //just for expirience. must do it nice
-    m_strategyName = obj.getName();
-    auto attack = Factory<AttackBehavior>::createAttackBehavior(m_strategyName, *m_heldObject);
+    m_strategyName = obj->getName();
+    auto attack = Factory<AttackBehavior>::createAttackBehavior(m_strategyName, m_heldObject);
     if (attack)
     {
         m_attack = std::move(attack);
@@ -178,6 +178,11 @@ void Player::setAniName(const std::string& name)
      m_aniName = name;
 }
 
+void Player::setStrategyName(const std::string& name)
+{
+    m_strategyName = name;
+}
+
 void Player::attack()
 {
     setAniName("attacking");
@@ -186,6 +191,7 @@ void Player::attack()
     {
         std::cout << "in player attack detuch object\n";
         m_heldObject = nullptr;
+
     }
     if (m_attack)
     {
@@ -193,6 +199,13 @@ void Player::attack()
         m_attack->attack();
     }
 
+}
+
+bool Player::isHeldWaepomSameAsWaepon(PickableObject* obj) const
+{
+    if(!m_heldObject)
+		return false;
+	return m_heldObject == obj;
 }
 
 bool Player::isAlive() const {

@@ -15,8 +15,9 @@ namespace {
         auto& player = static_cast<Player&>(playerObj);
         auto& rock = static_cast<Rock&>(rockObj);
 
-
-        player.setState(std::make_unique<CollideWithObject>(Input::NONE, rock));
+        if (player.isHeldWaepomSameAsWaepon(&rock))
+            return;
+        player.setState(std::make_unique<CollideWithObject>(Input::NONE, &rock));
 
     }
 

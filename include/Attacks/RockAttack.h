@@ -4,10 +4,10 @@
 
 class RockAttack : public AttackBehavior {
 public:
-	RockAttack(const std::string& name, PickableObject& obj);
+	RockAttack(const std::string& name, PickableObject* obj);
 	virtual void attack()override;
 private:
-	PickableObject& m_rock;
+	PickableObject* m_rock;
 	static bool m_register;
 
 };

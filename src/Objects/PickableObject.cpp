@@ -13,6 +13,6 @@ const std::string& PickableObject::getName()
 void PickableObject::move(sf::Vector2f goal)
 {
 	m_goalPosition = goal;
-	setPosition(m_goalPosition);
+	setPosition(m_goalPosition + m_offset);
 	
 }
