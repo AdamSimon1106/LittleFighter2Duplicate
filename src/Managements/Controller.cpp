@@ -11,10 +11,13 @@ Controller::Controller(sf::RenderWindow& window,
     m_players(std::move(players)),
     m_allies(std::move(allies))
 {
-    m_players.push_back(std::make_shared<Player>("davis_ani", 300.f));
+    m_players.push_back(std::make_shared<Player>(sf::Vector2f(50, 50), "davis_ani", 300.f));
     //      TODO: initialize HUD (m_stats)
     std::string enemiesLine = "b1 h1";
     m_level->addSquad(enemiesLine);
+
+    std::string objectLine = "r";
+    m_level->addPickableObjects(objectLine);
 }
 
 void Controller::handleInput(sf::Event ev)
@@ -27,6 +30,7 @@ void Controller::handleInput(sf::Event ev)
 
 void Controller::updateWorld(float deltaTime)
 {
+	m_level->handleCollisionsWithPlayer(*m_players.back());
     // Update all human-controlled players
     for (auto& player : m_players)
     {

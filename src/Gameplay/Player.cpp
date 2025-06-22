@@ -161,12 +161,16 @@ void Player::pickUpObject(PickableObject& obj)
 {
     m_heldObject = &obj;
     //just for expirience. must do it nice
-    m_strategyName = "rock";
+    m_strategyName = obj.getName();
+    auto attack = Factory<AttackBehavior>::createAttackBehavior(m_strategyName, *m_heldObject);
+    if (attack)
+    {
+        m_attack = std::move(attack);
+    }
+
 
     std::cout << m_aniName + m_strategyName << "\n";
     std::cout << " in Player::pickUpObject\n";
-
-    m_heldObject->setPosition(getPosition() + sf::Vector2f(20.f, -30.f));    
 }
 
 void Player::setAniName(const std::string& name)
