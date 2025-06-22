@@ -1,4 +1,3 @@
-// Player.cpp
 #include "Gameplay/Player.h"
 #include <algorithm>            // std::clamp
 #include "PlayerStates/StandingState.h"
@@ -121,22 +120,6 @@ void Player::handleCollision()
     // TODO; Not for now. (must have to compile properly)
 }
 
-// -----------------------------------------------------------------------------
-// Position helpers
-// -----------------------------------------------------------------------------
-//void Player::setPosition(const sf::Vector2f& pos)
-//{
-//    m_sprite.setPosition(pos);
-//}
-//
-//sf::Vector2f Player::getPosition() const
-//{
-//    return m_sprite.getPosition();
-//}
-
-// -----------------------------------------------------------------------------
-// Speed helpers
-// -----------------------------------------------------------------------------
 void Player::setSpeed(float speed)
 {
     m_speed = speed;
@@ -190,8 +173,6 @@ void Player::setAniName(const std::string& name)
 {
      m_aniName = name;
 }
-
-
 
 bool Player::isAlive() const {
     return m_alive;

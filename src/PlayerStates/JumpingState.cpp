@@ -43,6 +43,3 @@ void JumpingState::update(Player& player, float dt)
     }
     
 }
-
-
-
