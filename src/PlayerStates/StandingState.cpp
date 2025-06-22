@@ -32,14 +32,6 @@ std::unique_ptr<PlayerBaseState> StandingState::handleInput(Input input)
 void StandingState::enter(Player& player)
 {
 	std::cout << "enter:: StandingState\n";
-	
-	Animation standingAnim(player.getTexture(),
-		0, 0,          // x, y
-		80, 80,        // width, height
-		3,             // מספר פריימים
-		0.2f);         // זמן בין פריימים
-
-	player.setAnimation(standingAnim);
+	player.setAniName("standing");
 	player.setDiraction(m_input);
-	
 }

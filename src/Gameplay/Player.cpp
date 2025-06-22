@@ -1,8 +1,8 @@
-// Player.cpp
 #include "Gameplay/Player.h"
 #include <algorithm>            // std::clamp
 #include "PlayerStates/StandingState.h"
 #include "PlayerStates/PlayerBaseState.h"
+#include "Management/AnimationManager.h"
 
 Player::Player(const sf::Vector2f pos, const std::string& name, float speed)
     : PlayableObject(pos, name), m_speed(speed), m_state(std::make_unique<StandingState>(RELEASE_RIGHT))
@@ -27,12 +27,14 @@ void Player::handleInput(sf::Event event)
 
 void Player::update(float dt)
 {
+    if (m_currentAnimationName != m_aniName) {
+        setAnimation(AnimationManager::getAnimation(m_aniName + m_strategyName, getTexture()));
+        m_currentAnimationName = m_aniName;
+    }
     move(dt);
     m_state->update(*this, dt);
     updateAnimation(dt);
     apllySprite();
-    /*m_animation.update(dt);
-    m_animation.applyToSprite(m_sprite);*/
     
 }
 
@@ -64,6 +66,7 @@ void Player::move(float dt)
 
 void Player::setDiraction(Input input)
 {
+    std::cout << input << "\n";
     switch (input)
     {
     case PRESS_LEFT:
@@ -80,7 +83,7 @@ void Player::setDiraction(Input input)
         if (m_direction.x < 0.f)
             m_direction.x = 0.f;
         break;
-
+    case NONE:
     case RELEASE_RIGHT:
         if (m_direction.x > 0.f)
             m_direction.x = 0.f;
@@ -117,22 +120,6 @@ void Player::handleCollision()
     // TODO; Not for now. (must have to compile properly)
 }
 
-// -----------------------------------------------------------------------------
-// Position helpers
-// -----------------------------------------------------------------------------
-//void Player::setPosition(const sf::Vector2f& pos)
-//{
-//    m_sprite.setPosition(pos);
-//}
-//
-//sf::Vector2f Player::getPosition() const
-//{
-//    return m_sprite.getPosition();
-//}
-
-// -----------------------------------------------------------------------------
-// Speed helpers
-// -----------------------------------------------------------------------------
 void Player::setSpeed(float speed)
 {
     m_speed = speed;
@@ -159,30 +146,33 @@ void Player::clampToWindow(const sf::Vector2u& windowSize)
    setPosition(pos);
 }
 
-//void Player::setAnimation(const Animation& anim)
-//{
-//
-//    m_animation = anim;
-//    m_animation.reset();
-//    //m_animation.applyToSprite(m_sprite); 
-//}
-
 void Player::setState(std::unique_ptr<PlayerBaseState> state)
 {
     m_state = std::move(state);
     m_state->enter(*this);
 }
 
+void Player::setAttack(std::unique_ptr<AttackBehavior> attack)
+{
+    m_attack = std::move(attack);
+}
+
 void Player::pickUpObject(PickableObject& obj)
 {
     m_heldObject = &obj;
-    
-        std::cout << " in Player::pickUpObject\n";
-        m_heldObject->setPosition(getPosition() + sf::Vector2f(20.f, -30.f));
-      
+    //just for expirience. must do it nice
+    m_strategyName = "rock";
+
+    std::cout << m_aniName + m_strategyName << "\n";
+    std::cout << " in Player::pickUpObject\n";
+
+    m_heldObject->setPosition(getPosition() + sf::Vector2f(20.f, -30.f));    
 }
 
-
+void Player::setAniName(const std::string& name)
+{
+     m_aniName = name;
+}
 
 bool Player::isAlive() const {
     return m_alive;

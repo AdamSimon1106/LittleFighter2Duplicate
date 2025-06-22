@@ -28,17 +28,7 @@ std::unique_ptr<PlayerBaseState> WalkingState::handleInput(Input input)
 void WalkingState::enter(Player& player)
 {
 	std::cout << "enter:: WalkingState\n";
-
-	
-
-	Animation walkingAnim(player.getTexture(),
-		320, 0,       // x, y
-		80, 80,      // width, height
-		4,           // frame count
-		0.2f);      // frame time
-
-
-	player.setAnimation(walkingAnim);
+	player.setAniName("walking");
 	player.setDiraction(m_input);
 	
 	
