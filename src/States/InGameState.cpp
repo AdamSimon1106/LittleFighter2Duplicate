@@ -9,12 +9,12 @@
 #include <stdexcept>
 #include <memory>
 
-InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager)
-																			//m_level("lvl1bg"),
-																			//m_player(sf::Vector2f(50, 600), "davis_ani", 300.f),
-																			//m_controller(window, std::make_unique<Level>("lvl1bg"), 
-																			//std::vector<std::shared_ptr<Player>>{},
-																			//std::vector<std::shared_ptr<Ally>>{})
+InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager),
+																 m_level("lvl1bg"),
+																 m_player(sf::Vector2f(50, 600), "davis_ani", 300.f),
+																 m_controller(window, std::make_unique<Level>("lvl1bg"), 
+																 std::vector<std::shared_ptr<Player>>{},
+																 std::vector<std::shared_ptr<Ally>>{})
 {
 
 	std::cout << "InGameState created, m_manager ptr: " << &m_manager << std::endl;
@@ -22,7 +22,7 @@ InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IStat
 	
 
 	std::string objectLine = "r";
-	//m_level.addPickableObjects(objectLine);
+	m_level.addPickableObjects(objectLine);
 
 }
 
@@ -30,8 +30,8 @@ void InGameState::update(sf::Time deltaTime) {
     float dt = deltaTime.asSeconds();
     //m_level.update(dt);
 	//m_player.update(dt);
-//	m_level.handleCollisionsWithPlayer(m_player);
-	//m_controller.updateWorld(dt); // for later. dont let it stay hard coded
+    //m_level.handleCollisionsWithPlayer(m_player);
+	m_controller.updateWorld(dt); // for later. dont let it stay hard coded
     
    
 
@@ -44,7 +44,7 @@ void InGameState::update(sf::Time deltaTime) {
 void InGameState::handleEvents(sf::Event& ev) {
 	if (ev.type == sf::Event::KeyPressed || ev.type == sf::Event::KeyReleased )
 	{
-		//m_controller.handleInput(ev);
+		m_controller.handleInput(ev);
 		//m_player.handleInput(ev);
 		//if (ev.mouseButton.button == sf::Mouse::Button::Left) {
 		//	auto mousePos = sf::Vector2f(ev.mouseButton.x, ev.mouseButton.y);
@@ -60,7 +60,7 @@ void InGameState::render() {
 	//m_backGround->draw(m_window, sf::RenderStates::Default);
 	//m_startButton.draw(m_window, sf::RenderStates::Default);
     //m_window.clear();
-	//m_controller.render();
+	m_controller.render();
     /*m_level.render(m_window);
 	m_player.draw(m_window);*/
     //m_window.display();
