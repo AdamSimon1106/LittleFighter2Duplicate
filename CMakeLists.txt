@@ -31,10 +31,12 @@ set(SFML_DIR "${SFML_LOCATION}/lib/cmake/SFML")
 find_package(SFML 2.6 COMPONENTS graphics REQUIRED)
 
 # Link SFML to your target
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE sfml-graphics sfml-main)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE sfml-graphics sfml-main sfml-audio)
 
 # Optional: set SFML properties per config
 set_target_properties(sfml-main sfml-system sfml-window sfml-graphics sfml-audio sfml-network PROPERTIES MAP_IMPORTED_CONFIG_RELWITHDEBINFO RELEASE)
+
+file(COPY ${CMAKE_SOURCE_DIR}/resources DESTINATION ${CMAKE_BINARY_DIR})
 
 # Custom ZIP or SFML setup if needed
 include(cmake/Zip.cmake)

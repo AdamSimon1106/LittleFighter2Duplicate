@@ -1,4 +1,5 @@
 #include "../include/Management/GameManager.h"
+#include "Management/ResourceManager.h"
 #include "../include/UI/Background.h"
 #include <cstdlib>
 #include <SFML/Graphics.hpp>
@@ -8,6 +9,10 @@
 
 int main()
 {
+
+	GameManager gameManager;
+	gameManager.run();
+
 	//sf::RenderWindow window(sf::VideoMode(500, 500), "bgTest");
 	//sf::Texture bgTexture;
 	//
@@ -31,6 +36,7 @@ int main()
 	//	bg.draw(window,sf::RenderStates::Default);
 	//	window.display();
 	//}
+
 
 	return EXIT_SUCCESS;
 }

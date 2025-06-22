@@ -6,14 +6,18 @@
 #include "Management/Controller.h"
 #include "States/IState.h"
 #include "States/InGameState.h"
+#include "States/WelcomeState.h"
 #include "GamePlay/Level.h" 
+#include<iostream>
 
-GameManager::GameManager() : m_window(sf::VideoMode(500, 500), "Little Fighter 2"),
-                             m_currState(std::make_unique<InGameState>(m_window, *this))
-{};
+GameManager::GameManager() : m_window(sf::VideoMode(1000, 800), "Little Fighter 2")
+{
+    m_currState = std::make_unique<WelcomeState>(m_window, *this);
+}
 
 void GameManager::run()
 {
+    std::cout << "Running game, m_currState: " << m_currState.get() << std::endl;
     sf::Clock clock;
     while (m_window.isOpen())
     {
@@ -28,26 +32,33 @@ void GameManager::run()
             {
                 m_window.close();
             }
+            m_currState->handleEvents(ev);
 
-            sf::Time deltaTime = clock.restart();
 
-            m_currState->update(deltaTime);
-            m_window.clear();
-            m_currState -> render();
-            m_window.display();
-            
-            if (!m_nextState)
+            if (m_nextState)
             {
                 m_currState = std::move(m_nextState);
             }
 
         }
+        sf::Time deltaTime = clock.restart();
+
+        m_currState->update(deltaTime);
+
+        m_window.clear();
+
+        m_currState->render();
+        m_window.display();
     }
 }
 
 void GameManager::switchState(std::unique_ptr<IState> nextState)
 {
     m_nextState = std::move(nextState);
+    sf::Event ev;
+    while (m_window.pollEvent(ev)) {
+
+    }
 }
 /*
 void GameManager::readLevels(std::string path)
