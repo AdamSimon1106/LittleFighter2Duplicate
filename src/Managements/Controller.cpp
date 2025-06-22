@@ -48,7 +48,7 @@ void Controller::updateWorld(float deltaTime)
     }
     for (auto& enemy : m_enemies)
     {
-        enemy->update(deltaTime);
+        //enemy->update(deltaTime);
     }
     // Update the level itself (enemies, objects, etc.)
      //m_level->update(deltaTime);
