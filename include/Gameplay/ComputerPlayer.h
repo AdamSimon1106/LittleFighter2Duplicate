@@ -7,7 +7,7 @@
 class ComputerPlayer : public PlayableObject{
 public:
 
-    ComputerPlayer(const sf::Vector2f pos, const std::string& name) : PlayableObject(pos, name) { }
+    ComputerPlayer(const sf::Vector2f pos, const std::string& name); 
     virtual ~ComputerPlayer() = default;
     virtual void update(float dt);
 

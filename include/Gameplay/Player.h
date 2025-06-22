@@ -20,7 +20,7 @@ public:
     void handleCollision() override;    // Stub for future collision handling
 
     void setSpeed(float speed);
-    float getSpeed() const;
+    //float getSpeed() const;
 
     bool isAlive() const;
 

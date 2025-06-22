@@ -3,6 +3,10 @@
 #include "ComputerPlayerState/ApproachingEnemyState.h"
 #include <iostream>
 
+ComputerPlayer::ComputerPlayer(const sf::Vector2f pos, const std::string& name) : PlayableObject(pos, name)
+{
+    m_state = 
+}
 void ComputerPlayer::update(float dt)
 {
     if (m_state) {
@@ -69,7 +73,7 @@ void ComputerPlayer::setTargetEnemy(PlayableObject* target) {
 
 sf::Vector2f ComputerPlayer::getPosition()
 {
-    return m_position;
+   return m_position;
 }
 
 PlayableObject* ComputerPlayer::getTarget()
