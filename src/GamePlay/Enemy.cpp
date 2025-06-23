@@ -1,8 +1,7 @@
-#include "Gameplay/Ally.h"
-#include <iostream>
+#include "GamePlay/Enemy.h"
 
 
-Ally::Ally(const sf::Vector2f pos, const std::string& name, float speed)
+Enemy::Enemy(const sf::Vector2f pos, const std::string& name, float speed)
     : ComputerPlayer(pos, name)
 {
     m_speed = speed;
@@ -11,17 +10,18 @@ Ally::Ally(const sf::Vector2f pos, const std::string& name, float speed)
 }
 
 
-void Ally::update(float dt) {
+void Enemy::update(float dt)
+{
     ComputerPlayer::update(dt);  // זה מפעיל את ה־state
 }
 
-void Ally::handleCollision() {
+void Enemy::handleCollision() {
     // עדיין לא מוגדר מה קורה בהתנגשות, אז נשאיר ריק בינתיים
 }
 
 
 
 
-bool Ally::isAlive() const {
+bool Enemy::isAlive() const {
     return m_alive;
 }

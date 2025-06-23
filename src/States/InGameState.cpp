@@ -12,7 +12,7 @@
 
 InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager),
 																 m_level("lvl1bg"),
-																 m_player(sf::Vector2f(50, 600), "davis_ani", 300.f),
+																 /*m_player(sf::Vector2f(50, 600), "davis_ani", 300.f),*/
 																 m_controller(window, std::make_unique<Level>("lvl1bg"), 
 																 std::vector<std::shared_ptr<Player>>{},
 																 std::vector<std::shared_ptr<Ally>>{})
@@ -23,10 +23,11 @@ InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IStat
 
 	
 
-	std::string objectLine = "r";
-	m_level.addPickableObjects(objectLine);
+
 
 }
+
+
 
 void InGameState::update(sf::Time deltaTime) {
     float dt = deltaTime.asSeconds();

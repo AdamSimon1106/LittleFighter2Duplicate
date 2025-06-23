@@ -9,11 +9,11 @@ public:
 
     ComputerPlayer(const sf::Vector2f pos, const std::string& name); 
     virtual ~ComputerPlayer() = default;
-    virtual void update(float dt);
+    virtual void update(float dt) override;
 
     // Changes the current state
-    //void changeState(std::unique_ptr<ComputerPlayerState> newState);
-    //ComputerPlayerState* getState() const;
+    void changeState(std::unique_ptr<ComputerPlayerState> newState);
+    ComputerPlayerState* getState() const;
 
     void onHit();
     void onKnockedDown();
@@ -22,7 +22,7 @@ public:
     bool needsEnemyTracking() const;
     void clearHitFlags();
     void setTargetEnemy(PlayableObject* target);
-    sf::Vector2f getPosition();
+    //sf::Vector2f getPosition();
     PlayableObject* getTarget();
     void setBlocking(bool blocking);
     void setControllable(bool control);
@@ -30,7 +30,7 @@ public:
     void pickUp(PickableObject& pickable);
 
 protected:
-   // std::unique_ptr<ComputerPlayerState> m_state;
+    std::unique_ptr<ComputerPlayerState> m_state;
     bool m_wasHit = false;
     bool m_wasKnockedDown = false;
     PlayableObject* m_target = nullptr;

@@ -4,6 +4,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window.hpp>
 #include <utility>
+#include <iostream>
 
 Controller::Controller(sf::RenderWindow& window,
     std::unique_ptr<Level> level,
@@ -14,12 +15,22 @@ Controller::Controller(sf::RenderWindow& window,
     m_players(std::move(players)),
     m_allies(std::move(allies))
 {   
-    //std::string sq = "b1";
-    //m_level->addSquad(sq);
-    //m_enemies = m_level->getAllEnemies();
-    //m_pickables = m_level->getAllObjects();
 
-    m_players.push_back(std::make_shared<Player>(sf::Vector2f(50, 600), "davis_ani", 300.f));
+    // add pickable (rock)
+    std::string objectLine = "r";
+    m_level->addPickableObjects(objectLine);
+    // add enemies (one bandit)
+    std::string sq = "b1";
+    m_level->addSquad(sq);
+
+    m_enemies = m_level->getAllEnemies();
+    m_pickables = m_level->getAllObjects();
+    // creating user's player
+    m_players.push_back(std::make_shared<Player>(sf::Vector2f(50, 600), "davis_ani", 320.f));
+    // creating ally
+    auto ally = std::make_shared<Ally>(sf::Vector2f(700, 80), "davis", 60.f);
+    m_allies.push_back(ally);
+
     //      TODO: initialize HUD (m_stats)
     //std::string enemiesLine = "b1 h1";
     //m_level->addSquad(enemiesLine);
@@ -48,8 +59,11 @@ void Controller::updateWorld(float deltaTime)
     }
     for (auto& enemy : m_enemies)
     {
-        //enemy->update(deltaTime);
+        enemy->update(deltaTime);
     }
+
+    updateComputerPlayerTargets();
+
     // Update the level itself (enemies, objects, etc.)
      //m_level->update(deltaTime);
     //      TODO: create uptade() in Level - needs to update m_enemies!
@@ -110,12 +124,18 @@ void Controller::render()
     }
 
     // Draw AI allies
-    //for (const auto& ally : m_allies)
+    for (const auto& ally : m_allies)
     {
         //m_window.draw(*ally);        TODO: draw() in Ally
-        //ally->draw(m_window);
+
+        ally->draw(m_window);
     }
 
+    for (const auto& enemy : m_enemies)
+    {
+
+        enemy->draw(m_window);
+    }
     // Draw HUD
     //m_window.draw(m_stats);        TODO: draw() in HUD
     
@@ -134,58 +154,7 @@ void Controller::render()
 //}
 
 void Controller::updateComputerPlayerTargets() {
-    // Update targets for allies (their enemies are the enemies from Level)
-    for (auto& ally : m_allies) {
-        if (!ally || !ally->needsEnemyTracking())
-            continue;
 
-        Enemy* closest = nullptr;
-        float closestDist = std::numeric_limits<float>::max();
-
-        for (Enemy* enemy : m_enemies) {
-            float dist = distanceBetween(ally->getPosition(), enemy->getPosition());
-            if (dist < closestDist) {
-                closestDist = dist;
-                closest = enemy;
-            }
-        }
-
-        if (closest)
-            ally->setTargetEnemy(closest);
-    }
-
-    // Update targets for enemies (their enemies are players and allies)
-    for (Enemy* enemy : m_enemies) {
-        if (!enemy || !enemy->needsEnemyTracking())
-            continue;
-
-        PlayableObject* closest = nullptr;
-        float closestDist = std::numeric_limits<float>::max();
-
-        // Check all players
-        for (auto& player : m_players) {
-            float dist = distanceBetween(enemy->getPosition(), player->getPosition());
-            if (dist < closestDist) {
-                closestDist = dist;
-                closest = player.get();
-            }
-        }
-
-        // Check all allies
-        for (auto& ally : m_allies) {
-            float dist = distanceBetween(enemy->getPosition(), ally->getPosition());
-            if (dist < closestDist) {
-                closestDist = dist;
-                closest = ally.get();
-            }
-        }
-
-        if (closest)
-            enemy->setTargetEnemy(closest);
-    }
-}
-
-void Controller::updateComputerPlayerTargets() {
     // Update targets for allies (their enemies are the enemies from Level)
     for (auto& ally : m_allies) {
         if (!ally || !ally->needsEnemyTracking())

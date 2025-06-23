@@ -28,7 +28,7 @@ void Level::addSquad(std::string& squadLine)
 
         for (int i = 0; i < count; ++i) {
            
-            auto enemy = Factory<Enemy>::create(std::string(1, type), sf::Vector2f(25.f*i, 50.f*i));
+            auto enemy = Factory<Enemy>::create(std::string(1, type), sf::Vector2f(80.f + 25.f*i, 80.f + 50.f*i));
 
             if (enemy)
                 newSquad.addEnemy(std::move(enemy));
@@ -79,7 +79,7 @@ void Level::update(float dt)
 
     //just for demo need to pass player position
     if (index < m_enemies.size()) {
-        m_enemies[index].update(sf::Vector2f(125.0f, 125.0f));
+        m_enemies[index].update(dt);
     }
 
     for (auto& obj : m_pickables)

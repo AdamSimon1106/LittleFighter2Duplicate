@@ -16,8 +16,8 @@ public:
 	void render(sf::RenderWindow& window);
 	void update(float dt);
 	bool areAllEnemiesDefeated() const;
-	//std::vector<Enemy*> getAllEnemies();
-	//std::vector<PickableObject*> getAllObjects();
+	std::vector<Enemy*> getAllEnemies();
+	std::vector<PickableObject*> getAllObjects();
 	void handleCollisionsWithPlayer(Player& player);
 
 	
@@ -27,4 +27,3 @@ private:
 	Faze m_faze = Faze::Faze1;
 	sf::Sprite m_backgroundSprite;
 };
-	};

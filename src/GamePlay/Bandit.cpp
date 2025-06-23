@@ -5,7 +5,7 @@
 Bandit::Bandit(const sf::Vector2f pos)
     :Enemy(pos, "bandit"), m_attackRange(60.f)
 {
-    m_speed = 2.5f;
+    m_speed = 250.f;
 
 }
 
@@ -14,10 +14,10 @@ void Bandit::handleCollision()
 
 }
 
-void Bandit::update(const sf::Vector2f playarPos)
-{
-    move(playarPos);
-}
+//void Bandit::update(const sf::Vector2f playarPos)
+//{
+//    move(playarPos);
+//}
 
 void Bandit::move(const sf::Vector2f playerPos)
 {   

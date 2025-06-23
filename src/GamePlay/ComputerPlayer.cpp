@@ -3,26 +3,28 @@
 #include "ComputerPlayerState/ApproachingEnemyState.h"
 #include <iostream>
 
-//ComputerPlayer::ComputerPlayer(const sf::Vector2f pos, const std::string& name) : PlayableObject(pos, name)
-//{
-//    m_state = std::make_unique<IdleState>();
-//    m_state->enter(*this);
-//}
-//void ComputerPlayer::update(float dt)
-//{
-//    if (m_state) {
-//        m_state->update(*this, dt);
-//    }
-//}
-//void ComputerPlayer::changeState(std::unique_ptr<ComputerPlayerState> newState) {
-//    if (m_state)
-//        m_state->exit(*this);
-//
-//    m_state = std::move(newState);
-//
-//    if (m_state)
-//        m_state->enter(*this);
-//}
+ComputerPlayer::ComputerPlayer(const sf::Vector2f pos, const std::string& name) : PlayableObject(pos, name)
+{
+    m_state = std::make_unique<IdleState>();
+    m_state->enter(*this);
+}
+void ComputerPlayer::update(float dt)
+{
+
+    if (m_state) {
+
+        m_state->update(*this, dt);
+    }
+}
+void ComputerPlayer::changeState(std::unique_ptr<ComputerPlayerState> newState) {
+    if (m_state)
+        m_state->exit(*this);
+
+    m_state = std::move(newState);
+
+    if (m_state)
+        m_state->enter(*this);
+}
 
 // Returns current state
 ComputerPlayerState* ComputerPlayer::getState() const {
@@ -72,10 +74,10 @@ void ComputerPlayer::setTargetEnemy(PlayableObject* target) {
     m_target = target;
 }
 
-sf::Vector2f ComputerPlayer::getPosition()
-{
-   return m_position;
-}
+//sf::Vector2f ComputerPlayer::getPosition()
+//{
+//   return m_position;
+//}
 
 PlayableObject* ComputerPlayer::getTarget()
 {

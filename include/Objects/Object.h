@@ -19,6 +19,8 @@ public:
 	bool collide(Object& other)const;
 	sf::FloatRect getGlobalBounds();
 	sf::Vector2f getPosition()const;
+	sf::Sprite& getSprite();
+	const sf::Sprite& getSprite() const;
 
 protected:
 	void updateAnimation(float dt);

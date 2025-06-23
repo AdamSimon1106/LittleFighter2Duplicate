@@ -6,6 +6,8 @@ Object::Object(const sf::Vector2f pos, const std::string& name)
 	m_sprite.setTexture(*m_texture);
 	m_sprite.setOrigin(40.f, 40.f); // 80 / 2
 	m_sprite.setPosition(pos);
+	std::cout << "[Object] name: " << name
+		<< ", initial pos: (" << pos.x << ", " << pos.y << ")" << std::endl;
 
 }
 
@@ -73,3 +75,10 @@ void Object::setScale(int side)
 	m_sprite.setScale(side, 1);
 }
 
+sf::Sprite& Object::getSprite() {
+	return m_sprite;
+}
+
+const sf::Sprite& Object::getSprite() const {
+	return m_sprite;
+}
