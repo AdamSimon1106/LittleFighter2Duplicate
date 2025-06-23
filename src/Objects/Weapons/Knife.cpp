@@ -3,7 +3,7 @@
 Knife::Knife(const sf::Vector2f pos, const std::string& name)
 	:Weapon(pos, name)
 {
-	
+	setScale(1.1f);
 	setAnimation(AnimationManager::getAnimation(getName(), getTexture()));
 	
 }

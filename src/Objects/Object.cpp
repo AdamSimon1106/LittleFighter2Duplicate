@@ -51,6 +51,11 @@ sf::Vector2f Object::getPosition() const
 	return m_sprite.getPosition();
 }
 
+void Object::setScale(float scale)
+{
+	m_sprite.setScale(scale, scale);
+}
+
 
 
 void Object::updateAnimation(float dt)

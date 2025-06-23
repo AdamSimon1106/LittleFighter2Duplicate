@@ -20,7 +20,7 @@ public:
 	bool collide(Object& other)const;
 	sf::FloatRect getGlobalBounds();
 	sf::Vector2f getPosition()const;
-
+	void setScale(float scale);
 protected:
 	void updateAnimation(float dt);
 	void apllySprite();
