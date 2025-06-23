@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "Management/ResourceManager.h"
 #include "Management/Animation.h"
+#include "Management/AnimationManager.h"
 #include "Factory/Factory.h"
 #include "iostream"
 

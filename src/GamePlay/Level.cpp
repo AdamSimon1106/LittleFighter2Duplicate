@@ -43,17 +43,20 @@ void Level::addPickableObjects(const std::string& objectLine)
     std::istringstream iss(objectLine);
     std::string token;
 
+    // change i logic later
+    int i = 1;
     while (iss >> token) {
         if (token.empty()) continue;
 
         char type = std::tolower(token[0]);
 
-        auto obj = Factory<PickableObject>::create(std::string(1, type), sf::Vector2f(250.f, 500.f));
+        auto obj = Factory<PickableObject>::create(std::string(1, type), sf::Vector2f(250.f*i, 500.f));
         if (obj)
         {
             std::cout << "in Level::addPickableObjects if (obj)\n";
             m_pickables.push_back(std::move(obj));
         }
+        i++;
     }
 }
 

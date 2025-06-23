@@ -11,7 +11,7 @@ RockAttack::RockAttack(const std::string& name, PickableObject* obj)
 
 void RockAttack::attack()
 {
-    std::cout << "in RockAttack\n";
+    std::cout << "in RockAttack::attack\n";
     if (m_rock)
     {
         m_rock->playAttack();

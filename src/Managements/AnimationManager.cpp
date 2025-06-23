@@ -11,6 +11,12 @@ void AnimationManager::loadAnimations() {
     s_animationMap["jumpingr"] = JUMPING_WITH_ROCK;
     s_animationMap["attackingr"] = ATTACKING_WITH_ROCK;
     s_animationMap["attacking"] = ATTACKING;
+    s_animationMap["k"] = KNIFE;
+    s_animationMap["standingk"] = STANDING;
+    s_animationMap["walkingk"] = WALKING;
+    s_animationMap["attackingk"] = ATTACKING_WITH_KNIFE;
+
+    s_animationMap["r"] = ROCK;
 
 
 

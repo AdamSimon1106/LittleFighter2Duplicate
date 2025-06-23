@@ -185,19 +185,21 @@ void Player::setStrategyName(const std::string& name)
 
 void Player::attack()
 {
-    setAniName("attacking");
-	//std::cout << m_heldObject->getName() << "\n";
-    if (m_heldObject)
-    {
-        std::cout << "in player attack detuch object\n";
-        m_heldObject = nullptr;
-
-    }
+   
     if (m_attack)
     {
         std::cout << "player attack\n";
         m_attack->attack();
     }
+	//std::cout << m_heldObject->getName() << "\n";
+    if (m_heldObject)
+    {
+        std::cout << "in player attack detuch object\n";
+        m_heldObject = nullptr;
+		
+        m_attack = Factory<AttackBehavior>::createAttackBehavior("h", nullptr);
+    }
+    
 
 }
 

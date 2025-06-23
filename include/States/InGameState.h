@@ -18,8 +18,8 @@ private:
 	sf::Texture m_bgTexture;
 	std::optional<Background> m_backGround;
 	Button m_startButton;
-    Level m_level;
-	//Player m_player;
+    
+	
 	sf::Clock m_clock;
 
 	Controller m_controller;

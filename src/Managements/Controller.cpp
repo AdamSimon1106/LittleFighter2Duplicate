@@ -1,4 +1,5 @@
 #include "Management/Controller.h"
+#include "Management/AnimationManager.h"
 #include <SFML/Window.hpp>
 #include <utility>
 
@@ -11,12 +12,14 @@ Controller::Controller(sf::RenderWindow& window,
     m_players(std::move(players)),
     m_allies(std::move(allies))
 {
+    AnimationManager::loadAnimations();
+
     m_players.push_back(std::make_shared<Player>(sf::Vector2f(50, 50), "davis_ani", 300.f));
     //      TODO: initialize HUD (m_stats)
     std::string enemiesLine = "b1 h1";
     m_level->addSquad(enemiesLine);
 
-    std::string objectLine = "r";
+    std::string objectLine = "r k";
     m_level->addPickableObjects(objectLine);
 }
 
