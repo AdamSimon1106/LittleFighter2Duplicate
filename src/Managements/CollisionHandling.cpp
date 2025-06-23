@@ -88,9 +88,10 @@ void playerPickableObject(Object& playerObj, Object& pickableObj)
 {
     auto& player = static_cast<Player&>(playerObj);
     auto& object = static_cast<T&>(pickableObj);
-
-    if (player.isHeldWaepomSameAsWaepon(&object))
+    
+    if (player.isHoldingWaepon(&object))
         return;
+    
     player.setState(std::make_unique<CollideWithObject>(Input::NONE, &object));
 }
 

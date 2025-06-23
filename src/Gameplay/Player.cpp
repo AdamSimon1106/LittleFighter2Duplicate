@@ -73,20 +73,13 @@ void Player::setDiraction(Input input)
         m_direction.x = -1.f;
        setScale(-1);
         break;
-
     case PRESS_RIGHT:
         m_direction.x = 1.f;
         setScale(1);
         break;
-
     case RELEASE_LEFT:
-        if (m_direction.x < 0.f)
-            m_direction.x = 0.f;
-        break;
-    case NONE:
     case RELEASE_RIGHT:
-        if (m_direction.x > 0.f)
-            m_direction.x = 0.f;
+        m_direction.x = 0.f;
         break;
     case PRESS_JUMP:
     case PRESS_UP:
@@ -94,19 +87,12 @@ void Player::setDiraction(Input input)
         break;
     case PRESS_FALLING:
     case RELEASE_UP:
-       // if (m_direction.y < 0.f)
+    case RELEASE_DOWN:
             m_direction.y = 0.f;
         break;
-
     case PRESS_DOWN:
         m_direction.y = 1.f;
         break;
-
-    case RELEASE_DOWN:
-      // if (m_direction.y > 0.f)
-            m_direction.y = 0.f;
-        break;
-
     default:
         break;
     }
@@ -203,11 +189,9 @@ void Player::attack()
 
 }
 
-bool Player::isHeldWaepomSameAsWaepon(PickableObject* obj) const
+bool Player::isHoldingWaepon(PickableObject* obj) const
 {
-    if(!m_heldObject)
-		return false;
-	return m_heldObject == obj;
+	return m_heldObject != nullptr;
 }
 
 bool Player::isAlive() const {

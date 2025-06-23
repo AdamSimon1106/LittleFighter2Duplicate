@@ -37,7 +37,9 @@ public:
     void setAniName(const std::string& name);
     void setStrategyName(const std::string& name); 
     void attack();
-	bool isHeldWaepomSameAsWaepon(PickableObject* obj) const;
+	bool isHoldingWaepon(PickableObject* obj) const;
+
+    
 private:
     float m_speed = 600.f;
     bool m_alive = true;
