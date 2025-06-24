@@ -72,6 +72,7 @@
 #include "Objects/Weapons/Knife.h"
 #include "Objects/PickableObject.h"
 #include "PlayerStates/CollideWithObjectState.h"
+#include "PlayerStates/JumpingState.h"
 
 #include <iostream>
 #include <typeindex>
@@ -88,7 +89,12 @@ void playerPickableObject(Object& playerObj, Object& pickableObj)
 {
     auto& player = static_cast<Player&>(playerObj);
     auto& object = static_cast<T&>(pickableObj);
-    
+    //not so nice!!!!!
+	if (typeid(*player.getState()) == typeid(JumpingState))
+	{
+		std::cout << "Player is jumping, cannot pick up object.\n";
+		return;
+	}
     if (player.isHoldingWaepon(&object))
         return;
     

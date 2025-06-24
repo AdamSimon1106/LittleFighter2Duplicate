@@ -39,7 +39,7 @@ public:
     void attack();
 	bool isHoldingWaepon(PickableObject* obj) const;
 
-    
+	const PlayerBaseState* getState() const { return m_state.get(); }
 private:
     float m_speed = 600.f;
     bool m_alive = true;
