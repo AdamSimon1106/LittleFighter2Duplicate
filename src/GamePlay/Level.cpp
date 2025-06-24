@@ -6,11 +6,13 @@
 #include "GamePlay/Player.h"
 #include "../include/UI/Background.h"
 
-Level::Level(std::string background, sf::Vector2f screenSize) : m_backgorund(screenSize, ResourceManager::instance().getTexture(background)) 
+
+
+
+Level::Level(std::string background, sf::Vector2f screenSize) : 
+    m_backgorund(screenSize, ResourceManager::instance().getTexture(background))
 {
-
-}; 
-
+}
 
 void Level::addSquad(std::string& squadLine)
 {
