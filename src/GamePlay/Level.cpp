@@ -4,19 +4,18 @@
 #include "Factory/Factory.h"
 #include "Management/CollisionHandling.h"
 #include "GamePlay/Player.h"
+#include "../include/UI/Background.h"
 
-Level::Level(std::string background)
+Level::Level(std::string background, sf::Vector2f screenSize) : m_backgorund(screenSize, ResourceManager::instance().getTexture(background)) 
 {
-	//background
-	const sf::Texture& bgTex = ResourceManager::instance().getTexture(background);
-	m_backgroundSprite.setTexture(bgTex);
 
-}
+}; 
+
 
 void Level::addSquad(std::string& squadLine)
 {
     Squad newSquad;
-
+     
     std::istringstream iss(squadLine);
     std::string token;
 
@@ -59,9 +58,9 @@ void Level::addPickableObjects(const std::string& objectLine)
 
 void Level::render(sf::RenderWindow& window)
 {
-    window.draw(m_backgroundSprite);
+    m_backgorund.draw(window, sf::RenderStates::Default);
 
-    int index = static_cast<int>(m_faze);
+    int index = static_cast<int>(m_phase);
 
     if (index < m_enemies.size()) {
         m_enemies[index].render(window); 
@@ -75,7 +74,7 @@ void Level::render(sf::RenderWindow& window)
 
 void Level::update(float dt)
 {
-    int index = static_cast<int>(m_faze);
+    int index = static_cast<int>(m_phase);
 
     //just for demo need to pass player position
     if (index < m_enemies.size()) {

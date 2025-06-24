@@ -8,9 +8,9 @@ Background::Background(sf::Vector2f screenSize, sf::Color color) : m_screenSize(
 	m_rectangleShape.setFillColor(color);
 }
 
-Background::Background(sf::Vector2f screenSize, sf::Texture& texture) : m_bgTexture(&texture),
-																		m_screenSize(screenSize),
-																		m_useTexture(true)
+Background::Background(sf::Vector2f screenSize, const sf::Texture& texture) : m_bgTexture(&texture),
+																		      m_screenSize(screenSize),
+																		      m_useTexture(true)
 {
 	m_bgSprite.setTexture(*m_bgTexture);
 	setPictureToCover();
