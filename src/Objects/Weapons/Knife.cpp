@@ -13,6 +13,10 @@ void Knife::playAttack()
 	std::cout << "in Knife attack playattack\n";
 }
 
+void Knife::move(const sf::Vector2f goal)
+{
+}
+
 bool Knife::m_registered = Factory<PickableObject>::registerIt("k", [](const sf::Vector2f& pos, const std::string& name) {
 	return std::make_unique<Knife>(pos, name);
 	});
