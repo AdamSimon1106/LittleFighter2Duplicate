@@ -16,7 +16,7 @@ public:
 	void setAnimation(const Animation& anim);
 	void setPosition(const sf::Vector2f pos);
 	
-	void update(float dt);
+	virtual void update(float dt);
 	bool collide(Object& other)const;
 	sf::FloatRect getGlobalBounds();
 	sf::Vector2f getPosition()const;

@@ -15,6 +15,11 @@ void Knife::playAttack()
 
 void Knife::move(const sf::Vector2f goal)
 {
+	for (const auto& offset : m_offsets)
+	{
+		sf::Vector2f newPos = goal + offset;
+		setPosition(newPos);
+	}
 }
 
 bool Knife::m_registered = Factory<PickableObject>::registerIt("k", [](const sf::Vector2f& pos, const std::string& name) {

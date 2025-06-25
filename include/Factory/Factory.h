@@ -9,6 +9,7 @@
 class PickableObject;
 
 
+
 template<typename T>
 class Factory {
 public:
@@ -66,6 +67,7 @@ inline bool Factory<T>::registerAttackBehavior(const std::string& name, attackCr
     getAttackMap().emplace(name, f);
     return true;
 }
+
 
 
 

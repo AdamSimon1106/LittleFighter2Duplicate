@@ -15,4 +15,5 @@ void PickableObject::move(sf::Vector2f goal)
 	m_goalPosition = goal;
 	setPosition(m_goalPosition + m_offset);
 	
+	
 }

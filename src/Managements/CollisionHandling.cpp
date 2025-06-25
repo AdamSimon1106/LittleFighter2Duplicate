@@ -91,10 +91,10 @@ void playerPickableObject(Object& playerObj, Object& pickableObj)
     auto& player = static_cast<Player&>(playerObj);
     auto& object = static_cast<T&>(pickableObj);
     //not so nice!!!!!
-	/*if (typeid(*player.getState()) == typeid(JumpingState) || typeid(*player.getState()) == typeid(AttackingState))
+	if (typeid(*player.getState()) == typeid(JumpingState) || typeid(*player.getState()) == typeid(AttackingState))
 	{
 		return;
-	}*/
+	}
     if (player.isHoldingWaepon(&object))
         return;
     

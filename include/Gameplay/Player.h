@@ -39,6 +39,7 @@ public:
     void attack();
 	bool isHoldingWaepon(PickableObject* obj) const;
 
+	const sf::Vector2f& getDirection() const { return m_direction; }
 	const PlayerBaseState* getState() const { return m_state.get(); }
 private:
     float m_speed = 600.f;
