@@ -18,6 +18,21 @@ void PlayableObject::takeDamage(int damageAmount) {
     if (m_health == 0)
         onDeath(); */
 }
+
+void PlayableObject::updateScale()
+{
+    sf::Vector2f pos = getPosition();
+    float dx = pos.x - m_prevPosition.x;
+
+
+    if (dx > 0.01f)
+        setScale(1);  // moving right
+    else if (dx < -0.01f)
+        setScale(-1); // moving left
+
+    m_prevPosition = pos;
+}
+
 float PlayableObject::getSpeed() const
 {
     return m_speed;
@@ -25,4 +40,24 @@ float PlayableObject::getSpeed() const
 
 void PlayableObject::move(const sf::Vector2f& delta) {
     m_sprite.move(delta);
+}
+
+void PlayableObject::setAniName(const std::string& name)
+{
+    m_aniName = name;
+}
+
+std::string PlayableObject::getName() const
+{
+    return m_name;
+}
+
+bool PlayableObject::isAttacked() const
+{
+    return m_underAttack;
+}
+
+void PlayableObject::attack()
+{
+    m_underAttack = true;
 }

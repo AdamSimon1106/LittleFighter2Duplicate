@@ -4,10 +4,21 @@ std::map<std::string, AnimationInfo> AnimationManager::s_animationMap;
 
 void AnimationManager::loadAnimations() {
     s_animationMap["walking"] = WALKING;
-    s_animationMap["walkingrock"] = WALKING_WITH_ROCK;
+    s_animationMap["walkingr"] = WALKING_WITH_ROCK;
     s_animationMap["standing"] = STANDING;
-    s_animationMap["standingrock"] = STANDING_WITH_ROCK;
+    s_animationMap["standingr"] = STANDING_WITH_ROCK;
     s_animationMap["jumping"] = JUMPING;
+    s_animationMap["jumpingr"] = JUMPING_WITH_ROCK;
+    s_animationMap["attackingr"] = ATTACKING_WITH_ROCK;
+    s_animationMap["attacking"] = ATTACKING;
+    s_animationMap["k"] = KNIFE;
+    s_animationMap["standingk"] = STANDING;
+    s_animationMap["jumpingk"] = JUMPING;
+
+    s_animationMap["walkingk"] = WALKING;
+    s_animationMap["attackingk"] = ATTACKING_WITH_KNIFE;
+
+    s_animationMap["r"] = ROCK;
 
 
 }

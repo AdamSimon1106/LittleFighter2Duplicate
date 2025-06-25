@@ -81,6 +81,8 @@ void ComputerPlayer::setTargetEnemy(PlayableObject* target) {
 
 PlayableObject* ComputerPlayer::getTarget()
 {
+    if (!m_target)
+        std::cout << "THERE IS NO TARGET!\n";
     return m_target;
 }
 
@@ -97,7 +99,7 @@ void ComputerPlayer::setControllable(bool control)
 void ComputerPlayer::performAttack(PlayableObject& target)
 {
     // TODO: implement his properly (attack only if collision it true)
-    std::cout << "attacking now" << std::endl;
+    std::cout << "[ComputerPlayer] attacking now" << std::endl;
 }
 
 void ComputerPlayer::pickUp(PickableObject& pickable)

@@ -23,7 +23,8 @@ void CharacterSelectState::update(sf::Time deltaTime) {
 }
 
 void CharacterSelectState::handleEvents(sf::Event& ev) {
-	if (ev.mouseButton.button == sf::Mouse::Button::Left) {
+	if (ev.type == sf::Event::MouseButtonPressed && 
+		ev.mouseButton.button == sf::Mouse::Button::Left) {
 		auto mousePos = sf::Vector2f(ev.mouseButton.x, ev.mouseButton.y);
 		if (m_startButton.isClicked(mousePos)) {
 			m_manager.switchState(std::make_unique<InGameState>(m_window, m_manager));

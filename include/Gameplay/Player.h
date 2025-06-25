@@ -34,7 +34,7 @@ public:
     void setAttack(std::unique_ptr<AttackBehavior> attack);
     void pickUpObject(PickableObject& obj);
 
-    void setAniName(const std::string& name);
+    //void setAniName(const std::string& name);
 private:
     bool m_alive = true;
     sf::Vector2f m_direction{ 0.f,0.f };
@@ -47,7 +47,7 @@ private:
 
 
     //maybe in base
-    std::string m_aniName ;
-    std::string m_strategyName = "";
-    std::string m_currentAnimationName;
+    //std::string m_aniName ;
+    //std::string m_strategyName = "";
+    //std::string m_currentAnimationName;
 };

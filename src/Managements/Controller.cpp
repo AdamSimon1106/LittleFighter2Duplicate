@@ -20,16 +20,25 @@ Controller::Controller(sf::RenderWindow& window,
     std::string objectLine = "r";
     m_level->addPickableObjects(objectLine);
     // add enemies (one bandit)
-    std::string sq = "b1";
+    std::string sq = "b3";
     m_level->addSquad(sq);
 
     m_enemies = m_level->getAllEnemies();
     m_pickables = m_level->getAllObjects();
     // creating user's player
-    m_players.push_back(std::make_shared<Player>(sf::Vector2f(50, 600), "davis_ani", 320.f));
+    m_players.push_back(std::make_shared<Player>(sf::Vector2f(1000, 800), "davis_ani", 320.f));
     // creating ally
-    auto ally = std::make_shared<Ally>(sf::Vector2f(700, 80), "davis", 60.f);
+    auto ally = std::make_shared<Ally>(sf::Vector2f(800, 40), "davis_ani", 100.f);
+    auto allyTwo = std::make_shared<Ally>(sf::Vector2f(900, 700), "davis_ani", 100.f);
+    auto allyThree = std::make_shared<Ally>(sf::Vector2f(380, 580), "davis_ani", 100.f);
+
     m_allies.push_back(ally);
+    m_allies.push_back(allyTwo);
+    m_allies.push_back(allyThree);
+
+
+    updateComputerPlayerTargets();
+    auto target = m_enemies[0]->getTarget();
 
     //      TODO: initialize HUD (m_stats)
     //std::string enemiesLine = "b1 h1";
@@ -161,17 +170,29 @@ void Controller::updateComputerPlayerTargets() {
             continue;
 
         Enemy* closest = nullptr;
+        Enemy* freeClosest = nullptr;
         float closestDist = std::numeric_limits<float>::max();
+        float freeDist = closestDist;
 
         for (Enemy* enemy : m_enemies) {
+            //std::cout << "ally " << ally->getPosition().x << "," << ally->getPosition().y << std::endl;
+            //std::cout << "enemy " << enemy->getPosition().x << "," << enemy->getPosition().y << std::endl;
+
             float dist = distanceBetween(ally->getPosition(), enemy->getPosition());
             if (dist < closestDist) {
                 closestDist = dist;
                 closest = enemy;
             }
-        }
+            if (!enemy->isAttacked() && dist < freeDist) {
+                freeDist = dist;
+                freeClosest = enemy;
+            }
 
-        if (closest)
+        }
+        if (freeClosest) {
+            ally->setTargetEnemy(freeClosest);
+        }
+        else if (closest)
             ally->setTargetEnemy(closest);
     }
 
@@ -181,7 +202,27 @@ void Controller::updateComputerPlayerTargets() {
             continue;
 
         PlayableObject* closest = nullptr;
+        PlayableObject* freeClosest = nullptr;
         float closestDist = std::numeric_limits<float>::max();
+        float freeDist = closestDist;
+
+
+        //std::cout << "m_allies size: " << m_allies.size() << std::endl;
+
+        // Check all allies
+        for (auto& ally : m_allies) {
+            float dist = distanceBetween(enemy->getPosition(), ally->getPosition());
+            //std::cout << "[DEBUG] candidate ally, dist: " << dist << std::endl;
+
+            if (dist < closestDist) {
+                closestDist = dist;
+                closest = ally.get();
+            }
+            if (!ally->isAttacked() && dist < freeDist) {
+                freeDist = dist;
+                freeClosest = ally.get();
+            }
+        }
 
         // Check all players
         for (auto& player : m_players) {
@@ -190,18 +231,15 @@ void Controller::updateComputerPlayerTargets() {
                 closestDist = dist;
                 closest = player.get();
             }
-        }
-
-        // Check all allies
-        for (auto& ally : m_allies) {
-            float dist = distanceBetween(enemy->getPosition(), ally->getPosition());
-            if (dist < closestDist) {
-                closestDist = dist;
-                closest = ally.get();
+            if (!player->isAttacked() && dist < freeDist) {
+                freeDist = dist;
+                freeClosest = player.get();
             }
         }
-
-        if (closest)
+        if (freeClosest) {
+            enemy->setTargetEnemy(freeClosest);
+        }
+        else if (closest)
             enemy->setTargetEnemy(closest);
     }
 }

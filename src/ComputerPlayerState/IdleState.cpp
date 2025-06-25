@@ -6,15 +6,16 @@
 void IdleState::enter(ComputerPlayer& player) {
     // Optional: reset animation or internal timer
     // player.setAnimation("Idle");
-    std::cout << "enter:: IdleState\n";
+    std::cout << player.getName() << "enter:: IdleState\n";
 
-    Animation idleAnim(player.getTexture(),
-        0, 0,          // x, y
-        80, 80,        // width, height
-        4,             // מספר פריימים
-        0.2f);         // זמן בין פריימים
+    //Animation idleAnim(player.getTexture(),
+    //    0, 0,          // x, y
+    //    80, 80,        // width, height
+    //    4,             // מספר פריימים
+    //    0.2f);         // זמן בין פריימים
 
-    player.setAnimation(idleAnim);
+    //player.setAnimation(idleAnim);
+    player.setAniName("standing");
     //player.setDiraction(m_input); 
 }
 
@@ -31,8 +32,10 @@ void IdleState::update(ComputerPlayer& player, float deltaTime) {
     //        closestEnemy = enemy;
     //    //}
     closestEnemy = player.getTarget();
-    std::cout << "[IdleState] Update, target: " << player.getTarget() << std::endl;
-
+    if (closestEnemy)
+        std::cout << player.getName() << "[IdleState] Update, target: "  << std::endl;
+    else
+        std::cout << "THERE IS NO TARGET YET\n";
 
     // 2. If enemy is close enough, change to Approaching state
     if (closestEnemy) { // threshold distance

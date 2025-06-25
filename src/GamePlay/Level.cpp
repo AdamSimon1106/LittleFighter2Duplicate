@@ -28,7 +28,7 @@ void Level::addSquad(std::string& squadLine)
 
         for (int i = 0; i < count; ++i) {
            
-            auto enemy = Factory<Enemy>::create(std::string(1, type), sf::Vector2f(80.f + 25.f*i, 80.f + 50.f*i));
+            auto enemy = Factory<Enemy>::create(std::string(1, type), sf::Vector2f(80.f + 25.f*i, 80.f + 250.f*i));
 
             if (enemy)
                 newSquad.addEnemy(std::move(enemy));
