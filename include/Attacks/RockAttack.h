@@ -6,7 +6,7 @@ class Player;
 class RockAttack : public AttackBehavior {
 public:
 	RockAttack(const std::string& name, PickableObject* obj);
-	RockAttack(const std::string& name, Player* player, PickableObject* obj);
+	RockAttack(const std::string& name, PickableObject* obj, Player* player);
 
 	virtual void attack()override;
 private:
