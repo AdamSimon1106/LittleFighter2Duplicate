@@ -8,7 +8,7 @@ public:
 	virtual void handleCollision() {};
 	virtual void playAttack() override;
 	void update(float dt) override;
-	void throwRock(const sf::Vector2f& direction, float groundY, float speed = 200.f);
+	void throwRock(int direction, float groundY, float speed = 200.f);
 	
 private:
 	static bool m_registered;

@@ -7,6 +7,10 @@
 #include "Objects/PickableObject.h"
 #include "Attacks/AttackBehavior.h"
 
+enum class Direction
+{
+    RIGHT = 1, LEFT = -1
+};
 
 class Player : public PlayableObject
 {
@@ -39,11 +43,12 @@ public:
     void attack();
 	bool isHoldingWaepon(PickableObject* obj) const;
 
-	const sf::Vector2f& getDirection() const { return m_direction; }
-	const PlayerBaseState* getState() const { return m_state.get(); }
+	const int getDirection() const { return static_cast<int>(m_dir); } 
+    const PlayerBaseState* getState() const { return m_state.get(); }
 private:
     float m_speed = 600.f;
     bool m_alive = true;
+    Direction m_dir;
     sf::Vector2f m_direction{ 0.f,0.f };
     //sf::Text m_name;
 

@@ -3,7 +3,7 @@
 Rock::Rock(const sf::Vector2f pos, const std::string& name)
 	:Weapon(pos, name)
 {
-	setScale(0.5f); 
+	setScale(0.7f); 
     setAnimation(AnimationManager::getAnimation(getName(), getTexture()));
     sf::Vector2f offset(10.f, -35.f);
     m_offset = offset;
@@ -13,7 +13,7 @@ Rock::Rock(const sf::Vector2f pos, const std::string& name)
 void Rock::playAttack()
 {
 	//changeAnimation("throw");
-	throwRock({ 1.f, 0.f }, 200.f, 500.f); 
+	throwRock( 1, 200.f, 500.f); 
 }
 
 void Rock::update(float dt)
@@ -43,13 +43,13 @@ void Rock::update(float dt)
 }
 
 //need to get the direction and groundY from the player
-void Rock::throwRock(const sf::Vector2f& direction, float groundY, float speed)
+void Rock::throwRock(int direction, float groundY, float speed)
 {
     m_isFlying = true;
     m_groundY = groundY;
 
     // מהירות התחלתית:
-    m_velocity.x = direction.x * speed;
+    m_velocity.x = direction * speed;
     m_velocity.y = -400.f;  // לזרוק קצת למעלה (שלילי כי Y יורד למטה)
 	setAnimation(AnimationManager::getAnimation("rock_flying", getTexture()));
 

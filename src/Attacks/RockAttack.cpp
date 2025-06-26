@@ -25,7 +25,7 @@ void RockAttack::attack()
     {
 
 		m_rock->playAttack();
-		dynamic_cast<Rock*>(m_rock)->throwRock(sf::Vector2f(-1,0), m_player->getPosition().y);
+		dynamic_cast<Rock*>(m_rock)->throwRock(m_player->getDirection(), m_player->getPosition().y);
 		//m_rock->playAttack();
 		m_rock = nullptr; 
     } 

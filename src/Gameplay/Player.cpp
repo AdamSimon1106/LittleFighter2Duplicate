@@ -71,10 +71,12 @@ void Player::setDiraction(Input input)
     {
     case PRESS_LEFT:
         m_direction.x = -1.f;
+		m_dir = Direction::LEFT;
        setScale(-1);
         break;
     case PRESS_RIGHT:
         m_direction.x = 1.f;
+        m_dir = Direction::RIGHT;
         setScale(1);
         break;
     case RELEASE_LEFT:
