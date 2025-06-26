@@ -6,7 +6,7 @@ class Rock : public Weapon
 public:
 	Rock(const sf::Vector2f pos, const std::string& name);
 	virtual void handleCollision() {};
-	virtual void playAttack() override;
+	 virtual void playAttack() override {};
 	void update(float dt) override;
 	void throwRock(int direction, float groundY, float speed = 200.f);
 	

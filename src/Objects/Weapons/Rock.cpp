@@ -3,17 +3,11 @@
 Rock::Rock(const sf::Vector2f pos, const std::string& name)
 	:Weapon(pos, name)
 {
-	setScale(0.7f); 
+	
     setAnimation(AnimationManager::getAnimation(getName(), getTexture()));
     sf::Vector2f offset(10.f, -35.f);
     m_offset = offset;
     
-}
-
-void Rock::playAttack()
-{
-	//changeAnimation("throw");
-	throwRock( 1, 200.f, 500.f); 
 }
 
 void Rock::update(float dt)
