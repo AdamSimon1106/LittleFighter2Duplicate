@@ -5,9 +5,11 @@
 #include "Management/AnimationManager.h"
 
 Player::Player(const sf::Vector2f pos, const std::string& name, float speed)
-    : PlayableObject(pos, name), m_speed(speed), m_state(std::make_unique<StandingState>(RELEASE_RIGHT))
+    : PlayableObject(pos, name),  m_state(std::make_unique<StandingState>(RELEASE_RIGHT))
 {
+    m_speed = speed;
     m_state->enter(*this);
+    m_name = "player";
 }
 
 // Updates m_direction according to arrow keys
@@ -125,10 +127,7 @@ void Player::setSpeed(float speed)
     m_speed = speed;
 }
 
-float Player::getSpeed() const
-{
-    return m_speed;
-}
+
 
 // Keep the sprite fully inside the window bounds
 void Player::clampToWindow(const sf::Vector2u& windowSize)
@@ -169,10 +168,10 @@ void Player::pickUpObject(PickableObject& obj)
     m_heldObject->setPosition(getPosition() + sf::Vector2f(20.f, -30.f));    
 }
 
-void Player::setAniName(const std::string& name)
-{
-     m_aniName = name;
-}
+//void Player::setAniName(const std::string& name)
+//{
+//     m_aniName = name;
+//}
 
 bool Player::isAlive() const {
     return m_alive;

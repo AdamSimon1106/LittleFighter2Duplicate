@@ -19,15 +19,17 @@ public:
 	bool collide(Object& other)const;
 	sf::FloatRect getGlobalBounds();
 	sf::Vector2f getPosition()const;
+	sf::Sprite& getSprite();
+	const sf::Sprite& getSprite() const;
 
 protected:
 	void updateAnimation(float dt);
 	void apllySprite();
 	void moveSprite(sf::Vector2f pos);
 	void setScale(int side);
-	
-private:
 	sf::Sprite m_sprite;
+private:
+
 	const sf::Texture* m_texture = nullptr;
 
 	Animation m_animation;

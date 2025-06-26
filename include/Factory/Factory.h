@@ -37,7 +37,7 @@ inline std::unique_ptr<T> Factory<T>::create(const std::string& name, const sf::
     auto it = getMap().find(name);
     if (it == getMap().end())
         return nullptr;
-    return it->second(pos, name);
+    return std::move(it->second(pos, name));  // ? מחזיר unique_ptr בהעברה
 }
 
 template<typename T>

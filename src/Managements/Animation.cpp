@@ -59,7 +59,7 @@ void Animation::update(float deltaTime) {
 void Animation::applyToSprite(sf::Sprite& sprite) const {
     if (!texture /*|| frameCount <= 0*/) return;
 
-    sprite.setTexture(*texture);
+    sprite.setTexture(*texture, false);
 
     sf::IntRect rect(x + currentFrame * width, y, width, height);
     sprite.setTextureRect(rect);

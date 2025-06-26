@@ -24,14 +24,14 @@ void WelcomeState::update(sf::Time deltaTime) {
 }
 
 void WelcomeState::handleEvents(sf::Event& ev) {
-	if (ev.mouseButton.button == sf::Mouse::Button::Left) {
-		auto mousePos = sf::Vector2f(ev.mouseButton.x, ev.mouseButton.y);
-		if (m_startButton.isClicked(mousePos)) {
-			m_manager.switchState(std::make_unique<MenuState>(m_window, m_manager));
-		}
-	}
+    if (ev.type == sf::Event::MouseButtonPressed &&
+        ev.mouseButton.button == sf::Mouse::Left) {
+        auto mousePos = sf::Vector2f(ev.mouseButton.x, ev.mouseButton.y);
+        if (m_startButton.isClicked(mousePos)) {
+            m_manager.switchState(std::make_unique<MenuState>(m_window, m_manager));
+        }
+    }
 }
-
 void WelcomeState::render() {
 
 	m_backGround->draw(m_window, sf::RenderStates::Default);

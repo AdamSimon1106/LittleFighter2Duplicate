@@ -9,6 +9,7 @@
 
 
 
+
 Level::Level(std::string background, sf::Vector2f screenSize) : 
     m_backgorund(screenSize, ResourceManager::instance().getTexture(background))
 {
@@ -29,7 +30,7 @@ void Level::addSquad(std::string& squadLine)
 
         for (int i = 0; i < count; ++i) {
            
-            auto enemy = Factory<Enemy>::create(std::string(1, type), sf::Vector2f(25.f*i, 50.f*i));
+            auto enemy = Factory<Enemy>::create(std::string(1, type), sf::Vector2f(80.f + 25.f*i, 80.f + 250.f*i));
 
             if (enemy)
                 newSquad.addEnemy(std::move(enemy));
@@ -80,7 +81,7 @@ void Level::update(float dt)
 
     //just for demo need to pass player position
     if (index < m_enemies.size()) {
-        m_enemies[index].update(sf::Vector2f(125.0f, 125.0f));
+        m_enemies[index].update(dt);
     }
 
     for (auto& obj : m_pickables)
@@ -88,6 +89,32 @@ void Level::update(float dt)
 
     
 }
+
+std::vector<Enemy*> Level::getAllEnemies() {
+    std::vector<Enemy*> enemies;
+
+    Squad& curSquad = m_enemies[(int)m_faze];
+        for (auto& enemyPtr : curSquad.getEnemies()) {
+            if (enemyPtr) {
+                enemies.push_back(enemyPtr.get()); // Convert unique_ptr to raw pointer
+            }
+        }
+
+    return enemies;
+}
+
+std::vector<PickableObject*> Level::getAllObjects() {
+    std::vector<PickableObject*> objects;
+
+    for (auto& objPtr : m_pickables) {
+        if (objPtr) {
+            objects.push_back(objPtr.get());
+        }
+    }
+
+    return objects;
+}
+
 
 bool Level::areAllEnemiesDefeated() const
 {

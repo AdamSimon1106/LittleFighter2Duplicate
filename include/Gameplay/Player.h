@@ -22,7 +22,7 @@ public:
     void handleCollision() override;    // Stub for future collision handling
 
     void setSpeed(float speed);
-    float getSpeed() const;
+    //float getSpeed() const;
 
     bool isAlive() const;
 
@@ -34,9 +34,8 @@ public:
     void setAttack(std::unique_ptr<AttackBehavior> attack);
     void pickUpObject(PickableObject& obj);
 
-    void setAniName(const std::string& name);
+    //void setAniName(const std::string& name);
 private:
-    float m_speed = 600.f;
     bool m_alive = true;
     sf::Vector2f m_direction{ 0.f,0.f };
     //sf::Text m_name;
@@ -48,7 +47,7 @@ private:
 
 
     //maybe in base
-    std::string m_aniName ;
-    std::string m_strategyName = "";
-    std::string m_currentAnimationName;
+    //std::string m_aniName ;
+    //std::string m_strategyName = "";
+    //std::string m_currentAnimationName;
 };
