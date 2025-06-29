@@ -16,4 +16,5 @@ public:
 private:
     PlayableObject* m_target; // the target for attacking
     float m_attackCooldown = 0.f; // time betweeen attacks
+    void alignAttacker(ComputerPlayer& player);
 };
