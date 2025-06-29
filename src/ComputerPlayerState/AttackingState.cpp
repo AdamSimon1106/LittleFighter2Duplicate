@@ -17,8 +17,13 @@ void AttackingState::enter(ComputerPlayer& player) {
     //    0.2f);         // זמן בין פריימים
 
     //player.setAnimation(attackingAnim);
-    player.setAniName("attacking");
+
     m_target = player.getTarget();
+    //sf::Vector2f attackerPos = player.getPosition();
+    //sf::Vector2f targetPos = m_target->getPosition();
+    //player.setPosition({ targetPos.x, targetPos.y });
+    alignAttacker(player);
+    player.setAniName("attacking");
     m_target->attack();
     // I think we need switch-case here according to the attack
     //player.setDiraction(m_input);     m_attackCooldown = 0.f; // Start immediately
@@ -65,3 +70,18 @@ void AttackingState::update(ComputerPlayer& player, float deltaTime) {
 void AttackingState::exit(ComputerPlayer& player) {
     // Stop attack animation or cleanup if needed
 }
+
+void AttackingState::alignAttacker(ComputerPlayer& player)
+{
+    sf::Vector2f playerPos = player.getPosition();
+    sf::Vector2f targetPos = m_target->getPosition();
+
+    // שומרים על אותו X, מיישרים ל־Y, במרחק attackRange מהיריב
+    float dx = playerPos.x - targetPos.x;
+    float sign = (dx >= 0) ? -1.f : 1.f; // איזה צד של המותקף?
+    // float alignedX = targetPos.x + sign * 80.f; --> MAKING PROBLEM OF ATTACK AMINATION TO THE WRONG SIDE
+    float alignedY = targetPos.y; // יישור מדויק, או בתוך טולרנס קטן
+
+    player.setPosition({ playerPos.x, alignedY }); // suppose to be alignedX
+}
+
