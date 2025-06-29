@@ -18,13 +18,13 @@ public:
 	void update(float dt);
 	bool areAllEnemiesDefeated() const;
 	std::vector<Enemy*> getAllEnemies();
-	std::vector<PickableObject*> getAllObjects();
+	std::vector<std::shared_ptr<PickableObject>> getAllObjects();
 	void handleCollisionsWithPlayer(Player& player);
 
 	
 private:
 	std::vector<Squad> m_enemies;
-	std::vector<std::unique_ptr<PickableObject>> m_pickables;
+	std::vector<std::shared_ptr<PickableObject>> m_pickables;
 	Phase m_phase = Phase::Phase1;
 	Background m_backgorund;
 };

@@ -36,7 +36,7 @@ private:
     std::vector<std::shared_ptr<Player>> m_players; // human-controlled
     std::vector<std::shared_ptr<Ally>> m_allies;  // computer-controlled
     std::vector<Enemy*> m_enemies; // Non-owning pointers to current squad
-    std::vector<PickableObject*> m_pickables;
+    std::vector<std::shared_ptr<PickableObject>> m_pickables;
 
     // ========== Internal state ==========
     HeadsUpDisplay m_stats;

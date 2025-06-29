@@ -106,12 +106,12 @@ std::vector<Enemy*> Level::getAllEnemies() {
     return enemies;
 }
 
-std::vector<PickableObject*> Level::getAllObjects() {
-    std::vector<PickableObject*> objects;
+std::vector<std::shared_ptr<PickableObject>> Level::getAllObjects() {
+    std::vector<std::shared_ptr<PickableObject>> objects;
 
     for (auto& objPtr : m_pickables) {
         if (objPtr) {
-            objects.push_back(objPtr.get());
+            objects.push_back(objPtr);
         }
     }
 

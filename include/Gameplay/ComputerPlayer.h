@@ -22,8 +22,10 @@ public:
     bool needsEnemyTracking() const;
     void clearHitFlags();
     void setTargetEnemy(PlayableObject* target);
+    void setTargetObject(std::shared_ptr<PickableObject> obj);
     //sf::Vector2f getPosition();
     PlayableObject* getTarget();
+    std::shared_ptr<PickableObject> getObject();
     void setBlocking(bool blocking);
     void setControllable(bool control);
     void performAttack(PlayableObject &target);
@@ -34,6 +36,7 @@ protected:
     bool m_wasHit = false;
     bool m_wasKnockedDown = false;
     PlayableObject* m_target = nullptr;
+    std::shared_ptr<PickableObject> m_object = nullptr;
     sf::Vector2f m_position;
     bool m_controllable = true;
     bool m_blocking = false;
