@@ -9,10 +9,11 @@ RisingPhase::RisingPhase(float duration, float speed, float groundY)
 }
 
 std::unique_ptr<JumpPhaseBase> RisingPhase::update(Player& player, float dt) {
-    auto pos = player.getPosition();
+    /*auto pos = player.getPosition();
     pos.y -= m_speed * dt;
-    player.setPosition(pos);
-
+    player.setPosition(pos);*/
+    player.setDiraction(Input::PRESS_JUMP);
+    player.move(dt);
     if (m_clock.getElapsedTime().asSeconds() >= m_duration)
     {
         std::cout << "in Jumping::update, m_clock.getElapsedTime().asSeconds() >= m_duration\n";

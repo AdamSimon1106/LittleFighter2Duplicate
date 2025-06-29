@@ -7,6 +7,7 @@
 Player::Player(const sf::Vector2f pos, const std::string& name, float speed)
     : PlayableObject(pos, name),  m_state(std::make_unique<StandingState>(RELEASE_RIGHT))
 {
+	m_attack = Factory<AttackBehavior>::createAttackBehavior("h", nullptr, this);
     m_speed = speed;
     m_state->enter(*this);
     m_name = "player";
@@ -29,9 +30,9 @@ void Player::handleInput(sf::Event event)
 
 void Player::update(float dt)
 {
-    if (m_currentAnimationName != m_aniName) {
+    if (m_currentAnimationName != m_aniName + m_strategyName) {
         setAnimation(AnimationManager::getAnimation(m_aniName + m_strategyName, getTexture()));
-        m_currentAnimationName = m_aniName;
+        m_currentAnimationName = m_aniName + m_strategyName;
     }
     move(dt);
     m_state->update(*this, dt);
@@ -58,8 +59,7 @@ void Player::move(float dt)
     moveSprite(delta);
     if (m_heldObject)
     {
-        sf::Vector2f offset(20.f, -100.f);
-        m_heldObject->move(getPosition() + offset);
+        m_heldObject->move(getPosition());
     }
 
 }
@@ -73,42 +73,30 @@ void Player::setDiraction(Input input)
     {
     case PRESS_LEFT:
         m_direction.x = -1.f;
+		m_dir = Direction::LEFT;
        setScale(-1);
         break;
-
     case PRESS_RIGHT:
         m_direction.x = 1.f;
+        m_dir = Direction::RIGHT;
         setScale(1);
         break;
-
     case RELEASE_LEFT:
-        if (m_direction.x < 0.f)
-            m_direction.x = 0.f;
-        break;
-    case NONE:
     case RELEASE_RIGHT:
-        if (m_direction.x > 0.f)
-            m_direction.x = 0.f;
+        m_direction.x = 0.f;
         break;
     case PRESS_JUMP:
     case PRESS_UP:
         m_direction.y = -1.f;
         break;
-
+    case PRESS_FALLING:
     case RELEASE_UP:
-       // if (m_direction.y < 0.f)
+    case RELEASE_DOWN:
             m_direction.y = 0.f;
         break;
-
     case PRESS_DOWN:
         m_direction.y = 1.f;
         break;
-
-    case RELEASE_DOWN:
-      // if (m_direction.y > 0.f)
-            m_direction.y = 0.f;
-        break;
-
     default:
         break;
     }
@@ -156,22 +144,56 @@ void Player::setAttack(std::unique_ptr<AttackBehavior> attack)
     m_attack = std::move(attack);
 }
 
-void Player::pickUpObject(PickableObject& obj)
+void Player::pickUpObject(PickableObject* obj)
 {
-    m_heldObject = &obj;
+    m_heldObject = obj;
     //just for expirience. must do it nice
-    m_strategyName = "rock";
+    m_strategyName = obj->getName();
+    auto attack = Factory<AttackBehavior>::createAttackBehavior(m_strategyName, m_heldObject, this);
+    if (attack)
+    {
+        m_attack = std::move(attack);
+    }
+
 
     std::cout << m_aniName + m_strategyName << "\n";
     std::cout << " in Player::pickUpObject\n";
-
-    m_heldObject->setPosition(getPosition() + sf::Vector2f(20.f, -30.f));    
 }
 
-//void Player::setAniName(const std::string& name)
-//{
-//     m_aniName = name;
-//}
+void Player::setAniName(const std::string& name)
+{
+     m_aniName = name;
+}
+
+void Player::setStrategyName(const std::string& name)
+{
+    m_strategyName = name;
+}
+
+void Player::attack()
+{
+   
+    if (m_attack)
+    {
+        std::cout << "player attack\n";
+        m_attack->attack();
+    }
+	//std::cout << m_heldObject->getName() << "\n";
+    if (m_heldObject)
+    {
+        std::cout << "in player attack detuch object\n";
+        m_heldObject = nullptr;
+		
+        m_attack = Factory<AttackBehavior>::createAttackBehavior("h", nullptr, this);
+    }
+    
+
+}
+
+bool Player::isHoldingWaepon(PickableObject* obj) const
+{
+	return m_heldObject != nullptr;
+}
 
 bool Player::isAlive() const {
     return m_alive;

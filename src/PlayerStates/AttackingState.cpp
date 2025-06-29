@@ -6,25 +6,32 @@ std::unique_ptr<PlayerBaseState> AttackingState::handleInput(Input input)
 {
     switch (input)
     {
+
     case END_ATTACK:
         return std::make_unique<StandingState>(input);
         break;
-    
+	case PRESS_ATTACK:
+		return nullptr;
+		break;
+
     default:
         break;
     }
+	return nullptr; 
 }
 
 void AttackingState::enter(Player& player)
 {
     std::cout << "enter:: AttackingState\n";
+    player.setAniName("attacking");
+    player.attack();
+}
 
-    Animation attackAnim(player.getTexture(),
-        640, 0,       // שורת האנימציה של התקפה (לפי sprite sheet שלך)
-        80, 80,       // גודל פריים
-        2,            // 3 פריימים של תקיפה
-        0.1f,         // קצב מהיר יחסית
-        true);       // לא בלולאה – התקפה קורת פעם אחת
-
-    player.setAnimation(attackAnim);
+void AttackingState::update(Player& player, float dt)
+{
+    if (m_clock.getElapsedTime().asSeconds() >= m_attackDuration)
+    {
+        player.setStrategyName("");
+        player.setState(std::make_unique<StandingState>(Input::NONE));
+    }
 }

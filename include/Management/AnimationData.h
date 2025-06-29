@@ -19,9 +19,11 @@ inline const AnimationInfo JUMPING = { 0, 520, 80, 80, 4, 0.1f, false };
 
 inline const AnimationInfo JUMPING_WITH_ROCK = { 0, 520, 80, 80, 4, 0.1f, false };
 inline const AnimationInfo ATTACKING_WITH_ROCK = { 560, 160, 80, 80, 2, 0.1f, false };
-inline const AnimationInfo ATTACKING = { 0, 80, 80, 80, 4, 0.1f, true };
-inline const AnimationInfo KNIFE = { 0, 0, 40, 40, 1, 0.2f, false };
+inline const AnimationInfo ATTACKING = { 0, 80, 80, 80, 4, 0.1f, false };
+inline const AnimationInfo KNIFE = { 0, 0, 40, 40, 1, 0.2f, false};
 inline const AnimationInfo ROCK = { 0, 0, 58, 58, 1, 0.2f, false };
+inline const AnimationInfo ROCK_FLYING = { 0, 0, 58, 58, 4, 0.2f, true};
+
 inline const AnimationInfo ATTACKING_WITH_KNIFE = { 0, 0, 58, 58, 1, 0.2f, false };
 
 

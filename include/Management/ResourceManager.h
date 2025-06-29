@@ -30,7 +30,8 @@ public:
     sf::Music& getMusic(const std::string& name);
     const sf::Font& getFont(const std::string& name);
 
-    // Frees all loaded textures – call on shutdown or when reloading a level.
+    // Frees all 
+    // ed textures – call on shutdown or when reloading a level.
     void clear();
 
 private:

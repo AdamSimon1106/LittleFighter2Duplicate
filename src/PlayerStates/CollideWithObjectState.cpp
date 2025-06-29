@@ -7,7 +7,7 @@
 #include "Gameplay/Player.h"
 
 
-CollideWithObject::CollideWithObject(Input input, PickableObject& obj)
+CollideWithObject::CollideWithObject(Input input, PickableObject* obj)
 	:m_obj(obj)
 {
 	m_input = input;
@@ -18,8 +18,8 @@ std::unique_ptr<PlayerBaseState> CollideWithObject::handleInput(Input input)
 	if (input == Input::ADD_OBJ)
 	{
 		std::cout << "Handling ADD_OBJ\n";
-		m_pickupPending = true; 
-		return nullptr; 
+		m_pickupPending = true;
+		return nullptr;
 	}
 	switch (input)
 	{
@@ -37,14 +37,14 @@ std::unique_ptr<PlayerBaseState> CollideWithObject::handleInput(Input input)
 		return std::make_unique<JumpingState>(input);
 
 	}
-	
+
 	return nullptr;
 }
 
 void CollideWithObject::enter(Player& player)
 {
 	std::cout << "enter::CollideWithObject\n";
-	
+
 	//player.setDiraction(m_input);
 }
 
@@ -54,6 +54,6 @@ void CollideWithObject::update(Player& player, float dt)
 	{
 		player.pickUpObject(m_obj);
 		m_pickupPending = false;
-		
+		player.setState(std::make_unique<StandingState>(Input::NONE));
 	}
 }

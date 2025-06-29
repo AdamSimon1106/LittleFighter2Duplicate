@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "Management/ResourceManager.h"
 #include "Management/Animation.h"
+#include "Management/AnimationManager.h"
 #include "Factory/Factory.h"
 #include "iostream"
 
@@ -15,10 +16,11 @@ public:
 	void setAnimation(const Animation& anim);
 	void setPosition(const sf::Vector2f pos);
 	
-	void update(float dt);
+	virtual void update(float dt);
 	bool collide(Object& other)const;
 	sf::FloatRect getGlobalBounds();
 	sf::Vector2f getPosition()const;
+	void setScale(float scale);
 	sf::Sprite& getSprite();
 	const sf::Sprite& getSprite() const;
 

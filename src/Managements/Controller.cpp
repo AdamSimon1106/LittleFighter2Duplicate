@@ -15,7 +15,7 @@ Controller::Controller(sf::RenderWindow& window,
     m_players(std::move(players)),
     m_allies(std::move(allies))
 {   
-
+    AnimationManager::loadAnimations();
     // add pickable (rock)
     std::string objectLine = "r";
     m_level->addPickableObjects(objectLine);
@@ -80,6 +80,7 @@ void Controller::updateWorld(float deltaTime)
     // Update HUD/stats with current data
     //m_stats.update(m_players, m_allies, *m_level);
     //      TODO: create uptade() in HUD
+    m_level->handleCollisionsWithPlayer(*m_players.back()); // currently through level, need to transfer into controller
 
 }
 
