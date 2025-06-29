@@ -1,19 +1,18 @@
 #pragma once
-#include "../include/States/IState.h"
-#include "../include/States/InGameState.h"
-#include "../include/UI/Background.h"
-#include "../include/UI/Button.h"
-#include "../include/Management/GameManager.h"
+#include "States/IState.h"
+#include "States/InGameState.h"
+#include "UI/Background.h"
+#include "UI/Button.h"
+#include "Management/GameManager.h"
 #include "Management/ResourceManager.h"
-
+#include "Objects/PlayableObject.h"
 #include <iostream>
 #include <stdexcept>
 #include <memory>
 
 InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager),
 																			m_controller(window, std::make_unique<Level>("lvl1bg", sf::Vector2f(m_window.getSize())), 
-																			std::vector<std::shared_ptr<Player>>{},
-																			std::vector<std::shared_ptr<Ally>>{})
+																			std::vector<std::shared_ptr<PlayableObject>>{})
 {
 	
 

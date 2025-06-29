@@ -8,12 +8,10 @@
 
 Controller::Controller(sf::RenderWindow& window,
     std::unique_ptr<Level> level,
-    std::vector<std::shared_ptr<Player>> players,
-    std::vector<std::shared_ptr<Ally>> allies)
+    std::vector<std::shared_ptr<PlayableObject>> players)
     : m_window(window),
     m_level(std::move(level)),
-    m_players(std::move(players)),
-    m_allies(std::move(allies))
+    m_players(std::move(players))
 {   
     AnimationManager::loadAnimations();
     // add pickable (rock)
@@ -28,21 +26,14 @@ Controller::Controller(sf::RenderWindow& window,
     // creating user's player
     m_players.push_back(std::make_shared<Player>(sf::Vector2f(1000, 800), "davis_ani", 320.f));
     // creating ally
-    auto ally = std::make_shared<Ally>(sf::Vector2f(800, 40), "davis_ani", 100.f);
-    auto allyTwo = std::make_shared<Ally>(sf::Vector2f(900, 700), "davis_ani", 100.f);
-    auto allyThree = std::make_shared<Ally>(sf::Vector2f(380, 580), "davis_ani", 100.f);
-
-    m_allies.push_back(ally);
-    m_allies.push_back(allyTwo);
-    m_allies.push_back(allyThree);
-
+    m_players.push_back(std::make_shared<Ally>(sf::Vector2f(800, 40), "davis_ani", 100.f));
+    m_players.push_back(std::make_shared<Ally>(sf::Vector2f(900, 700), "davis_ani", 100.f));
+    m_players.push_back(std::make_shared<Ally>(sf::Vector2f(380, 580), "davis_ani", 100.f));
 
     updateComputerPlayerTargets();
     auto target = m_enemies[0]->getTarget();
 
-    //      TODO: initialize HUD (m_stats)
-    //std::string enemiesLine = "b1 h1";
-    //m_level->addSquad(enemiesLine);
+    //TOOO: Add HUD
 }
 
 void Controller::handleInput(sf::Event ev)
@@ -61,11 +52,6 @@ void Controller::updateWorld(float deltaTime)
         player->update(deltaTime);
     }
 
-    // Update all AI-controlled allies
-    for (auto& ally : m_allies)
-    {
-       ally->update(deltaTime);      //TODO: update() in Ally
-    }
     for (auto& enemy : m_enemies)
     {
         enemy->update(deltaTime);
@@ -76,11 +62,6 @@ void Controller::updateWorld(float deltaTime)
     }
 
     updateComputerPlayerTargets();
-
-    // Update the level itself (enemies, objects, etc.)
-     //m_level->update(deltaTime);
-    //      TODO: create uptade() in Level - needs to update m_enemies!
-
     // Update HUD/stats with current data
     //m_stats.update(m_players, m_allies, *m_level);
     //      TODO: create uptade() in HUD
@@ -108,15 +89,7 @@ void Controller::checkLevelEndConditions()
             break;
         }
     }
-    for (const auto& ally : m_allies)
-    {
-        if (ally->isAlive())
-        {
-            allPlayersDefeated = false;
-            break;
-        }
-    }
-
+   
     if (allPlayersDefeated)
     {
         m_levelFinished = true;
@@ -137,17 +110,8 @@ void Controller::render()
         player->draw(m_window);
     }
 
-    // Draw AI allies
-    for (const auto& ally : m_allies)
-    {
-        //m_window.draw(*ally);        TODO: draw() in Ally
-
-        ally->draw(m_window);
-    }
-
     for (const auto& enemy : m_enemies)
     {
-
         enemy->draw(m_window);
     }
     // Draw HUD
@@ -167,7 +131,7 @@ void Controller::render()
 //    render();
 //}
 
-void Controller::updateComputerPlayerTargets() {
+void Controller::updateComputerPlayerTargets() { 
 
     // Update targets for allies (their enemies are the enemies from Level)
     for (auto& ally : m_allies) {
