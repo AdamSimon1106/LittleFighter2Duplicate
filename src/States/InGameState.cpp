@@ -11,7 +11,7 @@
 #include <memory>
 
 InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager),
-																			m_controller(window, std::make_unique<Level>("lvl1bg"), 
+																			m_controller(window, std::make_unique<Level>("lvl1bg", sf::Vector2f(m_window.getSize())), 
 																			std::vector<std::shared_ptr<Player>>{},
 																			std::vector<std::shared_ptr<Ally>>{})
 {
