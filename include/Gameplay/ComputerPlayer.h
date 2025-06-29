@@ -4,10 +4,10 @@
 
 #include "ComputerPlayerState/ComputerPlayerState.h"
 
-class ComputerPlayer : public PlayableObject{
+class ComputerPlayer : public PlayableObject {
 public:
 
-    ComputerPlayer(const sf::Vector2f pos, const std::string& name); 
+    ComputerPlayer(const sf::Vector2f pos, const std::string& name);
     virtual ~ComputerPlayer() = default;
     virtual void update(float dt) override;
 
@@ -26,7 +26,7 @@ public:
     PlayableObject* getTarget();
     void setBlocking(bool blocking);
     void setControllable(bool control);
-    void performAttack(PlayableObject &target);
+    void performAttack(PlayableObject& target);
     void pickUp(PickableObject& pickable);
 
 protected:
