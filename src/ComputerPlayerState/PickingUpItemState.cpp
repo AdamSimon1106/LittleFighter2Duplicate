@@ -10,15 +10,16 @@ PickingUpItemState::PickingUpItemState(std::shared_ptr<PickableObject> item)
 
 void PickingUpItemState::enter(ComputerPlayer& player) {
     std::cout << "enter:: PickingUpItemState\n";
+    player.setAniName("walking");
 
-    Animation pickingUpItemAnim(player.getTexture(),
-        480, 0,          // x, y
-        80, 80,        // width, height
-        2,             // מספר פריימים
-        0.2f,
-        false);
+    //Animation pickingUpItemAnim(player.getTexture(),
+    //    480, 0,          // x, y
+    //    80, 80,        // width, height
+    //    2,             // מספר פריימים
+    //    0.2f,
+    //    false);
 
-    player.setAnimation(pickingUpItemAnim);
+    //player.setAnimation(pickingUpItemAnim);
     //player.setDiraction(m_input); 
 }
 
