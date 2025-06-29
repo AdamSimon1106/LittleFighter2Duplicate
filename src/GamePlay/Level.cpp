@@ -93,7 +93,7 @@ void Level::update(float dt)
 std::vector<Enemy*> Level::getAllEnemies() {
     std::vector<Enemy*> enemies;
 
-    Squad& curSquad = m_enemies[(int)m_faze];
+    Squad& curSquad = m_enemies[(int)m_phase];
         for (auto& enemyPtr : curSquad.getEnemies()) {
             if (enemyPtr) {
                 enemies.push_back(enemyPtr.get()); // Convert unique_ptr to raw pointer

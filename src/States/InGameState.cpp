@@ -13,7 +13,7 @@
 InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IState(window, manager),
 
 																 m_level("lvl1bg", static_cast<sf::Vector2f> (window.getSize())),
-																 m_player(sf::Vector2f(50, 600), "davis_ani", 300.f),
+																 //m_player(sf::Vector2f(50, 600), "davis_ani", 300.f),
 																 m_controller(window, std::make_unique<Level>("lvl1bg", static_cast<sf::Vector2f>(window.getSize())),
 																 std::vector<std::shared_ptr<Player>>{},
 																 std::vector<std::shared_ptr<Ally>>{})
@@ -32,9 +32,9 @@ InGameState::InGameState(sf::RenderWindow& window, GameManager& manager) : IStat
 
 void InGameState::update(sf::Time deltaTime) {
     float dt = deltaTime.asSeconds();
-    m_level.update(dt);
+    //m_level.update(dt);
 	//m_player.update(dt);
-    m_level.handleCollisionsWithPlayer(m_player);
+    //m_level.handleCollisionsWithPlayer(m_player);
 	m_controller.updateWorld(dt); // for later. dont let it stay hard coded
     
    
