@@ -73,7 +73,7 @@
 #include "Objects/PickableObject.h"
 #include "PlayerStates/CollideWithObjectState.h"
 #include "PlayerStates/JumpingState.h"
-#include "PlayerStates/AttackingState.h"
+#include "PlayerStates/AttackState.h"
 
 #include <iostream>
 #include <typeindex>
@@ -91,7 +91,7 @@ void playerPickableObject(Object& playerObj, Object& pickableObj)
     auto& player = static_cast<Player&>(playerObj);
     auto& object = static_cast<T&>(pickableObj);
     //not so nice!!!!!
-	if (typeid(*player.getState()) == typeid(JumpingState) || typeid(*player.getState()) == typeid(AttackingState))
+	if (typeid(*player.getState()) == typeid(JumpingState) || typeid(*player.getState()) == typeid(AttackState))
 	{
 		return;
 	}

@@ -8,7 +8,7 @@ AttackingState::AttackingState(PlayableObject* target)
     : m_target(std::move(target)) {}
 
 void AttackingState::enter(ComputerPlayer& player) {
-    std::cout << "enter:: AttackingState\n";
+    //std::cout << "enter:: AttackingState\n";
 
     //Animation attackingAnim(player.getTexture(),
     //    80, 0,          // x, y
@@ -36,13 +36,14 @@ void AttackingState::update(ComputerPlayer& player, float deltaTime) {
     player.setAniName("attacking");
 
     sf::Vector2f playerPos = player.getPosition();
+
     sf::Vector2f targetPos = m_target->getPosition();
- 
+
 
     float distance = std::sqrt(std::pow(playerPos.x - targetPos.x, 2) +
         std::pow(playerPos.y - targetPos.y, 2));
-    std::cout << targetPos.x << std::endl;
-    std::cout << "[AttackingState] " << player.getName() << " distance to " << m_target->getName() << ":" << distance << std::endl;
+    //std::cout << targetPos.x << std::endl;
+    //std::cout << "[AttackingState] " << player.getName() << " distance to " << m_target->getName() << ":" << distance << std::endl;
 
     // Check if still in attack range
     const float attackRange = 150.f;

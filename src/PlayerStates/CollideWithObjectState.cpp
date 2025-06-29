@@ -3,7 +3,7 @@
 #include "PlayerStates/JumpingState.h"
 #include "PlayerStates/WalkingState.h"
 #include "PlayerStates/StandingState.h"
-#include "PlayerStates/AttackingState.h"
+#include "PlayerStates/AttackState.h"
 #include "Gameplay/Player.h"
 
 

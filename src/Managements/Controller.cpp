@@ -17,7 +17,7 @@ Controller::Controller(sf::RenderWindow& window,
 {   
     AnimationManager::loadAnimations();
     // add pickable (rock)
-    std::string objectLine = "r";
+    std::string objectLine = "r r k";
     m_level->addPickableObjects(objectLine);
     // add enemies (one bandit)
     std::string sq = "b3";
@@ -69,6 +69,10 @@ void Controller::updateWorld(float deltaTime)
     for (auto& enemy : m_enemies)
     {
         enemy->update(deltaTime);
+    }
+    for (auto& obj : m_pickables)
+    {
+        obj->update(deltaTime);
     }
 
     updateComputerPlayerTargets();

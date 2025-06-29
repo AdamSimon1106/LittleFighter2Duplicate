@@ -7,11 +7,11 @@
 
 ApproachingEnemyState::ApproachingEnemyState(PlayableObject* target)
     : m_target(std::move(target)) {
-    std::cout << target->getPosition().x << "." << target->getPosition().y << std::endl;
+    //std::cout << target->getPosition().x << "." << target->getPosition().y << std::endl;
 }
 
 void ApproachingEnemyState::enter(ComputerPlayer& player) {
-    std::cout << "enter:: ApproachingEnemyState\n";
+    //std::cout << "enter:: ApproachingEnemyState\n";
     
 
     //Animation approachingEnemyAnim(player.getTexture(),

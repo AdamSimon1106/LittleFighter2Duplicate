@@ -19,7 +19,7 @@ void Enemy::update(float dt)
         setAnimation(AnimationManager::getAnimation(m_aniName + m_strategyName, getTexture()));
         m_currentAnimationName = m_aniName;
     }
-    std::cout << "my target is: " << m_target->getName() << std::endl;
+    //std::cout << "my target is: " << m_target->getName() << std::endl;
     updateScale();
     updateAnimation(dt);
     apllySprite();

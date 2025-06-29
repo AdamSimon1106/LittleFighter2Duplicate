@@ -1,8 +1,10 @@
-#include "PlayerStates/AttackingState.h"
+#include "PlayerStates/AttackState.h"
 #include"PlayerStates/StandingState.h"
 #include "GamePlay/Player.h"
+#include <iostream>
 
-std::unique_ptr<PlayerBaseState> AttackingState::handleInput(Input input)
+
+std::unique_ptr<PlayerBaseState> AttackState::handleInput(Input input)
 {
     switch (input)
     {
@@ -20,14 +22,17 @@ std::unique_ptr<PlayerBaseState> AttackingState::handleInput(Input input)
 	return nullptr; 
 }
 
-void AttackingState::enter(Player& player)
+void AttackState::enter(Player& player)
 {
-    std::cout << "enter:: AttackingState\n";
+    std::cout << "enter:: AttackingState Player\n";
+    
     player.setAniName("attacking");
+    std::cout << "after setAniName\n";
     player.attack();
+    std::cout << "after attack()\n";
 }
 
-void AttackingState::update(Player& player, float dt)
+void AttackState::update(Player& player, float dt)
 {
     if (m_clock.getElapsedTime().asSeconds() >= m_attackDuration)
     {
