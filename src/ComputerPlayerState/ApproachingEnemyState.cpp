@@ -37,7 +37,7 @@ void ApproachingEnemyState::update(ComputerPlayer& player, float deltaTime) {
     float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
     //std::cout << "[ApproachingEnemyState] " << player.getName() << " distance to " << m_target->getName() << ":" << distance << std::endl;
 
-    if (distance < 60.f /* && (playerPos.x - target->getPosition().x) == 0.f*/) {
+    if (distance < 50.f /* && (playerPos.x - target->getPosition().x) == 0.f*/) {
         player.changeState(std::make_unique<AttackingState>(m_target));
         return;
     }
