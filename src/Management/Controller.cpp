@@ -21,7 +21,7 @@ Controller::Controller(sf::RenderWindow& window,
     // === this section is hard coded. need to be done in Level ===
     // add pickable (rock)
 
-    std::string objectLine = "r";
+    std::string objectLine = "r r r";
 
     m_level->addPickableObjects(objectLine);
     // add enemies (one bandit)
@@ -38,12 +38,12 @@ Controller::Controller(sf::RenderWindow& window,
     // creating ally
 
     auto ally = std::make_shared<Ally>(sf::Vector2f(800, 100), "davis_ani",60.f);
-    //auto allyTwo = std::make_shared<Ally>(sf::Vector2f(900, 700), "davis_ani", 60.f);
-    //auto allyThree = std::make_shared<Ally>(sf::Vector2f(380, 580), "davis_ani", 60.f);
+    auto allyTwo = std::make_shared<Ally>(sf::Vector2f(900, 700), "davis_ani", 60.f);
+    auto allyThree = std::make_shared<Ally>(sf::Vector2f(380, 580), "davis_ani", 60.f);
 
     m_allies.push_back(ally);
-    //m_allies.push_back(allyTwo);
-    //m_allies.push_back(allyThree);
+    m_allies.push_back(allyTwo);
+    m_allies.push_back(allyThree);
 
 
 
