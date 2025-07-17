@@ -1,10 +1,10 @@
 #pragma once
 #include "PlayableObjectStates/PlayerStates/PlayerBaseState.h"
 
-class WalkingState : public PlayerBaseState
+class RunningState : public PlayerBaseState
 {
 public:
-	WalkingState(Input input);
+	RunningState(Input input);
 	virtual std::unique_ptr<PlayableObjectState> handleInput(Input input) override;
 	virtual void enter(PlayableObject& player) override;
 	virtual void update(PlayableObject& player, float dt) override {};
@@ -12,11 +12,8 @@ public:
 private:
 
 	void onHandsAttack(PlayableObject& player) override {};
-	void onStoneHit(PlayableObject& player) override;
+	void onStoneHit(PlayableObject& player) override {};
 	void onExplosion(PlayableObject& player) override {};
 
-	Input m_input;
-	sf::Clock m_clock;
-	bool m_inputReleased = false;
-	int m_tapStage = 1;
+	
 };

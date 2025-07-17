@@ -93,8 +93,6 @@ void Level::update(float dt)
     //}
 
     std::erase_if(m_pickables, [](std::shared_ptr<PickableObject>& obj) {
-        std::cout << "im here in Level erase_if\n";
-        std::cout << obj->getName() << " isUsed: " << obj->isUsed() << "\n";
         return obj->isUsed();
         });
         

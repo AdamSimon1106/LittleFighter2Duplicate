@@ -30,20 +30,20 @@ Controller::Controller(sf::RenderWindow& window,
 
     m_level->addPickableObjects(objectLine);
     // add enemies (one bandit)
-    std::string sq = "b4";
+    std::string sq = "b1";
     m_level->addSquad(sq);
 
     // creating ally
 
     auto ally = std::make_shared<Ally>(sf::Vector2f(100, 450), "davis_ani",60.f);
-    auto allyTwo = std::make_shared<Ally>(sf::Vector2f(100, 550), "davis_ani", 60.f);
+   /* auto allyTwo = std::make_shared<Ally>(sf::Vector2f(100, 550), "davis_ani", 60.f);
     auto allyThree = std::make_shared<Ally>(sf::Vector2f(100, 650), "davis_ani", 60.f);
-    auto allyFour = std::make_shared<Ally>(sf::Vector2f(100, 750), "davis_ani", 60.f);
+    auto allyFour = std::make_shared<Ally>(sf::Vector2f(100, 750), "davis_ani", 60.f);*/
 
     m_allies.push_back(ally);
-    m_allies.push_back(allyTwo);
+    /*m_allies.push_back(allyTwo);
     m_allies.push_back(allyThree);
-    m_allies.push_back(allyFour);
+    m_allies.push_back(allyFour);*/
 
 
 
@@ -99,8 +99,6 @@ void Controller::updateWorld(float deltaTime)
     }
 	m_level->update(deltaTime);
     std::erase_if(m_pickables, [](std::shared_ptr<PickableObject>& obj) {
-		std::cout << "im here in Controller erase_if\n";
-		std::cout << obj->getName() << " isUsed: " << obj->isUsed() << "\n";
         return obj->isUsed();
         });
 

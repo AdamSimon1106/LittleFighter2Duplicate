@@ -85,7 +85,7 @@ void enemyAttacked(Object& playerObj, std::shared_ptr<PickableObject> pickableOb
     }
     else if (pickableObj->isExploded())
     {
-        enemy.handleCommand((pickableObj->getHitCommand()));
+        enemy.handleCommand((pickableObj->getHitCommand()->clone()));
     }
 
 }
@@ -133,17 +133,17 @@ HitMap initializeCollisionMap()
     //map[{ typeid(Ally), typeid(Rock), typeid(Bandit)}] = &enemyAttackingAlly;
     //map[{ typeid(Player), typeid(Rock), typeid(Bandit)}] = &playerAttackingEnemy;
     //Box
-    map[{ typeid(Ally), typeid(Box), typeid(Ally)}] = &friendlyFire;
-    map[{ typeid(Ally), typeid(Box), typeid(Player)}] = &friendlyFire;
-    map[{ typeid(Player), typeid(Box), typeid(Ally)}] = &friendlyFire;
-    map[{ typeid(Bandit), typeid(Box), typeid(Bandit)}] = &friendlyFire;
-    map[{ typeid(Player), typeid(Box), typeid(Player)}] = &friendlyFire;
-    //Rock
-    map[{ typeid(Ally), typeid(Rock), typeid(Ally)}] = &friendlyFire;
-    map[{ typeid(Ally), typeid(Rock), typeid(Player)}] = &friendlyFire;
-    map[{ typeid(Player), typeid(Rock), typeid(Ally)}] = &friendlyFire;
-    map[{ typeid(Bandit), typeid(Rock), typeid(Bandit)}] = &friendlyFire;
-    map[{ typeid(Player), typeid(Rock), typeid(Player)}] = &friendlyFire;
+    //map[{ typeid(Ally), typeid(Box), typeid(Ally)}] = &friendlyFire;
+    //map[{ typeid(Ally), typeid(Box), typeid(Player)}] = &friendlyFire;
+    //map[{ typeid(Player), typeid(Box), typeid(Ally)}] = &friendlyFire;
+    //map[{ typeid(Bandit), typeid(Box), typeid(Bandit)}] = &friendlyFire;
+    //map[{ typeid(Player), typeid(Box), typeid(Player)}] = &friendlyFire;
+    ////Rock
+    //map[{ typeid(Ally), typeid(Rock), typeid(Ally)}] = &friendlyFire;
+    //map[{ typeid(Ally), typeid(Rock), typeid(Player)}] = &friendlyFire;
+    //map[{ typeid(Player), typeid(Rock), typeid(Ally)}] = &friendlyFire;
+    //map[{ typeid(Bandit), typeid(Rock), typeid(Bandit)}] = &friendlyFire;
+    //map[{ typeid(Player), typeid(Rock), typeid(Player)}] = &friendlyFire;
     
     
     return map;

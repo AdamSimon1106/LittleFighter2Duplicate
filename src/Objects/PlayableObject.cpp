@@ -215,6 +215,7 @@ void PlayableObject::onHandsAttack()
 }
 void PlayableObject::onStoneHit()
 {
+	moveSprite({ 100.f, 0.f }); // simulate knockback effect
     if (m_hp <= 0) {
         m_hp = 0;
         m_potentialHp = 0;
@@ -258,16 +259,6 @@ void PlayableObject::reduceHp(int amountToReduce)
     m_hp -= amountToReduce;
     m_potentialHp -= amountToReduce / 3;
 }
-
-//bool PlayableObject::isAttacked() const
-//{
-//    return m_underAttack;
-//}
-
-//void PlayableObject::attack()
-//{
-//    m_underAttack = true;
-//}
 
 void PlayableObject::tookItem()
 {
