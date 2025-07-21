@@ -1,0 +1,9 @@
+{
+  "name": "deep",
+  "description": "the yellow sowrdman",
+  "hp": 500,
+  "speed": 220,
+  "profile": "characters/deep_f",
+  "icon": "characters/deep_s",
+  "animation": "characters/deep_0"
+}

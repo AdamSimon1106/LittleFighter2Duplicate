@@ -5,6 +5,7 @@
 #include "Gameplay/Squad.h"
 #include "Objects/PickableObject.h"
 #include "UI/Background.h"
+#include "Management/LevelLoader.h"
 class Player;
 
 enum class Phase { Phase1, Phase2, Phase3 };
@@ -17,12 +18,15 @@ public:
 	void render(sf::RenderWindow& window);
 	void update(float dt);
 	bool areAllEnemiesDefeated() const;
-	void handleCollisionsWithPlayer(Player& player);
-
+	std::vector<std::shared_ptr<Enemy>> getAllEnemies();
+	std::vector<std::shared_ptr<PickableObject>> getAllObjects();
+	void handleCollisionsWithPlayer(PlayableObject& player);
+	int numOfStages() { return m_enemies.size(); };
 	
 private:
+	sf::Vector2f getRandomBoundedPosition(float xMin, float xMax, float yMin, float yMax);
 	std::vector<Squad> m_enemies;
-	std::vector<std::unique_ptr<PickableObject>> m_pickables;
-	Phase m_phase = Phase::Phase1;
+	std::vector<std::shared_ptr<PickableObject>> m_pickables;
+	int m_phase = -1;
 	Background m_backgorund;
 };

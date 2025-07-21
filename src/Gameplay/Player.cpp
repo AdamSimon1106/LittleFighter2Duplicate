@@ -1,12 +1,34 @@
 #include "Gameplay/Player.h"
-#include <algorithm>            // std::clamp
-#include "PlayerStates/StandingState.h"
-#include "PlayerStates/PlayerBaseState.h"
+#include <algorithm>           
+#include "PlayableObjectStates/PlayerStates/StandingState.h"
+#include "PlayableObjectStates/PlayerStates/PlayerBaseState.h"
+#include "PlayableObjectStates/ComputerPlayerState/DeadState.h"
+#include "PlayableObjectStates/PlayerStates/PlayerDeadState.h"
 #include "Management/AnimationManager.h"
 
 Player::Player(const sf::Vector2f pos, const std::string& name, float speed)
-    : PlayableObject(pos, name), m_speed(speed), m_state(std::make_unique<StandingState>(RELEASE_RIGHT))
+    : PlayableObject(pos, name)
 {
+    resetHP();
+	m_attack = Factory<AttackBehavior>::createAttackBehavior("h", nullptr, this);
+    m_speed = speed;
+    m_name = "player";
+    this->setState(std::make_unique<StandingState>(RELEASE_RIGHT));
+    m_state->enter(*this);
+
+}
+
+Player::Player(PlayerData data) : PlayableObject(data.m_animationSheet,data.m_chracterIcon)
+{
+    setPosition(getRandomYPosition(50, Y_BOUND + 20.f, Y_BOUND + BOUNDS_HEIGHT - 20.f));
+    m_prevPosition = getPosition();
+    m_hp = data.m_hp;
+    m_potentialHp = data.m_hp;
+    m_attack = Factory<AttackBehavior>::createAttackBehavior("h", nullptr, this);
+    m_speed = data.m_speed;
+    m_name = data.m_name;
+    m_icon = data.m_chracterIcon;
+    this -> setState(std::make_unique<StandingState>(RELEASE_RIGHT));
     m_state->enter(*this);
 }
 
@@ -27,97 +49,29 @@ void Player::handleInput(sf::Event event)
 
 void Player::update(float dt)
 {
-    if (m_currentAnimationName != m_aniName) {
+    if (m_hitCooldown > 0.f)
+        m_hitCooldown -= dt;
+
+    Object::update(dt);
+    if (m_currentAnimationName != m_aniName + m_strategyName) {
         setAnimation(AnimationManager::getAnimation(m_aniName + m_strategyName, getTexture()));
-        m_currentAnimationName = m_aniName;
+        m_currentAnimationName = m_aniName + m_strategyName;
     }
     move(dt);
     m_state->update(*this, dt);
     updateAnimation(dt);
     apllySprite();
+    updateHp();
     
 }
 
-void Player::move(float dt)
-{
-    sf::Vector2f velocity = m_direction;
 
-    // Normalize diagonal movement (to prevent faster diagonal movement)
-    if (velocity.x != 0.f && velocity.y != 0.f)
-    {
-        constexpr float invSqrt2 = 0.70710678118f;
-        velocity.x *= invSqrt2;
-        velocity.y *= invSqrt2;
-    }
-
-    // Apply speed and delta time
-    sf::Vector2f delta(velocity.x * m_speed * dt,
-        velocity.y * m_speed * dt);  
-    moveSprite(delta);
-    if (m_heldObject)
-    {
-        sf::Vector2f offset(20.f, -100.f);
-        m_heldObject->move(getPosition() + offset);
-    }
-
-}
-
-
-
-void Player::setDiraction(Input input)
-{
-    std::cout << input << "\n";
-    switch (input)
-    {
-    case PRESS_LEFT:
-        m_direction.x = -1.f;
-       setScale(-1);
-        break;
-
-    case PRESS_RIGHT:
-        m_direction.x = 1.f;
-        setScale(1);
-        break;
-
-    case RELEASE_LEFT:
-        if (m_direction.x < 0.f)
-            m_direction.x = 0.f;
-        break;
-    case NONE:
-    case RELEASE_RIGHT:
-        if (m_direction.x > 0.f)
-            m_direction.x = 0.f;
-        break;
-    case PRESS_JUMP:
-    case PRESS_UP:
-        m_direction.y = -1.f;
-        break;
-
-    case RELEASE_UP:
-       // if (m_direction.y < 0.f)
-            m_direction.y = 0.f;
-        break;
-
-    case PRESS_DOWN:
-        m_direction.y = 1.f;
-        break;
-
-    case RELEASE_DOWN:
-      // if (m_direction.y > 0.f)
-            m_direction.y = 0.f;
-        break;
-
-    default:
-        break;
-    }
-}
 
 // -----------------------------------------------------------------------------
 // Collision stub (will be expanded later)
 // -----------------------------------------------------------------------------
 void Player::handleCollision()
 {
-    // TODO; Not for now. (must have to compile properly)
 }
 
 void Player::setSpeed(float speed)
@@ -125,10 +79,7 @@ void Player::setSpeed(float speed)
     m_speed = speed;
 }
 
-float Player::getSpeed() const
-{
-    return m_speed;
-}
+
 
 // Keep the sprite fully inside the window bounds
 void Player::clampToWindow(const sf::Vector2u& windowSize)
@@ -146,34 +97,69 @@ void Player::clampToWindow(const sf::Vector2u& windowSize)
    setPosition(pos);
 }
 
-void Player::setState(std::unique_ptr<PlayerBaseState> state)
-{
-    m_state = std::move(state);
-    m_state->enter(*this);
-}
 
 void Player::setAttack(std::unique_ptr<AttackBehavior> attack)
 {
     m_attack = std::move(attack);
 }
 
-void Player::pickUpObject(PickableObject& obj)
-{
-    m_heldObject = &obj;
-    //just for expirience. must do it nice
-    m_strategyName = "rock";
-
-    std::cout << m_aniName + m_strategyName << "\n";
-    std::cout << " in Player::pickUpObject\n";
-
-    m_heldObject->setPosition(getPosition() + sf::Vector2f(20.f, -30.f));    
-}
 
 void Player::setAniName(const std::string& name)
 {
      m_aniName = name;
 }
 
+void Player::onStoneHit()
+{
+    moveSprite({ static_cast<float>(m_xdirHit) * 100, 0.f });
+    if (m_hp <= 0) {
+        m_hp = 0;
+        m_potentialHp = 0;
+        setState(std::make_unique<PlayerDeadState>());
+    }
+    m_state->onStoneHit(*this);
+}
+
+void Player::onBoxHit()
+{
+    moveSprite({ static_cast<float>(m_xdirHit) * 100, 0.f });
+    if (m_hp <= 0) {
+        m_hp = 0;
+        m_potentialHp = 0;
+        setState(std::make_unique<PlayerDeadState>());
+    }
+    m_state->onBoxHit(*this);
+}
+
+void Player::onHandsAttack()
+{
+
+    if (m_hp <= 0) {
+        m_hp = 0;
+        m_potentialHp = 0;
+        setState(std::make_unique<PlayerDeadState>());
+    }
+    m_state->onHandsAttack(*this);
+    std::cout << typeid(*m_state).name() << "\n";
+}
+
+void Player::onExplosion()
+{
+    moveSprite({ static_cast<float>(m_direction.x) * 100, 0.f });
+    if (m_hp <= 0) {
+        m_hp = 0;
+        m_potentialHp = 0;
+        setState(std::make_unique<PlayerDeadState>());
+    }
+    m_state->onExplosion(*this);
+}
+
+
 bool Player::isAlive() const {
     return m_alive;
+}
+
+void Player::resetHP() {
+    m_hp = PLAYER_HP;
+    m_potentialHp = PLAYER_HP;
 }

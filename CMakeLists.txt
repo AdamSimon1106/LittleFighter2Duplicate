@@ -14,6 +14,9 @@ include(cmake/CompilerSettings.cmake)
 # Create the main executable target early so subdirectories can modify it
 add_executable(${CMAKE_PROJECT_NAME})
 
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/libs)
+
+
 # Debug sanitizer for memory issues (use only on non-MSVC)
 target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE $<$<CONFIG:DEBUG>:-fsanitize=address>)
 if (NOT MSVC)
@@ -24,6 +27,29 @@ endif()
 add_subdirectory(include)
 add_subdirectory(src)
 add_subdirectory(resources)
+
+# Set the source and destination paths
+set(DATA_SOURCE_DIR "${CMAKE_SOURCE_DIR}/data")
+set(DATA_BINARY_DIR "${CMAKE_BINARY_DIR}/data")
+
+# Copy the entire data folder before building
+add_custom_command(
+    TARGET ${CMAKE_PROJECT_NAME} PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${DATA_SOURCE_DIR} ${DATA_BINARY_DIR}
+    COMMENT "Copying all data files to build directory"
+)
+# Set the source and destination paths
+set(LEVEL_SOURCE_DIR "${CMAKE_SOURCE_DIR}/levelsData")
+set(LEVEL_BINARY_DIR "${CMAKE_BINARY_DIR}/levelsData")
+
+# Copy the entire data folder before building
+add_custom_command(
+    TARGET ${CMAKE_PROJECT_NAME} PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${LEVEL_SOURCE_DIR} ${LEVEL_BINARY_DIR}
+    COMMENT "Copying all data files to build directory"
+)
 
 # SFML location and setup
 set(SFML_LOCATION "C:/SFML/SFML-2.6.1")

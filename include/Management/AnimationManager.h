@@ -3,7 +3,7 @@
 #include <map>
 #include <string>
 #include "Animation.h"
-#include "AnimationData.h"  // כי שם יש את AnimationInfo
+#include "AnimationData.h"  
 
 class AnimationManager {
 public:

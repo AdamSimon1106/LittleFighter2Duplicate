@@ -1,0 +1,9 @@
+{
+  "name": "woody",
+  "description": "Gritty veteran who can teleport (??)",
+  "hp": 500,
+  "speed": 220,
+  "profile": "characters/woody_f",
+  "icon": "characters/woody_s",
+  "animation": "characters/woody_0"
+}

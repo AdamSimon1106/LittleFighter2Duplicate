@@ -11,7 +11,7 @@ public:
     void update(float deltaTime);
     void applyToSprite(sf::Sprite& sprite) const;
     void reset();
-
+    sf::Vector2f getCurrentSize() const;
 private:
     const sf::Texture* texture;
     int x, y, width, height;

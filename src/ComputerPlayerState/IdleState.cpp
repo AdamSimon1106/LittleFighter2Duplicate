@@ -1,35 +1,55 @@
-//#include "ComputerPlayerState/IdleState.h"
-//#include "GamePlay/ComputerPlayer.h"
-//#include "ComputerPlayerState/ApproachingEnemyState.h" // the next state
-//#include <cmath> // distance calculation
-//
-//void IdleState::enter(ComputerPlayer& player) {
-//    // Optional: reset animation or internal timer
-//    player.setAnimation("Idle");
-//}
-//
-//void IdleState::update(ComputerPlayer& player, float deltaTime) {
-//    // 1. Scan for closest enemy (pseudo code)
-//    auto enemies = player.getKnownEnemies();
-//    float closestDist = std::numeric_limits<float>::max(); // init to largest float number
-//    std::shared_ptr<PlayableObject> closestEnemy = nullptr;
-//
-//    for (const auto& enemy : enemies) {
-//        float dist = distance(player.getPosition(), enemy->getPosition());
-//        if (dist < closestDist) {
-//            closestDist = dist;
-//            closestEnemy = enemy;
-//        }
-//    }
-//
-//    // 2. If enemy is close enough, change to Approaching state
-//    if (closestEnemy && closestDist < 300.f) { // threshold distance
-//        player.changeState(std::make_unique<ApproachingEnemyState>(closestEnemy));
-//    }
-//
-//    // 3. Otherwise, stay idle
-//}
-//
-//void IdleState::exit(ComputerPlayer& player) {
-//    // Optional: stop idle animation, log transition, etc.
-//}
+#include "PlayableObjectStates/ComputerPlayerState/IdleState.h"
+#include "GamePlay/ComputerPlayer.h"  
+#include "PlayableObjectStates/ComputerPlayerState/ApproachingEnemyState.h" // the next state
+#include <cmath> // distance calculation
+#include "PlayableObjectStates/ComputerPlayerState/PickingUpItemState.h"
+#include "PlayableObjectStates/ComputerPlayerState/GotHitState.h"
+#include "PlayableObjectStates/ComputerPlayerState/KnockedDownState.h"
+#include "PlayableObjectStates/ComputerPlayerState/BlockingState.h"
+
+
+void IdleState::enter(PlayableObject& player) {
+
+    player.setAniName("standing");
+}
+
+void IdleState::update(PlayableObject& player, float deltaTime) {
+    
+    std::shared_ptr<Object> target = player.getTarget();
+    if (!target)
+    {
+        return;
+    }
+    if (std::dynamic_pointer_cast<PlayableObject>(target)) {
+        player.setState(std::make_unique<ApproachingEnemyState>(target));
+        return;
+    }
+    else if (std::dynamic_pointer_cast<PickableObject>(target)) {
+        player.setState(std::make_unique<PickingUpItemState>(target));
+        return;
+    }
+    
+}
+
+void IdleState::exit(ComputerPlayer& player) {
+    // Optional: stop idle animation, log transition, etc.
+}
+
+void IdleState::onHandsAttack(PlayableObject& player) {
+    player.setState(std::make_unique<BlockingState>());
+
+}
+
+void IdleState::onStoneHit(PlayableObject& player) {
+
+}
+void IdleState::onBoxHit(PlayableObject& player)
+{
+}
+void IdleState::onExplosion(PlayableObject& player) {
+    player.setState(std::make_unique<GotHitState>());
+
+}
+
+void IdleState::name() {
+}

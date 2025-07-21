@@ -1,25 +1,28 @@
 
-#include "PlayerStates/CollideWithObjectState.h"
-#include "PlayerStates/JumpingState.h"
-#include "PlayerStates/WalkingState.h"
-#include "PlayerStates/StandingState.h"
-#include "PlayerStates/AttackingState.h"
+#include "PlayableObjectStates/PlayerStates/CollideWithObjectState.h"
+#include "PlayableObjectStates/PlayerStates/JumpingState.h"
+#include "PlayableObjectStates/PlayerStates/WalkingState.h"
+#include "PlayableObjectStates/PlayerStates/StandingState.h"
+#include "PlayableObjectStates/PlayerStates/AttackState.h"
+#include "PlayableObjectStates/PlayerStates/KnockedState.h"
+#include "PlayableObjectStates/PlayerStates/PlayerGotHitState.h"
+
 #include "Gameplay/Player.h"
 
+class PlayableObject;
 
-CollideWithObject::CollideWithObject(Input input, PickableObject& obj)
+CollideWithObject::CollideWithObject(Input input, std::shared_ptr<PickableObject> obj)
 	:m_obj(obj)
 {
 	m_input = input;
 }
 
-std::unique_ptr<PlayerBaseState> CollideWithObject::handleInput(Input input)
+std::unique_ptr<PlayableObjectState> CollideWithObject::handleInput(Input input)
 {
 	if (input == Input::ADD_OBJ)
 	{
-		std::cout << "Handling ADD_OBJ\n";
-		m_pickupPending = true; 
-		return nullptr; 
+		m_pickupPending = true;
+		return nullptr;
 	}
 	switch (input)
 	{
@@ -35,25 +38,46 @@ std::unique_ptr<PlayerBaseState> CollideWithObject::handleInput(Input input)
 		return std::make_unique<StandingState>(input);
 	case Input::PRESS_JUMP:
 		return std::make_unique<JumpingState>(input);
+	case Input::PRESS_ATTACK:
+		return std::make_unique<AttackState>();
 
 	}
-	
+
 	return nullptr;
 }
 
-void CollideWithObject::enter(Player& player)
+void CollideWithObject::enter(PlayableObject& player)
 {
-	std::cout << "enter::CollideWithObject\n";
-	
-	//player.setDiraction(m_input);
+	std::cout << "CollideWithObject::enter\n";
 }
 
-void CollideWithObject::update(Player& player, float dt)
+void CollideWithObject::update(PlayableObject& player, float dt)
 {
-	if (m_pickupPending)
+	if (m_pickupPending && m_obj->onEarth())
 	{
 		player.pickUpObject(m_obj);
+		m_obj->pick();
 		m_pickupPending = false;
-		
+		player.setState(std::make_unique<StandingState>(Input::NONE));
 	}
+}
+
+void CollideWithObject::onHandsAttack(PlayableObject& player)
+{
+	player.setState(std::make_unique<PlayerGotHitState>());
+}
+
+void CollideWithObject::onStoneHit(PlayableObject& player)
+{
+	player.setState(std::make_unique<KnockedState>());
+}
+
+void CollideWithObject::onBoxHit(PlayableObject& player)
+{
+	player.setState(std::make_unique<KnockedState>());
+}
+
+void CollideWithObject::onExplosion(PlayableObject& player)
+{
+	player.setState(std::make_unique<KnockedState>());
 }

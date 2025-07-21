@@ -1,0 +1,9 @@
+{
+  "name": "davis",
+  "description": "Excellent blue-energy boxer",
+  "hp": 500,
+  "speed" : 280,
+  "profile": "characters/davis_f",
+  "icon": "characters/davis_s",
+  "animation": "characters/davis_0"
+}

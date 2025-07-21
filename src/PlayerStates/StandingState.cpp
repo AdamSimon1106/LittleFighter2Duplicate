@@ -1,27 +1,30 @@
-#include "PlayerStates/StandingState.h"
-#include "PlayerStates/WalkingState.h" 
-#include "PlayerStates/JumpingState.h"
-#include "PlayerStates/AttackingState.h"
-#include"Gameplay/Player.h"
+#include "PlayableObjectStates/PlayerStates/StandingState.h"
+#include "PlayableObjectStates/PlayerStates/WalkingState.h" 
+#include "PlayableObjectStates/PlayerStates/JumpingState.h"
+#include "PlayableObjectStates/PlayerStates/AttackState.h"
+#include "PlayableObjectStates/PlayerStates/KnockedState.h"
+#include "PlayableObjectStates/PlayerStates/PlayerGotHitState.h"
 
+#include "Gameplay/Player.h"
+#include <iostream>
 StandingState::StandingState(Input input)
 {
 	m_input = input;
 }
 
-std::unique_ptr<PlayerBaseState> StandingState::handleInput(Input input)
+std::unique_ptr<PlayableObjectState> StandingState::handleInput(Input input)
 {
 	switch (input)
 	{
 	case Input::PRESS_UP:
-	case Input ::PRESS_DOWN:
+	case Input::PRESS_DOWN:
 	case Input::PRESS_LEFT:
 	case Input::PRESS_RIGHT:
-		 return std::make_unique<WalkingState>(input);
+		return std::make_unique<WalkingState>(input);
 	case Input::PRESS_JUMP:
 		return std::make_unique<JumpingState>(input);
 	case Input::PRESS_ATTACK:
-		return std::make_unique<AttackingState>();
+		return std::make_unique<AttackState>();
 
 	default:
 		break;
@@ -29,9 +32,32 @@ std::unique_ptr<PlayerBaseState> StandingState::handleInput(Input input)
 	return nullptr;
 }
 
-void StandingState::enter(Player& player)
+void StandingState::enter(PlayableObject& player)
 {
-	std::cout << "enter:: StandingState\n";
 	player.setAniName("standing");
-	player.setDiraction(m_input);
+	
+	player.resetDirection();
+}
+
+void StandingState::onHandsAttack(PlayableObject& player)
+{
+	player.setState(std::make_unique<PlayerGotHitState>());
+}
+
+void StandingState::onStoneHit(PlayableObject& player)
+{
+	player.setAniName("knockedDown");
+	player.setState(std::make_unique<KnockedState>());
+}
+
+void StandingState::onBoxHit(PlayableObject& player)
+{
+	player.setAniName("knockedDown");
+	player.setState(std::make_unique<KnockedState>());
+}
+
+void StandingState::onExplosion(PlayableObject& player)
+{
+	player.setAniName("knockedDown");
+	player.setState(std::make_unique<KnockedState>());
 }
